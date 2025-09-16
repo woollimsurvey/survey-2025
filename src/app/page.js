@@ -31,7 +31,7 @@ export default function Home() {
           </Text>
         </article>
         <Divider className="mt-6" />
-        <article className="bg-gray-50 py-6">
+        <article className="py-6 bg-gray-100">
           <Text>
             ㅇ <Strong>(조사 목적)</Strong> 현 발전 수준 진단 및 낙후된 기술
             분야 파악을 통한 산업기술 R&D투자 우선순위 설정, 산업 R&D 투자방향의
