@@ -1,3 +1,7 @@
+"use client";
+
+import { useForm } from "@/contexts/FormContext";
+
 import { Heading } from "@/components/heading";
 import { Badge } from "@/components/badge";
 import { Text } from "@/components/text";
@@ -7,8 +11,31 @@ import { Radio, RadioField, RadioGroup } from "@/components/radio";
 import { Button } from "@/components/button";
 
 export default function Basic() {
+  const {
+    name,
+    setName,
+    company,
+    setCompany,
+    position,
+    setPosition,
+    classification,
+    setClassification,
+    etc,
+    setEtc,
+    career,
+    setCareer,
+    tel,
+    setTel,
+    email,
+    setEmail,
+  } = useForm();
+
+  const handleNext = (e) => {
+    e.preventDefault();
+  };
+
   return (
-    <div>
+    <form onSubmit={handleNext}>
       <header className="my-3 py-3 bg-gray-50 ">
         <Heading level={2}>
           <Badge className="align-middle">1</Badge> 응답자 기본 조사
@@ -35,13 +62,31 @@ export default function Basic() {
               직위
             </div>
             <div className="flex items-center border-r px-4 h-16">
-              <Input />
+              <Input
+                aria-label="name"
+                name="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
             </div>
             <div className="flex items-center border-r px-4 h-16">
-              <Input />
+              <Input
+                aria-label="company"
+                name="company"
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
+                required
+              />
             </div>
             <div className="flex items-center border-r px-4 h-16">
-              <Input />
+              <Input
+                aria-label="position"
+                name="position"
+                value={position}
+                onChange={(e) => setPosition(e.target.value)}
+                required
+              />
             </div>
           </div>
           <div className="grid grid-cols-4">
@@ -58,7 +103,12 @@ export default function Basic() {
               이메일
             </div>
             <div className="border-r p-4">
-              <RadioGroup defaultValue="ind">
+              <RadioGroup
+                name="classification"
+                aria-label="classification"
+                value={classification}
+                onChange={(e) => setClassification(e)}
+              >
                 <RadioField>
                   <Radio value="ind" />
                   <Label>산(기업)</Label>
@@ -75,13 +125,24 @@ export default function Basic() {
                   <Radio value="etc" />
                   <Label>
                     기타
-                    <Input disabled />
+                    <Input
+                      name="etc"
+                      aria-label="etc"
+                      value={etc}
+                      onChange={(e) => setEtc(e.target.value)}
+                      disabled={classification !== "etc"}
+                    />
                   </Label>
                 </RadioField>
               </RadioGroup>
             </div>
             <div className="border-r p-4">
-              <RadioGroup defaultValue="0">
+              <RadioGroup
+                name="career"
+                aria-label="career"
+                value={career}
+                onChange={(e) => setCareer(e)}
+              >
                 <RadioField>
                   <Radio value="0" />
                   <Label>5년 미만</Label>
@@ -105,17 +166,30 @@ export default function Basic() {
               </RadioGroup>
             </div>
             <div className="flex items-center border-r px-4">
-              <Input type="tel" />
+              <Input
+                type="tel"
+                aria-label="tel"
+                name="tel"
+                value={tel}
+                onChange={(e) => setTel(e.target.value)}
+                required
+              />
             </div>
             <div className="flex items-center border-r px-4">
-              <Input type="email" />
+              <Input
+                type="email"
+                aria-label="email"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
           </div>
         </section>
       </main>
       <footer className="text-right">
-        <Button>다음</Button>
+        <Button type="submit">다음</Button>
       </footer>
-    </div>
+    </form>
   );
 }
