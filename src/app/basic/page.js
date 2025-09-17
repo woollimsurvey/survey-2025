@@ -36,7 +36,7 @@ export default function Basic() {
 
   return (
     <form onSubmit={handleNext}>
-      <header className="my-3 py-3 bg-gray-50 ">
+      <header className="my-3 p-3 bg-gray-50 ">
         <Heading level={2}>
           <Badge className="align-middle">1</Badge> 응답자 기본 조사
         </Heading>
@@ -48,8 +48,8 @@ export default function Basic() {
           따라 정확히 입력을 부탁드립니다.
         </Text>
         <section className="grid grid-cols-[1fr_9fr] my-16 border">
-          <div className="row-span-2 flex justify-center items-center border-r bg-blue-50">
-            <strong className="text-lg">응답자 정보</strong>
+          <div className="row-span-2 flex justify-center items-center border-r bg-blue-950">
+            <strong className="text-lg text-white">응답자 정보</strong>
           </div>
           <div className="grid grid-cols-3 border-b">
             <div className="border-r border-b text-lg font-bold text-center leading-8">
