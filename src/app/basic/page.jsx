@@ -1,5 +1,7 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
 import { useForm } from "@/contexts/FormContext";
 
 import { Heading } from "@/components/heading";
@@ -11,6 +13,8 @@ import { Radio, RadioField, RadioGroup } from "@/components/radio";
 import { Button } from "@/components/button";
 
 export default function Basic() {
+  const router = useRouter();
+
   const {
     name,
     setName,
@@ -32,11 +36,13 @@ export default function Basic() {
 
   const handleNext = (e) => {
     e.preventDefault();
+
+    router.push("/prepare");
   };
 
   return (
     <form onSubmit={handleNext}>
-      <header className="my-3 p-3 bg-gray-50 ">
+      <header className="my-3 p-3 bg-gray-50">
         <Heading level={2}>
           <Badge className="align-middle">1</Badge> 응답자 기본 조사
         </Heading>
