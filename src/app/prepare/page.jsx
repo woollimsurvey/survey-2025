@@ -30,6 +30,7 @@ export default function Prepare() {
                 id: ele.id,
                 intermediate: ele.intermediate,
                 description: ele.description,
+                code: ele.code,
               });
             }
           });
@@ -65,23 +66,24 @@ export default function Prepare() {
         </Text>
         <Text className="indent-4">※ 기술분류 예시 : 전기수소자동차</Text>
         <section className="grid grid-cols-[2fr_3fr] my-4 border-t border-r border-l">
-          <div className="border-r bg-blue-950 text-lg font-bold text-white text-center leading-8">
+          <div className="border-r border-b bg-gray-100 text-lg font-bold text-center leading-8">
             대분류
           </div>
-          <div className="bg-blue-950 text-lg font-bold text-white text-center leading-8">
+          <div className="border-b bg-gray-100 text-lg font-bold text-center leading-8">
             중분류
           </div>
           {industry.map((lar, index) => (
             <Fragment key={index}>
               <div
-                className={`row-span-${lar.intermediate.length} flex justify-center items-center border-r border-b font-bold`}
+                style={{ gridRow: `span ${lar.intermediate.length}` }}
+                className="flex justify-center items-center border-r border-b bg-blue-950 text-lg font-bold text-white"
               >
                 {lar.large}
               </div>
               {lar.intermediate.map((int) => (
                 <div key={int.id} className="border-b">
                   <CheckboxField className="px-1">
-                    <Checkbox aria-label={int.id} name={int.id} />
+                    <Checkbox aria-label={int.code} name={int.code} />
                     <Label>
                       {int.intermediate}
                       <span className="text-red-400">(!)</span>

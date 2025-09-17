@@ -58,13 +58,13 @@ export default function Basic() {
             <strong className="text-lg text-white">응답자 정보</strong>
           </div>
           <div className="grid grid-cols-3 border-b">
-            <div className="border-r border-b text-lg font-bold text-center leading-8">
+            <div className="border-r border-b bg-gray-100 text-lg font-bold text-center leading-8">
               성명
             </div>
-            <div className="border-r border-b text-lg font-bold text-center leading-8">
+            <div className="border-r border-b bg-gray-100 text-lg font-bold text-center leading-8">
               소속기관명
             </div>
-            <div className="border-r border-b text-lg font-bold text-center leading-8">
+            <div className="border-r border-b bg-gray-100 text-lg font-bold text-center leading-8">
               직위
             </div>
             <div className="flex items-center border-r px-4 h-16">
@@ -96,16 +96,16 @@ export default function Basic() {
             </div>
           </div>
           <div className="grid grid-cols-4">
-            <div className="border-r border-b text-lg font-bold text-center leading-8">
+            <div className="border-r border-b bg-gray-100 text-lg font-bold text-center leading-8">
               소속 구분
             </div>
-            <div className="border-r border-b text-lg font-bold text-center leading-8">
+            <div className="border-r border-b bg-gray-100 text-lg font-bold text-center leading-8">
               연구 경력
             </div>
-            <div className="border-r border-b text-lg font-bold text-center leading-8">
+            <div className="border-r border-b bg-gray-100 text-lg font-bold text-center leading-8">
               연락처(핸드폰 번호)
             </div>
-            <div className="border-r border-b text-lg font-bold text-center leading-8">
+            <div className="border-r border-b bg-gray-100 text-lg font-bold text-center leading-8">
               이메일
             </div>
             <div className="border-r p-4">
