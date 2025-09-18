@@ -1,17 +1,56 @@
 "use client";
 
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 import { Heading } from "@/components/heading";
 import { Badge } from "@/components/badge";
 import { Text } from "@/components/text";
 import { Radio, RadioGroup } from "@/components/radio";
 import { Input } from "@/components/input";
+import { Button } from "@/components/button";
 
 import { useForm } from "@/contexts/FormContext";
 
+import { supabase } from "@/libs/supabaseClient";
+
 export default function Country() {
-  const { checkedInter, countries, setCountries } = useForm();
+  const router = useRouter();
+
+  const {
+    name,
+    company,
+    position,
+    classification,
+    etc,
+    career,
+    tel,
+    email,
+    checkedInter,
+    countries,
+    setCountries,
+  } = useForm();
+
+  const handleNext = async () => {
+    const { error } = await supabase.from("form").insert(
+      checkedInter.map((inter) => {
+        return {
+          name,
+          company,
+          position,
+          classification,
+          etc,
+          career,
+          tel,
+          email,
+          intermediate: inter.intermediate,
+          code: inter.code,
+        };
+      })
+    );
+
+    error && console.error(error);
+  };
 
   useEffect(() => {
     setCountries(
@@ -20,7 +59,7 @@ export default function Country() {
       })
     );
   }, []);
-  console.log(countries);
+
   return (
     <div>
       <header className="my-3 p-3 bg-gray-50">
@@ -209,7 +248,12 @@ export default function Country() {
               </article>
             ))}
         </section>
+        <Text>* 유럽 국가 선택 시 작성</Text>
+        <Text>※ 기타 선택 시 해당 국가명 기재</Text>
       </main>
+      <footer className="text-right">
+        <Button onClick={handleNext}>다음</Button>
+      </footer>
     </div>
   );
 }
