@@ -15,8 +15,6 @@ export function FormProvider({ children }) {
   const [email, setEmail] = useState("");
   const [checkedInter, setCheckedInter] = useState([]);
 
-  const [countries, setCountries] = useState([]);
-
   return (
     <FormContext.Provider
       value={{
@@ -38,8 +36,6 @@ export function FormProvider({ children }) {
         setEmail,
         checkedInter,
         setCheckedInter,
-        countries,
-        setCountries,
       }}
     >
       {children}

@@ -27,8 +27,7 @@ export default function Country() {
     tel,
     email,
     checkedInter,
-    countries,
-    setCountries,
+    setCheckedInter,
   } = useForm();
 
   const handleNext = async () => {
@@ -45,17 +44,23 @@ export default function Country() {
           email,
           intermediate: inter.intermediate,
           code: inter.code,
+          country: inter.country,
+          euName: inter.euName,
+          etcName: inter.etcName,
+          institution: inter.institution,
         };
       })
     );
 
     error && console.error(error);
+
+    router.push("/level");
   };
 
   useEffect(() => {
-    setCountries(
-      checkedInter.map((inter) => {
-        return { code: inter.code, country: "kr" };
+    setCheckedInter((prevInter) =>
+      prevInter.map((prev) => {
+        return { ...prev, country: "kr" };
       })
     );
   }, []);
@@ -145,8 +150,8 @@ export default function Country() {
                   aria-label="country"
                   className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr_2fr_1fr]"
                   onChange={(e) => {
-                    setCountries((prevList) =>
-                      prevList.map((prev) => {
+                    setCheckedInter((prevInter) =>
+                      prevInter.map((prev) => {
                         if (prev.code === inter.code) {
                           return { ...prev, country: e };
                         }
@@ -177,11 +182,11 @@ export default function Country() {
                       aria-label="euName"
                       name="euName"
                       value={
-                        countries.find((ele) => ele.code === inter.code)
+                        checkedInter.find((ele) => ele.code === inter.code)
                           ?.euName || ""
                       }
                       onChange={({ target }) =>
-                        setCountries((prevList) =>
+                        setCheckedInter((prevList) =>
                           prevList.map((prev) => {
                             if (prev.code === inter.code) {
                               return { ...prev, euName: target.value };
@@ -192,7 +197,7 @@ export default function Country() {
                         )
                       }
                       disabled={
-                        countries.find((ele) => ele.code === inter.code)
+                        checkedInter.find((ele) => ele.code === inter.code)
                           ?.country !== "eu"
                       }
                     />
@@ -203,11 +208,11 @@ export default function Country() {
                       aria-label="etcName"
                       name="etcName"
                       value={
-                        countries.find((ele) => ele.code === inter.code)
+                        checkedInter.find((ele) => ele.code === inter.code)
                           ?.etcName || ""
                       }
                       onChange={({ target }) =>
-                        setCountries((prevList) =>
+                        setCheckedInter((prevList) =>
                           prevList.map((prev) => {
                             if (prev.code === inter.code) {
                               return { ...prev, etcName: target.value };
@@ -218,7 +223,7 @@ export default function Country() {
                         )
                       }
                       disabled={
-                        countries.find((ele) => ele.code === inter.code)
+                        checkedInter.find((ele) => ele.code === inter.code)
                           ?.country !== "etc"
                       }
                     />
@@ -229,11 +234,11 @@ export default function Country() {
                     aria-label="institution"
                     name="institution"
                     value={
-                      countries.find((ele) => ele.code === inter.code)
+                      checkedInter.find((ele) => ele.code === inter.code)
                         ?.institution || ""
                     }
                     onChange={({ target }) =>
-                      setCountries((prevList) =>
+                      setCheckedInter((prevList) =>
                         prevList.map((prev) => {
                           if (prev.code === inter.code) {
                             return { ...prev, institution: target.value };
