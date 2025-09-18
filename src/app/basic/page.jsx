@@ -2,8 +2,6 @@
 
 import { useRouter } from "next/navigation";
 
-import { useForm } from "@/contexts/FormContext";
-
 import { Heading } from "@/components/heading";
 import { Badge } from "@/components/badge";
 import { Text } from "@/components/text";
@@ -11,6 +9,8 @@ import { Input } from "@/components/input";
 import { Label } from "@/components/fieldset";
 import { Radio, RadioField, RadioGroup } from "@/components/radio";
 import { Button } from "@/components/button";
+
+import { useForm } from "@/contexts/FormContext";
 
 export default function Basic() {
   const router = useRouter();
@@ -72,7 +72,7 @@ export default function Basic() {
                 aria-label="name"
                 name="name"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={({ target }) => setName(target.value)}
                 required
               />
             </div>
@@ -81,7 +81,7 @@ export default function Basic() {
                 aria-label="company"
                 name="company"
                 value={company}
-                onChange={(e) => setCompany(e.target.value)}
+                onChange={({ target }) => setCompany(target.value)}
                 required
               />
             </div>
@@ -90,7 +90,7 @@ export default function Basic() {
                 aria-label="position"
                 name="position"
                 value={position}
-                onChange={(e) => setPosition(e.target.value)}
+                onChange={({ target }) => setPosition(target.value)}
                 required
               />
             </div>
@@ -135,7 +135,7 @@ export default function Basic() {
                       name="etc"
                       aria-label="etc"
                       value={etc}
-                      onChange={(e) => setEtc(e.target.value)}
+                      onChange={({ target }) => setEtc(target.value)}
                       disabled={classification !== "etc"}
                     />
                   </Label>
@@ -177,7 +177,7 @@ export default function Basic() {
                 aria-label="tel"
                 name="tel"
                 value={tel}
-                onChange={(e) => setTel(e.target.value)}
+                onChange={({ target }) => setTel(target.value)}
                 required
               />
             </div>
@@ -187,7 +187,7 @@ export default function Basic() {
                 aria-label="email"
                 name="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={({ target }) => setEmail(target.value)}
               />
             </div>
           </div>
