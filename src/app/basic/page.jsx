@@ -62,7 +62,7 @@ export default function Basic() {
           따라 정확히 입력을 부탁드립니다.
         </Text>
         <section className="grid grid-cols-[1fr_9fr] my-16 border">
-          <div className="row-span-2 flex justify-center items-center border-r bg-blue-950">
+          <div className="row-span-2 flex justify-center items-center bg-blue-950">
             <strong className="text-2xl text-white">응답자 정보</strong>
           </div>
           <div className="grid grid-cols-3 border-b">

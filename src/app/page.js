@@ -17,7 +17,7 @@ export default function Home() {
     <div>
       <header className="text-center">
         <Divider className="my-6" />
-        <h1 className="text-3xl font-semibold text-zinc-950">
+        <h1 className="text-4xl font-semibold text-zinc-950">
           2025년 산업기술수준조사
         </h1>
         <Divider className="my-6" />

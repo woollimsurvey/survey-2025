@@ -22,9 +22,12 @@ export default function Prepare() {
 
   const [industry, setIndustry] = useState([]);
 
-  const handleChecked = (e, id, intermediate, code) => {
+  const handleChecked = (e, id, intermediate, description, code) => {
     if (e) {
-      setCheckedInter((prevList) => [...prevList, { id, intermediate, code }]);
+      setCheckedInter((prevList) => [
+        ...prevList,
+        { id, intermediate, description, code },
+      ]);
 
       return;
     }
@@ -121,7 +124,7 @@ export default function Prepare() {
             <Fragment key={index}>
               <div
                 style={{ gridRow: `span ${lar.intermediates.length}` }}
-                className="flex justify-center items-center border-r border-b bg-blue-950 text-2xl font-bold text-white"
+                className="flex justify-center items-center border-b bg-blue-950 text-2xl font-bold text-white"
               >
                 {lar.large}
               </div>
@@ -135,6 +138,7 @@ export default function Prepare() {
                         e,
                         intermediate.id,
                         intermediate.intermediate,
+                        intermediate.description,
                         intermediate.code
                       )
                     }

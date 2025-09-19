@@ -5,10 +5,10 @@ import { useRouter } from "next/navigation";
 
 import { Heading } from "@/components/heading";
 import { Badge } from "@/components/badge";
+import { Button } from "@/components/button";
 import { Text } from "@/components/text";
 import { Radio, RadioGroup } from "@/components/radio";
 import { Input } from "@/components/input";
-import { Button } from "@/components/button";
 
 import { useForm } from "@/contexts/FormContext";
 
@@ -24,7 +24,9 @@ export default function Country() {
     classification,
     etc,
     career,
-    tel,
+    tel1,
+    tel2,
+    tel3,
     email,
     checkedInter,
     setCheckedInter,
@@ -42,7 +44,7 @@ export default function Country() {
           classification,
           etc,
           career,
-          tel,
+          tel: tel1 + tel2 + tel3,
           email,
           intermediate: inter.intermediate,
           code: inter.code,
@@ -75,22 +77,30 @@ export default function Country() {
         </Heading>
       </header>
       <main>
-        <section className="flex justify-between items-center gap-8">
-          <div>
+        <section className="flex justify-evenly items-center gap-8 border p-1">
+          <div className="text-lg font-bold">
             기술수준조사 수행 전 과년도(2023년)에 수행된 기술수준조사 결과를
             다운받아 응답 시 참고해주시기 바랍니다.
           </div>
           <div className="border">
-            <div className="bg-gray-100 p-4 text-lg font-bold">
+            <div className="bg-gray-100 p-4 text-xl font-bold">
               과년도 조사결고 다운로드
             </div>
-            <div className="p-4 text-red-400 text-center">PDF 파일</div>
+            <div className="p-2 text-center">
+              <Button
+                href="https://sisfrqtridudubgcsuoe.supabase.co/storage/v1/object/public/keit/keit.pdf"
+                target="_blank"
+                color="red"
+              >
+                PDF 파일
+              </Button>
+            </div>
           </div>
         </section>
-        <Heading level={3} className="my-4">
+        <h3 className="my-4 text-3xl font-semibold text-zinc-950">
           □ (기술성) 위원님께서 선택하신 중분류 기술들의 기술성을 평가할 수 있는
           하위 문항에 응답해주시기 바랍니다.
-        </Heading>
+        </h3>
         <Heading level={4}>
           3Q-1. (최고기술 보유국)&nbsp;
           <span className="font-normal">
@@ -102,39 +112,39 @@ export default function Country() {
           ※ 유럽의 경우, 유럽 내 최상위 기술 국가명을 제시해주시기 바랍니다.
         </Text>
         <section className="my-2 border-t border-r border-l text-center">
-          <article className="grid grid-cols-[1fr_8fr_1fr] border-b">
-            <div className="border-r bg-gray-100 text-lg font-bold leading-24">
+          <article className="grid grid-cols-[4fr_12fr_4fr] border-b">
+            <div className="border-r bg-gray-100 text-xl font-bold leading-30">
               중분류
             </div>
-            <div className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr_2fr_1fr]">
-              <div className="col-span-7 border-r border-b bg-gray-100 text-lg font-bold leading-8">
+            <div className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr_4fr_3fr]">
+              <div className="col-span-7 border-r border-b bg-gray-100 text-xl font-bold leading-10">
                 최고기술 보유국
               </div>
-              <div className="border-r bg-gray-100 text-lg font-bold leading-16">
+              <div className="border-r bg-gray-100 text-xl font-bold leading-20">
                 한국
               </div>
-              <div className="border-r bg-gray-100 text-lg font-bold leading-16">
+              <div className="border-r bg-gray-100 text-xl font-bold leading-20">
                 미국
               </div>
-              <div className="border-r bg-gray-100 text-lg font-bold leading-16">
+              <div className="border-r bg-gray-100 text-xl font-bold leading-20">
                 중국
               </div>
-              <div className="border-r bg-gray-100 text-lg font-bold leading-16">
+              <div className="border-r bg-gray-100 text-xl font-bold leading-20">
                 일본
               </div>
-              <div className="border-r bg-gray-100 text-lg font-bold leading-16">
+              <div className="border-r bg-gray-100 text-xl font-bold leading-20">
                 유럽
               </div>
-              <div className="flex justify-center items-center border-r bg-gray-100 text-lg font-bold">
+              <div className="flex justify-center items-center border-r bg-gray-100 text-xl font-bold">
                 유럽국가명*
                 <br />
-                (복구 국가 제시 가능)
+                (복수 국가 제시 가능)
               </div>
-              <div className="border-r bg-gray-100 text-lg font-bold leading-16">
+              <div className="border-r bg-gray-100 text-xl font-bold leading-20">
                 기타
               </div>
             </div>
-            <div className="flex justify-center items-center bg-gray-100 text-lg font-bold">
+            <div className="flex justify-center items-center bg-gray-100 text-xl font-bold">
               최고기술
               <br />
               보유기관
@@ -143,14 +153,15 @@ export default function Country() {
           {checkedInter
             .sort((a, b) => a.id - b.id)
             .map((inter) => (
-              <article key={inter.id} className="grid grid-cols-[1fr_8fr_1fr]">
-                <div className="border-r border-b bg-blue-950 p-1 text-lg font-bold text-white">
+              <article key={inter.id} className="grid grid-cols-[4fr_12fr_4fr]">
+                <div className="border-b bg-blue-950 p-2 text-lg font-bold text-white">
                   {inter.intermediate}
+                  <span className="text-red-400">(!)</span>
                 </div>
                 <RadioGroup
                   name="country"
                   aria-label="country"
-                  className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr_2fr_1fr]"
+                  className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr_4fr_3fr]"
                   onChange={(e) => {
                     setCheckedInter((prevInter) =>
                       prevInter.map((prev) => {
@@ -259,7 +270,7 @@ export default function Country() {
         <Text>* 유럽 국가 선택 시 작성</Text>
         <Text>※ 기타 선택 시 해당 국가명 기재</Text>
       </main>
-      <footer className="text-right">
+      <footer className="my-2 text-right">
         <Button type="submit">다음</Button>
       </footer>
     </form>
