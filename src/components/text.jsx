@@ -8,7 +8,7 @@ export function Text({ className, ...props }) {
       {...props}
       className={clsx(
         className,
-        "text-base/6 text-zinc-500 sm:text-base dark:text-zinc-400"
+        "text-base/6 text-black sm:text-lg dark:text-zinc-400"
       )}
     />
   );
@@ -30,7 +30,7 @@ export function Strong({ className, ...props }) {
   return (
     <strong
       {...props}
-      className={clsx(className, "font-medium text-zinc-950 dark:text-white")}
+      className={clsx(className, "font-semibold text-zinc-950 dark:text-white")}
     />
   );
 }

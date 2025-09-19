@@ -17,7 +17,8 @@ import { supabase } from "@/libs/supabaseClient";
 export default function Prepare() {
   const router = useRouter();
 
-  const { checkedInter, setCheckedInter } = useForm();
+  const { checkedInter, setCheckedInter, settingInter, setSettingInter } =
+    useForm();
 
   const [industry, setIndustry] = useState([]);
 
@@ -35,14 +36,26 @@ export default function Prepare() {
     }
   };
 
+  const handlePrev = () => {
+    router.push("/basic");
+  };
+
   const handleNext = () => {
     if (checkedInter.length === 0) {
-      alert("중분류를 선택해 주세요.");
+      alert("※ 한 개 이상의 중분류를 선택해 주세요!.");
 
       return;
     }
 
-    router.push("/country");
+    if (
+      confirm(
+        "※ (주의!!) 선택하신 중분류를 다시 한번 검토해주세요. 현재 선택하신 중분류를 기준으로 다음 설문이 이어집니다.\n현재 페이지 이후, 중분류를 제외하거나 추가로 선택하려는 경우 설문을 처음부터 다시 진행해야 합니다."
+      )
+    ) {
+      setSettingInter(true);
+
+      router.push("/country");
+    }
   };
 
   useEffect(() => {
@@ -96,34 +109,46 @@ export default function Prepare() {
           ※ <span className="text-red-400">(!)</span>에 마우스를 올리시면 해당
           기술의 정의가 표시됩니다.
         </Text>
-        <Text className="indent-4">※ 기술분류 예시 : 전기수소자동차</Text>
+        <Text className="indent-4">※ 기술분류 : 전기수소자동차</Text>
         <section className="grid grid-cols-[2fr_3fr] my-4 border-t border-r border-l">
-          <div className="border-r border-b bg-gray-100 text-lg font-bold text-center leading-8">
+          <div className="border-r border-b bg-gray-100 text-xl font-bold text-center leading-10">
             대분류
           </div>
-          <div className="border-b bg-gray-100 text-lg font-bold text-center leading-8">
+          <div className="border-b bg-gray-100 text-xl font-bold text-center leading-10">
             중분류
           </div>
           {industry.map((lar, index) => (
             <Fragment key={index}>
               <div
                 style={{ gridRow: `span ${lar.intermediates.length}` }}
-                className="flex justify-center items-center border-r border-b bg-blue-950 text-lg font-bold text-white"
+                className="flex justify-center items-center border-r border-b bg-blue-950 text-2xl font-bold text-white"
               >
                 {lar.large}
               </div>
-              {lar.intermediates.map((int) => (
-                <CheckboxField key={int.id} className="border-b px-1">
+              {lar.intermediates.map((intermediate) => (
+                <CheckboxField key={intermediate.id} className="border-b p-1">
                   <Checkbox
-                    aria-label={int.code}
-                    name={int.code}
-                    value={int.code}
+                    aria-label={intermediate.code}
+                    name={intermediate.code}
                     onChange={(e) =>
-                      handleChecked(e, int.id, int.intermediate, int.code)
+                      handleChecked(
+                        e,
+                        intermediate.id,
+                        intermediate.intermediate,
+                        intermediate.code
+                      )
                     }
+                    defaultChecked={
+                      checkedInter.find(
+                        (inter) => inter.code === intermediate.code
+                      )
+                        ? true
+                        : false
+                    }
+                    disabled={settingInter}
                   />
                   <Label>
-                    {int.intermediate}
+                    {intermediate.intermediate}
                     <span className="text-red-400">(!)</span>
                   </Label>
                 </CheckboxField>
@@ -132,7 +157,8 @@ export default function Prepare() {
           ))}
         </section>
       </main>
-      <footer className="text-right">
+      <footer className="flex justify-end gap-4 my-4">
+        <Button onClick={handlePrev}>이전</Button>
         <Button onClick={handleNext}>다음</Button>
       </footer>
     </div>

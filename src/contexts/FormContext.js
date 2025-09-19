@@ -11,9 +11,12 @@ export function FormProvider({ children }) {
   const [classification, setClassification] = useState("ind");
   const [etc, setEtc] = useState("");
   const [career, setCareer] = useState("0");
-  const [tel, setTel] = useState("");
+  const [tel1, setTel1] = useState("");
+  const [tel2, setTel2] = useState("");
+  const [tel3, setTel3] = useState("");
   const [email, setEmail] = useState("");
   const [checkedInter, setCheckedInter] = useState([]);
+  const [settingInter, setSettingInter] = useState(false);
 
   return (
     <FormContext.Provider
@@ -30,12 +33,18 @@ export function FormProvider({ children }) {
         setEtc,
         career,
         setCareer,
-        tel,
-        setTel,
+        tel1,
+        setTel1,
+        tel2,
+        setTel2,
+        tel3,
+        setTel3,
         email,
         setEmail,
         checkedInter,
         setCheckedInter,
+        settingInter,
+        setSettingInter,
       }}
     >
       {children}

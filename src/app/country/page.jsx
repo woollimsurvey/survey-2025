@@ -30,7 +30,9 @@ export default function Country() {
     setCheckedInter,
   } = useForm();
 
-  const handleNext = async () => {
+  const handleNext = async (e) => {
+    e.preventDefault();
+
     const { error } = await supabase.from("form").insert(
       checkedInter.map((inter) => {
         return {
@@ -66,14 +68,14 @@ export default function Country() {
   }, []);
 
   return (
-    <div>
+    <form onSubmit={handleNext}>
       <header className="my-3 p-3 bg-gray-50">
         <Heading level={2}>
           <Badge className="align-middle">3</Badge> 기술수준조사
         </Heading>
       </header>
       <main>
-        <section className="flex items-center gap-8">
+        <section className="flex justify-between items-center gap-8">
           <div>
             기술수준조사 수행 전 과년도(2023년)에 수행된 기술수준조사 결과를
             다운받아 응답 시 참고해주시기 바랍니다.
@@ -248,6 +250,7 @@ export default function Country() {
                         })
                       )
                     }
+                    required
                   />
                 </div>
               </article>
@@ -257,8 +260,8 @@ export default function Country() {
         <Text>※ 기타 선택 시 해당 국가명 기재</Text>
       </main>
       <footer className="text-right">
-        <Button onClick={handleNext}>다음</Button>
+        <Button type="submit">다음</Button>
       </footer>
-    </div>
+    </form>
   );
 }

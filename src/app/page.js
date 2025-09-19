@@ -1,13 +1,23 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+
 import { Divider } from "@/components/divider";
 import { Text, Strong } from "@/components/text";
 import { Button } from "@/components/button";
 
 export default function Home() {
+  const router = useRouter();
+
+  const handleNext = () => {
+    router.push("/basic");
+  };
+
   return (
     <div>
       <header className="text-center">
         <Divider className="my-6" />
-        <h1 className="text-2xl font-semibold text-zinc-950">
+        <h1 className="text-3xl font-semibold text-zinc-950">
           2025년 산업기술수준조사
         </h1>
         <Divider className="my-6" />
@@ -29,6 +39,12 @@ export default function Home() {
             바쁘신 와중에도 기술수준 조사 전문가로 활동하여 주심에 감사드리며,
             기술수준 조사 결과에 전문가님의 고견이 반영될 수 있도록 적극 협조
             부탁드리겠습니다.
+          </Text>
+          <Text className="indent-1">
+            동 조사의 응답 결과는 조사목적을 위해서만 활용될 예정이며, 응답
+            내용은 법률 제 12504호 개인정보보호법 제15조(개인정보 수집․이용)에
+            의거하여 보호받을 수 있으며, 동법 제21조(개인정보의 파기)에 의거
+            조사 종료 후 파기됩니다.
           </Text>
         </article>
         <Divider className="mt-6" />
@@ -96,8 +112,8 @@ export default function Home() {
           - ㈜전략울림 000 선임(000@woollimi.com, 00-0000-0000)
         </Text>
       </main>
-      <footer className="text-center">
-        <Button href="/basic">설문조사 시작</Button>
+      <footer className="my-6 text-center">
+        <Button onClick={handleNext}>설문조사 시작</Button>
       </footer>
     </div>
   );
