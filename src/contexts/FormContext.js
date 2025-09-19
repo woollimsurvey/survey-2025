@@ -17,6 +17,7 @@ export function FormProvider({ children }) {
   const [email, setEmail] = useState("");
   const [checkedInter, setCheckedInter] = useState([]);
   const [settingInter, setSettingInter] = useState(false);
+  const [settingCountry, setSettingCountry] = useState(false);
 
   return (
     <FormContext.Provider
@@ -45,6 +46,8 @@ export function FormProvider({ children }) {
         setCheckedInter,
         settingInter,
         setSettingInter,
+        settingCountry,
+        setSettingCountry,
       }}
     >
       {children}

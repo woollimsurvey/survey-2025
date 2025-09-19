@@ -12,51 +12,27 @@ import { Input } from "@/components/input";
 
 import { useForm } from "@/contexts/FormContext";
 
-import { supabase } from "@/libs/supabaseClient";
-
 export default function Country() {
   const router = useRouter();
 
-  const {
-    name,
-    company,
-    position,
-    classification,
-    etc,
-    career,
-    tel1,
-    tel2,
-    tel3,
-    email,
-    checkedInter,
-    setCheckedInter,
-  } = useForm();
+  const { checkedInter, setCheckedInter, setSettingCountry } = useForm();
 
-  const handleNext = async (e) => {
-    e.preventDefault();
+  const handleChangeCountry = (e, inter) => {
+    setCheckedInter((prevInter) =>
+      prevInter.map((prev) => {
+        if (prev.code === inter.code) {
+          return { ...prev, country: e };
+        }
 
-    const { error } = await supabase.from("form").insert(
-      checkedInter.map((inter) => {
-        return {
-          name,
-          company,
-          position,
-          classification,
-          etc,
-          career,
-          tel: tel1 + tel2 + tel3,
-          email,
-          intermediate: inter.intermediate,
-          code: inter.code,
-          country: inter.country,
-          euName: inter.euName,
-          etcName: inter.etcName,
-          institution: inter.institution,
-        };
+        return prev;
       })
     );
 
-    error && console.error(error);
+    setSettingCountry(false);
+  };
+
+  const handleNext = async (e) => {
+    e.preventDefault();
 
     router.push("/level");
   };
@@ -64,7 +40,11 @@ export default function Country() {
   useEffect(() => {
     setCheckedInter((prevInter) =>
       prevInter.map((prev) => {
-        return { ...prev, country: "kr" };
+        if (!prev.country) {
+          return { ...prev, country: "kr" };
+        }
+
+        return prev;
       })
     );
   }, []);
@@ -162,18 +142,8 @@ export default function Country() {
                   name="country"
                   aria-label="country"
                   className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr_4fr_3fr]"
-                  onChange={(e) => {
-                    setCheckedInter((prevInter) =>
-                      prevInter.map((prev) => {
-                        if (prev.code === inter.code) {
-                          return { ...prev, country: e };
-                        }
-
-                        return prev;
-                      })
-                    );
-                  }}
-                  defaultValue="kr"
+                  onChange={(e) => handleChangeCountry(e, inter)}
+                  defaultValue={inter.country || "kr"}
                 >
                   <div className="flex justify-center items-center m-0 border-r border-b">
                     <Radio value="kr" />

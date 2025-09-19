@@ -1,10 +1,12 @@
 "use client";
 
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import { Heading } from "@/components/heading";
 import { Badge } from "@/components/badge";
 import { Text } from "@/components/text";
+import { Input } from "@/components/input";
 import { Button } from "@/components/button";
 
 import { useForm } from "@/contexts/FormContext";
@@ -27,13 +29,121 @@ export default function Level() {
     email,
     checkedInter,
     setCheckedInter,
+    settingCountry,
+    setSettingCountry,
   } = useForm();
 
   const handlePrev = () => {
+    setSettingCountry(true);
+
     router.push("/country");
   };
 
-  const handleNext = () => {};
+  const handleNext = async (e) => {
+    e.preventDefault();
+
+    const { error } = await supabase.from("form").insert(
+      checkedInter.map((inter) => {
+        return {
+          name,
+          company,
+          position,
+          classification,
+          etc,
+          career,
+          tel: tel1 + tel2 + tel3,
+          email,
+          intermediate: inter.intermediate,
+          code: inter.code,
+          country: inter.country,
+          euName: inter.euName,
+          etcName: inter.etcName,
+          institution: inter.institution,
+          krPer: inter.krPer,
+          usPer: inter.usPer,
+          cnPer: inter.cnPer,
+          jpPer: inter.jpPer,
+          euPer: inter.euPer,
+          etcPer: inter.etcPer,
+        };
+      })
+    );
+
+    error && console.error(error);
+
+    setSettingCountry(true);
+
+    router.push("/gap");
+  };
+
+  useEffect(() => {
+    if (!settingCountry) {
+      setCheckedInter((prevInter) =>
+        prevInter.map((inter) => {
+          if (inter.country === "kr")
+            return {
+              ...inter,
+              krPer: 100,
+              usPer: 0,
+              cnPer: 0,
+              jpPer: 0,
+              euPer: 0,
+              etcPer: 0,
+            };
+          if (inter.country === "us")
+            return {
+              ...inter,
+              krPer: 0,
+              usPer: 100,
+              cnPer: 0,
+              jpPer: 0,
+              euPer: 0,
+              etcPer: 0,
+            };
+          if (inter.country === "cn")
+            return {
+              ...inter,
+              krPer: 0,
+              usPer: 0,
+              cnPer: 100,
+              jpPer: 0,
+              euPer: 0,
+              etcPer: 0,
+            };
+          if (inter.country === "jp")
+            return {
+              ...inter,
+              krPer: 0,
+              usPer: 0,
+              cnPer: 0,
+              jpPer: 100,
+              euPer: 0,
+              etcPer: 0,
+            };
+          if (inter.country === "eu")
+            return {
+              ...inter,
+              krPer: 0,
+              usPer: 0,
+              cnPer: 0,
+              jpPer: 0,
+              euPer: 100,
+              etcPer: 0,
+            };
+          if (inter.country === "etc")
+            return {
+              ...inter,
+              krPer: 0,
+              usPer: 0,
+              cnPer: 0,
+              jpPer: 0,
+              euPer: 0,
+              etcPer: 100,
+            };
+        })
+      );
+    }
+  }, []);
 
   return (
     <form onSubmit={handleNext}>
@@ -124,17 +234,192 @@ export default function Level() {
                   {inter.intermediate}
                   <span className="text-red-400">(!)</span>
                 </div>
-                <div className="border-r border-b p-2 text-lg font-bold">
+                <div className="flex justify-center items-center border-r border-b text-lg font-bold">
                   {inter.country === "kr" && "한국"}
                   {inter.country === "us" && "미국"}
                   {inter.country === "cn" && "중국"}
                   {inter.country === "jp" && "일본"}
                   {inter.country === "eu" && "유럽"}
-                  {inter.country === "etc" && "기타*"}
+                  {inter.country === "etc" && "기타"}
+                </div>
+                <div className="flex items-center border-r border-b px-2">
+                  <Input
+                    type="number"
+                    step="1"
+                    min="0"
+                    max={inter.country === "kr" ? 100 : 99}
+                    aria-label="krPer"
+                    name="krPer"
+                    value={
+                      checkedInter.find((ele) => ele.code === inter.code)
+                        ?.krPer || ""
+                    }
+                    onChange={({ target }) =>
+                      setCheckedInter((prevList) =>
+                        prevList.map((prev) => {
+                          if (prev.code === inter.code) {
+                            return { ...prev, krPer: target.value };
+                          }
+
+                          return prev;
+                        })
+                      )
+                    }
+                    disabled={inter.country === "kr"}
+                    required
+                  />
+                  %
+                </div>
+                <div className="flex items-center border-r border-b px-2">
+                  <Input
+                    type="number"
+                    step="1"
+                    min="0"
+                    max={inter.country === "us" ? 100 : 99}
+                    aria-label="usPer"
+                    name="usPer"
+                    value={
+                      checkedInter.find((ele) => ele.code === inter.code)
+                        ?.usPer || ""
+                    }
+                    onChange={({ target }) =>
+                      setCheckedInter((prevList) =>
+                        prevList.map((prev) => {
+                          if (prev.code === inter.code) {
+                            return { ...prev, usPer: target.value };
+                          }
+
+                          return prev;
+                        })
+                      )
+                    }
+                    disabled={inter.country === "us"}
+                    required
+                  />
+                  %
+                </div>
+                <div className="flex items-center border-r border-b px-2">
+                  <Input
+                    type="number"
+                    step="1"
+                    min="0"
+                    max={inter.country === "cn" ? 100 : 99}
+                    aria-label="cnPer"
+                    name="cnPer"
+                    value={
+                      checkedInter.find((ele) => ele.code === inter.code)
+                        ?.cnPer || ""
+                    }
+                    onChange={({ target }) =>
+                      setCheckedInter((prevList) =>
+                        prevList.map((prev) => {
+                          if (prev.code === inter.code) {
+                            return { ...prev, cnPer: target.value };
+                          }
+
+                          return prev;
+                        })
+                      )
+                    }
+                    disabled={inter.country === "cn"}
+                    required
+                  />
+                  %
+                </div>
+                <div className="flex items-center border-r border-b px-2">
+                  <Input
+                    type="number"
+                    step="1"
+                    min="0"
+                    max={inter.country === "jp" ? 100 : 99}
+                    aria-label="jpPer"
+                    name="jpPer"
+                    value={
+                      checkedInter.find((ele) => ele.code === inter.code)
+                        ?.jpPer || ""
+                    }
+                    onChange={({ target }) =>
+                      setCheckedInter((prevList) =>
+                        prevList.map((prev) => {
+                          if (prev.code === inter.code) {
+                            return { ...prev, jpPer: target.value };
+                          }
+
+                          return prev;
+                        })
+                      )
+                    }
+                    disabled={inter.country === "jp"}
+                    required
+                  />
+                  %
+                </div>
+                <div className="flex items-center border-r border-b px-2">
+                  <Input
+                    type="number"
+                    step="1"
+                    min="0"
+                    max={inter.country === "eu" ? 100 : 99}
+                    aria-label="euPer"
+                    name="euPer"
+                    value={
+                      checkedInter.find((ele) => ele.code === inter.code)
+                        ?.euPer || ""
+                    }
+                    onChange={({ target }) =>
+                      setCheckedInter((prevList) =>
+                        prevList.map((prev) => {
+                          if (prev.code === inter.code) {
+                            return { ...prev, euPer: target.value };
+                          }
+
+                          return prev;
+                        })
+                      )
+                    }
+                    disabled={inter.country === "eu"}
+                    required
+                  />
+                  %
+                </div>
+                <div className="flex items-center border-b px-2">
+                  <Input
+                    type="number"
+                    step="1"
+                    min="0"
+                    max={inter.country === "etc" ? 100 : 99}
+                    aria-label="etcPer"
+                    name="etcPer"
+                    value={
+                      checkedInter.find((ele) => ele.code === inter.code)
+                        ?.etcPer || ""
+                    }
+                    onChange={({ target }) =>
+                      setCheckedInter((prevList) =>
+                        prevList.map((prev) => {
+                          if (prev.code === inter.code) {
+                            return { ...prev, etcPer: target.value };
+                          }
+
+                          return prev;
+                        })
+                      )
+                    }
+                    disabled={inter.country === "etc"}
+                  />
+                  %
                 </div>
               </article>
             ))}
         </section>
+        <Text>
+          * 기타는 3Q-1.에서 기타 국가를 최고기술 보유국으로 선택한 경우만
+          100%로 입력, 나머지 경우에는 작성 불필요
+        </Text>
+        <Text>
+          ※ 최고기술 보유국에 제시된 국가는 무조건 100%로 기재해야 하며, 나머지
+          국가는 해당 국가와 비교하여 상대적 기술수준을 %로 제시
+        </Text>
       </main>
       <footer className="flex justify-end gap-4 my-4">
         <Button onClick={handlePrev}>이전</Button>
