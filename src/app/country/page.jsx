@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import Form from "next/form";
 import { useRouter } from "next/navigation";
 
 import { Heading } from "@/components/heading";
@@ -15,7 +16,8 @@ import { useForm } from "@/contexts/FormContext";
 export default function Country() {
   const router = useRouter();
 
-  const { checkedInter, setCheckedInter, setSettingCountry } = useForm();
+  const { checkedInter, setCheckedInter, setSettingPer, setSettingMonth } =
+    useForm();
 
   const handleChangeCountry = (e, inter) => {
     setCheckedInter((prevInter) =>
@@ -28,12 +30,11 @@ export default function Country() {
       })
     );
 
-    setSettingCountry(false);
+    setSettingPer(false);
+    setSettingMonth(false);
   };
 
-  const handleNext = async (e) => {
-    e.preventDefault();
-
+  const handleNext = () => {
     router.push("/level");
   };
 
@@ -50,7 +51,7 @@ export default function Country() {
   }, []);
 
   return (
-    <form onSubmit={handleNext}>
+    <Form action={handleNext}>
       <header className="my-3 p-3 bg-gray-50">
         <Heading level={2}>
           <Badge className="align-middle">3</Badge> 기술수준조사
@@ -243,6 +244,6 @@ export default function Country() {
       <footer className="my-2 text-right">
         <Button type="submit">다음</Button>
       </footer>
-    </form>
+    </Form>
   );
 }

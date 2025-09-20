@@ -1,5 +1,6 @@
 "use client";
 
+import Form from "next/form";
 import { useRouter } from "next/navigation";
 
 import { Heading } from "@/components/heading";
@@ -42,14 +43,12 @@ export default function Basic() {
     router.push("/");
   };
 
-  const handleNext = (e) => {
-    e.preventDefault();
-
+  const handleNext = () => {
     router.push("/prepare");
   };
 
   return (
-    <form onSubmit={handleNext}>
+    <Form action={handleNext}>
       <header className="my-3 p-3 bg-gray-50">
         <Heading level={2}>
           <Badge className="align-middle">1</Badge> 응답자 기본 조사
@@ -227,6 +226,6 @@ export default function Basic() {
         <Button onClick={handlePrev}>이전</Button>
         <Button type="submit">다음</Button>
       </footer>
-    </form>
+    </Form>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import Form from "next/form";
 import { useRouter } from "next/navigation";
 
 import { Heading } from "@/components/heading";
@@ -11,73 +12,26 @@ import { Button } from "@/components/button";
 
 import { useForm } from "@/contexts/FormContext";
 
-import { supabase } from "@/libs/supabaseClient";
-
 export default function Level() {
   const router = useRouter();
 
-  const {
-    name,
-    company,
-    position,
-    classification,
-    etc,
-    career,
-    tel1,
-    tel2,
-    tel3,
-    email,
-    checkedInter,
-    setCheckedInter,
-    settingCountry,
-    setSettingCountry,
-  } = useForm();
-
+  const { checkedInter, setCheckedInter, settingPer, setSettingPer } =
+    useForm();
+  console.log(checkedInter);
   const handlePrev = () => {
-    setSettingCountry(true);
+    setSettingPer(true);
 
     router.push("/country");
   };
 
-  const handleNext = async (e) => {
-    e.preventDefault();
-
-    const { error } = await supabase.from("form").insert(
-      checkedInter.map((inter) => {
-        return {
-          name,
-          company,
-          position,
-          classification,
-          etc,
-          career,
-          tel: tel1 + tel2 + tel3,
-          email,
-          intermediate: inter.intermediate,
-          code: inter.code,
-          country: inter.country,
-          euName: inter.euName,
-          etcName: inter.etcName,
-          institution: inter.institution,
-          krPer: inter.krPer,
-          usPer: inter.usPer,
-          cnPer: inter.cnPer,
-          jpPer: inter.jpPer,
-          euPer: inter.euPer,
-          etcPer: inter.etcPer,
-        };
-      })
-    );
-
-    error && console.error(error);
-
-    setSettingCountry(true);
+  const handleNext = () => {
+    setSettingPer(true);
 
     router.push("/gap");
   };
 
   useEffect(() => {
-    if (!settingCountry) {
+    if (!settingPer) {
       setCheckedInter((prevInter) =>
         prevInter.map((inter) => {
           if (inter.country === "kr")
@@ -146,7 +100,7 @@ export default function Level() {
   }, []);
 
   return (
-    <form onSubmit={handleNext}>
+    <Form action={handleNext}>
       <header className="my-3 p-3 bg-gray-50">
         <Heading level={2}>
           <Badge className="align-middle">3</Badge> 기술수준조사
@@ -425,6 +379,6 @@ export default function Level() {
         <Button onClick={handlePrev}>이전</Button>
         <Button type="submit">다음</Button>
       </footer>
-    </form>
+    </Form>
   );
 }

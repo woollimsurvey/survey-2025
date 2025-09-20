@@ -1,5 +1,6 @@
 "use client";
 
+import Form from "next/form";
 import { useRouter } from "next/navigation";
 
 import { Divider } from "@/components/divider";
@@ -14,7 +15,7 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <Form action={handleNext}>
       <header className="text-center">
         <Divider className="my-6" />
         <h1 className="text-4xl font-semibold text-zinc-950">
@@ -113,8 +114,8 @@ export default function Home() {
         </Text>
       </main>
       <footer className="my-6 text-center">
-        <Button onClick={handleNext}>설문조사 시작</Button>
+        <Button type="submit">설문조사 시작</Button>
       </footer>
-    </div>
+    </Form>
   );
 }
