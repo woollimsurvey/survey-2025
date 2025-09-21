@@ -23,11 +23,19 @@ export default function Prepare() {
 
   const [industry, setIndustry] = useState([]);
 
-  const handleChecked = (e, id, intermediate, description, code) => {
+  const handleCheckInter = (
+    e,
+    id,
+    large,
+    definition,
+    intermediate,
+    description,
+    code
+  ) => {
     if (e) {
       setCheckedInter((prevList) => [
         ...prevList,
-        { id, intermediate, description, code },
+        { id, large, definition, intermediate, description, code },
       ]);
 
       return;
@@ -85,7 +93,11 @@ export default function Prepare() {
           });
 
           !acc.find((ele) => ele.large === cur.large) &&
-            acc.push({ large: cur.large, intermediates });
+            acc.push({
+              large: cur.large,
+              definition: cur.definition,
+              intermediates,
+            });
 
           return acc;
         }, [])
@@ -135,9 +147,11 @@ export default function Prepare() {
                     aria-label={intermediate.code}
                     name={intermediate.code}
                     onChange={(e) =>
-                      handleChecked(
+                      handleCheckInter(
                         e,
                         intermediate.id,
+                        lar.large,
+                        lar.definition,
                         intermediate.intermediate,
                         intermediate.description,
                         intermediate.code

@@ -17,7 +17,7 @@ export default function Level() {
 
   const { checkedInter, setCheckedInter, settingPer, setSettingPer } =
     useForm();
-  console.log(checkedInter);
+
   const handlePrev = () => {
     setSettingPer(true);
 
