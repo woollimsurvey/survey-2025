@@ -1,22 +1,107 @@
 "use client";
 
+import { useEffect } from "react";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
 
 import { Heading } from "@/components/heading";
 import { Badge } from "@/components/badge";
 import { Text, Strong } from "@/components/text";
+import { Radio, RadioGroup } from "@/components/radio";
 import { Button } from "@/components/button";
+
+import { useForm } from "@/contexts/FormContext";
+
+import { supabase } from "@/libs/supabaseClient";
 
 export default function Independence() {
   const router = useRouter();
+
+  const {
+    name,
+    company,
+    position,
+    classification,
+    etc,
+    career,
+    tel1,
+    tel2,
+    tel3,
+    email,
+    checkedInter,
+    setCheckedInter,
+  } = useForm();
+
+  const handleChangeInde = (e, inter) => {
+    setCheckedInter((prevInter) =>
+      prevInter.map((prev) => {
+        if (prev.code === inter.code) {
+          return { ...prev, independence: e };
+        }
+
+        return prev;
+      })
+    );
+  };
 
   const handlePrev = () => {
     router.push("/gap");
   };
 
+  const handleNext = async () => {
+    const { error } = await supabase.from("form").insert(
+      checkedInter.map((inter) => {
+        return {
+          name,
+          company,
+          position,
+          classification,
+          etc,
+          career,
+          tel: tel1 + tel2 + tel3,
+          email,
+          intermediate: inter.intermediate,
+          code: inter.code,
+          country: inter.country,
+          euName: inter.euName,
+          etcName: inter.etcName,
+          institution: inter.institution,
+          krPer: inter.krPer,
+          usPer: inter.usPer,
+          cnPer: inter.cnPer,
+          jpPer: inter.jpPer,
+          euPer: inter.euPer,
+          etcPer: inter.etcPer,
+          krMonth: inter.krMonth,
+          usMonth: inter.usMonth,
+          cnMonth: inter.cnMonth,
+          jpMonth: inter.jpMonth,
+          euMonth: inter.euMonth,
+          etcMonth: inter.etcMonth,
+          independence: inter.independence,
+        };
+      })
+    );
+
+    error && console.error(error);
+
+    router.push("/way");
+  };
+
+  useEffect(() => {
+    setCheckedInter((prevInter) =>
+      prevInter.map((prev) => {
+        if (!prev.independence) {
+          return { ...prev, independence: "1" };
+        }
+
+        return prev;
+      })
+    );
+  }, []);
+
   return (
-    <Form>
+    <Form action={handleNext}>
       <header className="my-3 p-3 bg-gray-50">
         <Heading level={2}>
           <Badge className="align-middle">3</Badge> 기술수준조사
@@ -104,7 +189,7 @@ export default function Independence() {
             <div className="flex justify-center items-center border-r border-b">
               중분류
             </div>
-            <div className="grid grid-cols-[1ff_1fr_1fr_1fr_1fr]">
+            <div className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr]">
               <div className="col-span-5 border-b leading-10">기술 자립도</div>
               <div className="border-r border-b p-2">
                 ① 해외 기술 의존도가 매우 높음
@@ -118,11 +203,44 @@ export default function Independence() {
               <div className="border-r border-b p-2">
                 ④ 국내 기술 자립도가 높음
               </div>
-              <div className="border-r border-b p-2">
+              <div className="border-b p-2">
                 ⑤ 국내 독자적 기술 자립도가 매우 높음
               </div>
             </div>
           </article>
+          {checkedInter
+            .sort((a, b) => a.id - b.id)
+            .map((inter) => (
+              <article key={inter.id} className="grid grid-cols-[2fr_5fr]">
+                <div className="border-b bg-blue-950 p-2 text-lg font-bold text-white">
+                  {inter.intermediate}
+                  <span className="text-red-400">(!)</span>
+                </div>
+                <RadioGroup
+                  name="independence"
+                  aria-label="independence"
+                  className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr]"
+                  onChange={(e) => handleChangeInde(e, inter)}
+                  defaultValue={inter.independence || "1"}
+                >
+                  <div className="flex justify-center items-center m-0 border-r border-b">
+                    <Radio value="1" />
+                  </div>
+                  <div className="flex justify-center items-center m-0 border-r border-b">
+                    <Radio value="2" />
+                  </div>
+                  <div className="flex justify-center items-center m-0 border-r border-b">
+                    <Radio value="3" />
+                  </div>
+                  <div className="flex justify-center items-center m-0 border-r border-b">
+                    <Radio value="4" />
+                  </div>
+                  <div className="flex justify-center items-center m-0 border-b">
+                    <Radio value="5" />
+                  </div>
+                </RadioGroup>
+              </article>
+            ))}
         </section>
       </main>
       <footer className="flex justify-end gap-4 my-4">
