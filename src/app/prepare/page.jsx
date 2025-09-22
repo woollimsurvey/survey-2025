@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, Fragment } from "react";
-import Form from "next/form";
 import { useRouter } from "next/navigation";
 
 import { Heading } from "@/components/heading";
@@ -110,7 +109,7 @@ export default function Prepare() {
   }, []);
 
   return (
-    <Form action={handleNext}>
+    <div>
       <header className="my-3 p-3 bg-gray-50">
         <Heading level={2}>
           <Badge className="align-middle">2</Badge> 준비단계
@@ -178,8 +177,8 @@ export default function Prepare() {
       </main>
       <footer className="flex justify-end gap-4 my-4">
         <Button onClick={handlePrev}>이전</Button>
-        <Button type="submit">다음</Button>
+        <Button onClick={handleNext}>다음</Button>
       </footer>
-    </Form>
+    </div>
   );
 }
