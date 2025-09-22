@@ -12,25 +12,10 @@ import { Button } from "@/components/button";
 
 import { useForm } from "@/contexts/FormContext";
 
-import { supabase } from "@/libs/supabaseClient";
-
 export default function Independence() {
   const router = useRouter();
 
-  const {
-    name,
-    company,
-    position,
-    classification,
-    etc,
-    career,
-    tel1,
-    tel2,
-    tel3,
-    email,
-    checkedInter,
-    setCheckedInter,
-  } = useForm();
+  const { checkedInter, setCheckedInter } = useForm();
 
   const handleChangeInde = (e, inter) => {
     setCheckedInter((prevInter) =>
@@ -48,43 +33,7 @@ export default function Independence() {
     router.push("/gap");
   };
 
-  const handleNext = async () => {
-    const { error } = await supabase.from("form").insert(
-      checkedInter.map((inter) => {
-        return {
-          name,
-          company,
-          position,
-          classification,
-          etc,
-          career,
-          tel: tel1 + tel2 + tel3,
-          email,
-          intermediate: inter.intermediate,
-          code: inter.code,
-          country: inter.country,
-          euName: inter.euName,
-          etcName: inter.etcName,
-          institution: inter.institution,
-          krPer: inter.krPer,
-          usPer: inter.usPer,
-          cnPer: inter.cnPer,
-          jpPer: inter.jpPer,
-          euPer: inter.euPer,
-          etcPer: inter.etcPer,
-          krMonth: inter.krMonth,
-          usMonth: inter.usMonth,
-          cnMonth: inter.cnMonth,
-          jpMonth: inter.jpMonth,
-          euMonth: inter.euMonth,
-          etcMonth: inter.etcMonth,
-          independence: inter.independence,
-        };
-      })
-    );
-
-    error && console.error(error);
-
+  const handleNext = () => {
     router.push("/way");
   };
 
