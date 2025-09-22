@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useState } from "react";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
 
@@ -19,6 +19,8 @@ export default function Country() {
   const { checkedInter, setCheckedInter, setSettingPer, setSettingMonth } =
     useForm();
 
+  const [error, setError] = useState("");
+
   const handleChangeCountry = (e, inter) => {
     setCheckedInter((prevInter) =>
       prevInter.map((prev) => {
@@ -35,20 +37,14 @@ export default function Country() {
   };
 
   const handleNext = () => {
+    if (!checkedInter.every((inter) => "country" in inter)) {
+      setError("모든 중분류에 대해 최고기술 보유국을 선택해주세요.");
+
+      return;
+    }
+
     router.push("/level");
   };
-
-  useEffect(() => {
-    setCheckedInter((prevInter) =>
-      prevInter.map((prev) => {
-        if (!prev.country) {
-          return { ...prev, country: "kr" };
-        }
-
-        return prev;
-      })
-    );
-  }, []);
 
   return (
     <Form action={handleNext}>
@@ -144,7 +140,7 @@ export default function Country() {
                   aria-label="country"
                   className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr_4fr_3fr]"
                   onChange={(e) => handleChangeCountry(e, inter)}
-                  defaultValue={inter.country || "kr"}
+                  defaultValue={inter.country}
                 >
                   <div className="flex justify-center items-center m-0 border-r border-b">
                     <Radio value="kr" />
@@ -243,6 +239,7 @@ export default function Country() {
         <Text>※ 기타 선택 시 해당 국가명 기재</Text>
       </main>
       <footer className="my-2 text-right">
+        <div className="text-red-700">{error}</div>
         <Button type="submit">다음</Button>
       </footer>
     </Form>

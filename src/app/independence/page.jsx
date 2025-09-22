@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useState } from "react";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
 
@@ -16,6 +16,8 @@ export default function Independence() {
   const router = useRouter();
 
   const { checkedInter, setCheckedInter } = useForm();
+
+  const [error, setError] = useState("");
 
   const handleChangeInde = (e, inter) => {
     setCheckedInter((prevInter) =>
@@ -34,20 +36,14 @@ export default function Independence() {
   };
 
   const handleNext = () => {
+    if (!checkedInter.every((inter) => "independence" in inter)) {
+      setError("모든 중분류에 대해 기술 자립도를 선택해주세요.");
+
+      return;
+    }
+
     router.push("/way");
   };
-
-  useEffect(() => {
-    setCheckedInter((prevInter) =>
-      prevInter.map((prev) => {
-        if (!prev.independence) {
-          return { ...prev, independence: "1" };
-        }
-
-        return prev;
-      })
-    );
-  }, []);
 
   return (
     <Form action={handleNext}>
@@ -170,7 +166,7 @@ export default function Independence() {
                   aria-label="independence"
                   className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr]"
                   onChange={(e) => handleChangeInde(e, inter)}
-                  defaultValue={inter.independence || "1"}
+                  defaultValue={inter.independence}
                 >
                   <div className="flex justify-center items-center m-0 border-r border-b">
                     <Radio value="1" />
@@ -192,9 +188,12 @@ export default function Independence() {
             ))}
         </section>
       </main>
-      <footer className="flex justify-end gap-4 my-4">
-        <Button onClick={handlePrev}>이전</Button>
-        <Button type="submit">다음</Button>
+      <footer className="my-4">
+        <div className="text-red-700 text-right">{error}</div>
+        <div className="flex justify-end gap-4">
+          <Button onClick={handlePrev}>이전</Button>
+          <Button type="submit">다음</Button>
+        </div>
       </footer>
     </Form>
   );

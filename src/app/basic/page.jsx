@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
 
@@ -39,11 +40,25 @@ export default function Basic() {
     setEmail,
   } = useForm();
 
+  const [error, setError] = useState("");
+
   const handlePrev = () => {
     router.push("/");
   };
 
   const handleNext = () => {
+    if (!classification) {
+      setError("소속 구분을 선택해주세요.");
+
+      return;
+    }
+
+    if (!career) {
+      setError("연구 경력을 선택해주세요.");
+
+      return;
+    }
+
     router.push("/prepare");
   };
 
@@ -222,9 +237,12 @@ export default function Basic() {
           </div>
         </section>
       </main>
-      <footer className="flex justify-end gap-4">
-        <Button onClick={handlePrev}>이전</Button>
-        <Button type="submit">다음</Button>
+      <footer>
+        <div className="text-right text-red-700">{error}</div>
+        <div className="flex justify-end gap-4">
+          <Button onClick={handlePrev}>이전</Button>
+          <Button type="submit">다음</Button>
+        </div>
       </footer>
     </Form>
   );

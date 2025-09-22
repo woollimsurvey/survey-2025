@@ -8,9 +8,9 @@ export function FormProvider({ children }) {
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
   const [position, setPosition] = useState("");
-  const [classification, setClassification] = useState("ind");
+  const [classification, setClassification] = useState("");
   const [etc, setEtc] = useState("");
-  const [career, setCareer] = useState("0");
+  const [career, setCareer] = useState("");
   const [tel1, setTel1] = useState("");
   const [tel2, setTel2] = useState("");
   const [tel3, setTel3] = useState("");
