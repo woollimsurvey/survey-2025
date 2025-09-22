@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
 
@@ -23,6 +23,7 @@ export default function Way() {
     company,
     position,
     classification,
+    etc,
     career,
     tel1,
     tel2,
@@ -32,8 +33,6 @@ export default function Way() {
     largeWay,
     setLargeWay,
   } = useForm();
-
-  const [etc, setEtc] = useState(largeWay[0]?.etc || "");
 
   const handleSelectWay = (e, way) => {
     setLargeWay((prevWay) =>
@@ -48,22 +47,10 @@ export default function Way() {
   };
 
   const handlePrev = () => {
-    setLargeWay((prevList) =>
-      prevList.map((prev) => {
-        return { ...prev, etc };
-      })
-    );
-
     router.push("/independence");
   };
 
   const handleNext = async () => {
-    setLargeWay((prevList) =>
-      prevList.map((prev) => {
-        return { ...prev, etc };
-      })
-    );
-
     const { error1 } = await supabase.from("form").insert(
       checkedInter.map((inter) => {
         return {
@@ -98,21 +85,21 @@ export default function Way() {
       })
     );
 
-    // const { error2 } = await supabase.from("form_large").insert(
-    //   largeWay.map((way) => {
-    //     return {
-    //       tel: way.tel,
-    //       etc: way.etc,
-    //       large: way.large,
-    //       code: way.code,
-    //       way: way.way,
-    //       reason: way.reason,
-    //     };
-    //   })
-    // );
+    const { error2 } = await supabase.from("form_large").insert(
+      largeWay.map((way) => {
+        return {
+          tel: way.tel,
+          etc: way.etc,
+          large: way.large,
+          code: way.code,
+          way: way.way,
+          reason: way.reason,
+        };
+      })
+    );
 
     error1 && console.error(error1);
-    // error2 && console.error(error2);
+    error2 && console.error(error2);
 
     router.push("/importance");
   };
@@ -132,7 +119,6 @@ export default function Way() {
           .map((inter) => {
             return {
               tel: tel1 + tel2 + tel3,
-              etc: "",
               large: inter.large,
               code: inter.code.substring(0, 2),
               way: "1",
@@ -183,16 +169,7 @@ export default function Way() {
             <div className="border-r border-b">⑩ R&D 정책 개선</div>
             <div className="border-r border-b">⑪ 시장투자 확대 </div>
             <div className="border-b">⑫ 산업 생태계 개선</div>
-            <div className="col-span-3 flex items-center p-1">
-              <span className="flex-1">⑬ 기타</span>
-              <Input
-                aria-label="etc"
-                name="etc"
-                className="flex-2"
-                value={etc}
-                onChange={({ target }) => setEtc(target.value)}
-              />
-            </div>
+            <div className="p-1">⑬ 기타</div>
           </article>
         </section>
         <section className="border text-center">
@@ -207,7 +184,7 @@ export default function Way() {
                 {way.large}
                 <span className="text-red-400">(!)</span>
               </div>
-              <div className="flex items-center border-r px-2">
+              <div className="flex items-center gap-2 border-r px-2">
                 <Listbox
                   name="way"
                   defaultValue="1"
@@ -254,6 +231,26 @@ export default function Way() {
                     <ListboxLabel>기타</ListboxLabel>
                   </ListboxOption>
                 </Listbox>
+                <Input
+                  aria-label="etc"
+                  name="etc"
+                  className={`${way.way !== "13" && "hidden"}`}
+                  value={
+                    largeWay.find((ele) => ele.code === way.code)?.etc || ""
+                  }
+                  onChange={({ target }) =>
+                    setLargeWay((prevList) =>
+                      prevList.map((prev) => {
+                        if (prev.code === way.code) {
+                          return { ...prev, etc: target.value };
+                        }
+
+                        return prev;
+                      })
+                    )
+                  }
+                  required={way.way === "13"}
+                />
               </div>
               <div className="flex items-center px-2">
                 <Input
