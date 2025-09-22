@@ -13,6 +13,8 @@ import { Button } from "@/components/button";
 
 import { useForm } from "@/contexts/FormContext";
 
+import { supabase } from "@/libs/supabaseClient";
+
 export default function Way() {
   const router = useRouter();
 
@@ -96,21 +98,21 @@ export default function Way() {
       })
     );
 
-    const { error2 } = await supabase.from("form_large").insert(
-      largeWay.map((way) => {
-        return {
-          tel: way.tel,
-          etc: way.etc,
-          large: way.large,
-          code: way.code,
-          way: way.way,
-          reason: way.reason,
-        };
-      })
-    );
+    // const { error2 } = await supabase.from("form_large").insert(
+    //   largeWay.map((way) => {
+    //     return {
+    //       tel: way.tel,
+    //       etc: way.etc,
+    //       large: way.large,
+    //       code: way.code,
+    //       way: way.way,
+    //       reason: way.reason,
+    //     };
+    //   })
+    // );
 
     error1 && console.error(error1);
-    error2 && console.error(error2);
+    // error2 && console.error(error2);
 
     router.push("/importance");
   };

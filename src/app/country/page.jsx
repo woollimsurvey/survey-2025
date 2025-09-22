@@ -184,6 +184,7 @@ export default function Country() {
                         checkedInter.find((ele) => ele.code === inter.code)
                           ?.country !== "eu"
                       }
+                      required={inter.country === "eu"}
                     />
                   </div>
                   <div className="flex items-center gap-1 border-r border-b px-2">
@@ -210,6 +211,7 @@ export default function Country() {
                         checkedInter.find((ele) => ele.code === inter.code)
                           ?.country !== "etc"
                       }
+                      required={inter.country === "etc"}
                     />
                   </div>
                 </RadioGroup>
@@ -232,7 +234,6 @@ export default function Country() {
                         })
                       )
                     }
-                    required
                   />
                 </div>
               </article>

@@ -193,8 +193,8 @@ export default function Level() {
                   {inter.country === "us" && "미국"}
                   {inter.country === "cn" && "중국"}
                   {inter.country === "jp" && "일본"}
-                  {inter.country === "eu" && "유럽"}
-                  {inter.country === "etc" && "기타"}
+                  {inter.country === "eu" && `유럽(${inter.euName})`}
+                  {inter.country === "etc" && `기타(${inter.etcName})`}
                 </div>
                 <div className="flex items-center border-r border-b px-2">
                   <Input
@@ -348,18 +348,7 @@ export default function Level() {
                       checkedInter.find((ele) => ele.code === inter.code)
                         ?.etcPer || ""
                     }
-                    onChange={({ target }) =>
-                      setCheckedInter((prevList) =>
-                        prevList.map((prev) => {
-                          if (prev.code === inter.code) {
-                            return { ...prev, etcPer: target.value };
-                          }
-
-                          return prev;
-                        })
-                      )
-                    }
-                    disabled={inter.country === "etc"}
+                    disabled
                   />
                   %
                 </div>
