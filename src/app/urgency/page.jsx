@@ -12,26 +12,10 @@ import { Button } from "@/components/button";
 
 import { useForm } from "@/contexts/FormContext";
 
-import { supabase } from "@/libs/supabaseClient";
-
 export default function Urgency() {
   const router = useRouter();
 
-  const {
-    name,
-    company,
-    position,
-    classification,
-    etc,
-    career,
-    tel1,
-    tel2,
-    tel3,
-    email,
-    checkedInter,
-    setCheckedInter,
-    largeWay,
-  } = useForm();
+  const { checkedInter, setCheckedInter } = useForm();
 
   const [error, setError] = useState("");
 
@@ -51,64 +35,12 @@ export default function Urgency() {
     router.push("/importance");
   };
 
-  const handleNext = async () => {
+  const handleNext = () => {
     if (!checkedInter.every((inter) => "urgency" in inter)) {
       setError("모든 중분류에 대해 시급성을 선택해주세요.");
 
       return;
     }
-
-    const { error1 } = await supabase.from("form").insert(
-      checkedInter.map((inter) => {
-        return {
-          name,
-          company,
-          position,
-          classification,
-          etc,
-          career,
-          tel: tel1 + tel2 + tel3,
-          email,
-          intermediate: inter.intermediate,
-          code: inter.code,
-          country: inter.country,
-          euName: inter.euName,
-          etcName: inter.etcName,
-          institution: inter.institution,
-          krPer: inter.krPer,
-          usPer: inter.usPer,
-          cnPer: inter.cnPer,
-          jpPer: inter.jpPer,
-          euPer: inter.euPer,
-          etcPer: inter.etcPer,
-          krMonth: inter.krMonth,
-          usMonth: inter.usMonth,
-          cnMonth: inter.cnMonth,
-          jpMonth: inter.jpMonth,
-          euMonth: inter.euMonth,
-          etcMonth: inter.etcMonth,
-          independence: inter.independence,
-          importance: inter.importance,
-          urgency: inter.urgency,
-        };
-      })
-    );
-
-    const { error2 } = await supabase.from("form_large").insert(
-      largeWay.map((way) => {
-        return {
-          tel: way.tel,
-          etc: way.etc,
-          large: way.large,
-          code: way.code,
-          way: way.way,
-          reason: way.reason,
-        };
-      })
-    );
-
-    error1 && console.error(error1);
-    error2 && console.error(error2);
 
     router.push("/effect");
   };
@@ -137,7 +69,7 @@ export default function Urgency() {
           또는 국민 안전·복지에 심각한 영향을 미칠 수 있는 정도
         </Text>
         <section className="my-4 border-t border-r border-l text-center">
-          <article className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr] border-b bg-gray-100 text-xl font-bold leading-20">
+          <article className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr] border-b bg-gray-100 text-xl font-bold leading-10">
             <div className="border-r">중분류</div>
             <div className="border-r">① 전혀 시급하지 않다</div>
             <div className="border-r">② 시급하지 않다</div>

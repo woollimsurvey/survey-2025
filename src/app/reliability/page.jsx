@@ -12,14 +12,30 @@ import { Button } from "@/components/button";
 
 import { useForm } from "@/contexts/FormContext";
 
+import { supabase } from "@/libs/supabaseClient";
+
 export default function Effect() {
   const router = useRouter();
 
-  const { checkedInter, setCheckedInter } = useForm();
+  const {
+    name,
+    company,
+    position,
+    classification,
+    etc,
+    career,
+    tel1,
+    tel2,
+    tel3,
+    email,
+    checkedInter,
+    setCheckedInter,
+    largeWay,
+  } = useForm();
 
   const [error, setError] = useState("");
 
-  const handleChangeEff = (e, inter) => {
+  const handleChangeReliable = (e, inter) => {
     setCheckedInter((prevInter) =>
       prevInter.map((prev) => {
         if (prev.code === inter.code) {
@@ -35,12 +51,65 @@ export default function Effect() {
     router.push("/urgency");
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (!checkedInter.every((inter) => "effect" in inter)) {
       setError("모든 중분류에 대해 파급효과를 선택해주세요.");
 
       return;
     }
+
+    const { error1 } = await supabase.from("form").insert(
+      checkedInter.map((inter) => {
+        return {
+          name,
+          company,
+          position,
+          classification,
+          etc,
+          career,
+          tel: tel1 + tel2 + tel3,
+          email,
+          intermediate: inter.intermediate,
+          code: inter.code,
+          country: inter.country,
+          euName: inter.euName,
+          etcName: inter.etcName,
+          institution: inter.institution,
+          krPer: inter.krPer,
+          usPer: inter.usPer,
+          cnPer: inter.cnPer,
+          jpPer: inter.jpPer,
+          euPer: inter.euPer,
+          etcPer: inter.etcPer,
+          krMonth: inter.krMonth,
+          usMonth: inter.usMonth,
+          cnMonth: inter.cnMonth,
+          jpMonth: inter.jpMonth,
+          euMonth: inter.euMonth,
+          etcMonth: inter.etcMonth,
+          independence: inter.independence,
+          importance: inter.importance,
+          urgency: inter.urgency,
+          effect: inter.effect,
+        };
+      })
+    );
+
+    const { error2 } = await supabase.from("form_large").insert(
+      largeWay.map((way) => {
+        return {
+          tel: way.tel,
+          etc: way.etc,
+          large: way.large,
+          code: way.code,
+          way: way.way,
+          reason: way.reason,
+        };
+      })
+    );
+
+    error1 && console.error(error1);
+    error2 && console.error(error2);
 
     router.push("/reliability");
   };
@@ -58,23 +127,29 @@ export default function Effect() {
           하위 문항에 응답해주시기 바랍니다.
         </h3>
         <Heading level={4}>
-          4Q-3. (파급효과)&nbsp;
+          4Q-4. (기술 신뢰도)&nbsp;
           <span className="font-normal">
-            선택하신 중분류별 가장 적합한 파급효과를 선택해주시기 바랍니다.
+            선택하신 중분류별 가장 적합한 기술 신뢰도를 선택해 주시기 바랍니다.
           </span>
         </Heading>
         <Text className="indent-4">
-          ※ 특정 산업에만 국한하지 않고 연관 산업군의 혁신, 국가 경쟁력 강화,
-          일자리 창출, 생활·안전 개선 등으로 이어지는 효과의 크기
+          ※ 해당 기술이 실제 산업·서비스 현장에서 안정적이고 일관되게 활용될 수
+          있는 신뢰 수준(공급 측면에서 기술의 성숙도와 활용 신뢰도를 보유하고
+          있는지 여부)
         </Text>
         <section className="my-4 border-t border-r border-l text-center">
-          <article className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr] border-b bg-gray-100 text-xl font-bold leading-10">
-            <div className="border-r">중분류</div>
-            <div className="border-r">① 전혀 크지 않다</div>
-            <div className="border-r">② 크지 않다</div>
-            <div className="border-r">③ 보통이다</div>
-            <div className="border-r">④ 크다</div>
-            <div>⑤ 매우 크다</div>
+          <article className="grid grid-cols-[3fr_1fr_2fr_2fr_2fr_2fr+2fr] border-b bg-gray-100 text-xl font-bold">
+            <div className="flex justify-center items-center border-r">
+              중분류
+            </div>
+            <div className="flex justify-center items-center border-r">
+              구분*
+            </div>
+            <div className="border-r p-2">① 전혀 사용이 불가능하다</div>
+            <div className="border-r p-2">② 거의 사용이 불가능하다</div>
+            <div className="border-r p-2">③ 중간 수준이다</div>
+            <div className="border-r p-2">④ 대체로 사용이 가능하다</div>
+            <div className="p-2">⑤ 즉시 상용화가 가능하다</div>
           </article>
           {checkedInter
             .sort((a, b) => a.id - b.id)
