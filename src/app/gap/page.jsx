@@ -310,7 +310,7 @@ export default function Gap() {
                   />
                   개월
                 </div>
-                <div className="flex items-center border-r border-b px-2">
+                <div className="flex items-center border-b px-2">
                   <Input
                     type="number"
                     step="1"

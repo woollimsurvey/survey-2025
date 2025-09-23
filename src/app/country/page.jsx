@@ -237,6 +237,7 @@ export default function Country() {
         </section>
         <Text>* 유럽 국가 선택 시 작성</Text>
         <Text>※ 기타 선택 시 해당 국가명 기재</Text>
+        <Text>※ '최고기술 보유기관'을 아시는 바에 따라 작성 부탁드립니다.</Text>
       </main>
       <footer className="my-2 text-right">
         <div className="text-red-700">{error}</div>
