@@ -35,11 +35,23 @@ export default function Effect() {
 
   const [error, setError] = useState("");
 
-  const handleChangeReliable = (e, inter) => {
+  const handleChangeKrRely = (e, inter) => {
     setCheckedInter((prevInter) =>
       prevInter.map((prev) => {
         if (prev.code === inter.code) {
-          return { ...prev, effect: e };
+          return { ...prev, krReliability: e };
+        }
+
+        return prev;
+      })
+    );
+  };
+
+  const handleChangeEtcRely = (e, inter) => {
+    setCheckedInter((prevInter) =>
+      prevInter.map((prev) => {
+        if (prev.code === inter.code) {
+          return { ...prev, etcReliability: e };
         }
 
         return prev;
@@ -48,12 +60,15 @@ export default function Effect() {
   };
 
   const handlePrev = () => {
-    router.push("/urgency");
+    router.push("/effect");
   };
 
   const handleNext = async () => {
-    if (!checkedInter.every((inter) => "effect" in inter)) {
-      setError("모든 중분류에 대해 파급효과를 선택해주세요.");
+    if (
+      !checkedInter.every((inter) => "krReliability" in inter) ||
+      !checkedInter.every((inter) => "etcReliability" in inter)
+    ) {
+      setError("모든 중분류에 대해 기술 신뢰도를 선택해주세요.");
 
       return;
     }
@@ -91,6 +106,8 @@ export default function Effect() {
           importance: inter.importance,
           urgency: inter.urgency,
           effect: inter.effect,
+          krReliability: inter.krReliability,
+          etcReliability: inter.etcReliability,
         };
       })
     );
@@ -111,7 +128,7 @@ export default function Effect() {
     error1 && console.error(error1);
     error2 && console.error(error2);
 
-    router.push("/reliability");
+    router.push("/availability");
   };
 
   return (
@@ -138,7 +155,7 @@ export default function Effect() {
           있는지 여부)
         </Text>
         <section className="my-4 border-t border-r border-l text-center">
-          <article className="grid grid-cols-[3fr_1fr_2fr_2fr_2fr_2fr+2fr] border-b bg-gray-100 text-xl font-bold">
+          <article className="grid grid-cols-[3fr_1fr_2fr_2fr_2fr_2fr_2fr] border-b bg-gray-100 text-xl font-bold">
             <div className="flex justify-center items-center border-r">
               중분류
             </div>
@@ -147,25 +164,56 @@ export default function Effect() {
             </div>
             <div className="border-r p-2">① 전혀 사용이 불가능하다</div>
             <div className="border-r p-2">② 거의 사용이 불가능하다</div>
-            <div className="border-r p-2">③ 중간 수준이다</div>
+            <div className="flex justify-center items-center border-r p-2">
+              ③ 중간 수준이다
+            </div>
             <div className="border-r p-2">④ 대체로 사용이 가능하다</div>
             <div className="p-2">⑤ 즉시 상용화가 가능하다</div>
           </article>
           {checkedInter
             .sort((a, b) => a.id - b.id)
             .map((inter) => (
-              <article key={inter.id} className="grid grid-cols-[2fr_5fr]">
-                <div className="border-b bg-blue-950 p-2 text-lg font-bold text-white">
+              <article key={inter.id} className="grid grid-cols-[3fr_11fr]">
+                <div className="row-span-2 flex justify-center items-center border-b bg-blue-950 p-2 text-lg font-bold text-white">
                   {inter.intermediate}
                   <span className="text-red-400">(!)</span>
                 </div>
                 <RadioGroup
                   name="urgency"
                   aria-label="urgency"
-                  className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr] border-b"
-                  onChange={(e) => handleChangeEff(e, inter)}
-                  defaultValue={inter.effect}
+                  className="grid grid-cols-[1fr_2fr_2fr_2fr_2fr_2fr] border-b"
+                  onChange={(e) => handleChangeKrRely(e, inter)}
+                  defaultValue={inter.krReliability}
                 >
+                  <div className="flex justify-center items-center m-0 border-r text-lg">
+                    국내
+                  </div>
+                  <div className="flex justify-center items-center m-0 border-r">
+                    <Radio value="1" />
+                  </div>
+                  <div className="flex justify-center items-center m-0 border-r">
+                    <Radio value="2" />
+                  </div>
+                  <div className="flex justify-center items-center m-0 border-r">
+                    <Radio value="3" />
+                  </div>
+                  <div className="flex justify-center items-center m-0 border-r">
+                    <Radio value="4" />
+                  </div>
+                  <div className="flex justify-center items-center m-0">
+                    <Radio value="5" />
+                  </div>
+                </RadioGroup>
+                <RadioGroup
+                  name="urgency"
+                  aria-label="urgency"
+                  className="grid grid-cols-[1fr_2fr_2fr_2fr_2fr_2fr] border-b"
+                  onChange={(e) => handleChangeEtcRely(e, inter)}
+                  defaultValue={inter.etcReliability}
+                >
+                  <div className="flex justify-center items-center m-0 border-r text-lg">
+                    국외
+                  </div>
                   <div className="flex justify-center items-center m-0 border-r">
                     <Radio value="1" />
                   </div>
@@ -185,6 +233,10 @@ export default function Effect() {
               </article>
             ))}
         </section>
+        <Text>
+          * 국내 기술에 대해 국내 시장과 국외 시장에서의 신뢰도를 각각
+          평가해주시기 바랍니다.
+        </Text>
       </main>
       <footer className="my-4">
         <div className="text-red-700 text-right">{error}</div>
