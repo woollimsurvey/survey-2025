@@ -84,7 +84,7 @@ export default function Availability() {
           제품·서비스로 구현되고 확산될 수 있는 현실적 가능성(국내·외 시장에서
           활용될 가능성으로, 수요 측면에서의 기술 경쟁력)
         </Text>
-        <section className="my-4 border-t border-r border-l text-center">
+        <section className="mt-4 border-t border-r border-l text-center">
           <article className="grid grid-cols-[3fr_1fr_2fr_2fr_2fr_2fr_2fr] border-b bg-gray-100 text-xl font-bold">
             <div className="flex justify-center items-center border-r">
               중분류

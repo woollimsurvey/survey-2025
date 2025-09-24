@@ -83,7 +83,7 @@ export default function Reliability() {
           있는 신뢰 수준(공급 측면에서 기술의 성숙도와 활용 신뢰도를 보유하고
           있는지 여부)
         </Text>
-        <section className="my-4 border-t border-r border-l text-center">
+        <section className="mt-4 border-t border-r border-l text-center">
           <article className="grid grid-cols-[3fr_1fr_2fr_2fr_2fr_2fr_2fr] border-b bg-gray-100 text-xl font-bold">
             <div className="flex justify-center items-center border-r">
               중분류
