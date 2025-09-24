@@ -12,26 +12,10 @@ import { Button } from "@/components/button";
 
 import { useForm } from "@/contexts/FormContext";
 
-import { supabase } from "@/libs/supabaseClient";
-
-export default function Maturity() {
+export default function Confidence() {
   const router = useRouter();
 
-  const {
-    name,
-    company,
-    position,
-    classification,
-    etc,
-    career,
-    tel1,
-    tel2,
-    tel3,
-    email,
-    checkedInter,
-    setCheckedInter,
-    largeWay,
-  } = useForm();
+  const { checkedInter, setCheckedInter } = useForm();
 
   const [error, setError] = useState("");
 
@@ -51,72 +35,12 @@ export default function Maturity() {
     router.push("/maturity");
   };
 
-  const handleNext = async () => {
+  const handleNext = () => {
     if (!checkedInter.every((inter) => "confidence" in inter)) {
       setError("모든 중분류에 대해 본인 확신도를 선택해주세요.");
 
       return;
     }
-
-    const { error1 } = await supabase.from("form").insert(
-      checkedInter.map((inter) => {
-        return {
-          name,
-          company,
-          position,
-          classification,
-          etc,
-          career,
-          tel: tel1 + tel2 + tel3,
-          email,
-          intermediate: inter.intermediate,
-          code: inter.code,
-          country: inter.country,
-          euName: inter.euName,
-          etcName: inter.etcName,
-          institution: inter.institution,
-          krPer: inter.krPer,
-          usPer: inter.usPer,
-          cnPer: inter.cnPer,
-          jpPer: inter.jpPer,
-          euPer: inter.euPer,
-          etcPer: inter.etcPer,
-          krMonth: inter.krMonth,
-          usMonth: inter.usMonth,
-          cnMonth: inter.cnMonth,
-          jpMonth: inter.jpMonth,
-          euMonth: inter.euMonth,
-          etcMonth: inter.etcMonth,
-          independence: inter.independence,
-          importance: inter.importance,
-          urgency: inter.urgency,
-          effect: inter.effect,
-          krReliability: inter.krReliability,
-          etcReliability: inter.etcReliability,
-          krAvailability: inter.krAvailability,
-          etcAvailability: inter.etcAvailability,
-          maturity: inter.maturity,
-          confidence: inter.confidence,
-          confidenceReason: inter.confidenceReason,
-        };
-      })
-    );
-
-    const { error2 } = await supabase.from("form_large").insert(
-      largeWay.map((way) => {
-        return {
-          tel: way.tel,
-          etc: way.etc,
-          large: way.large,
-          code: way.code,
-          way: way.way,
-          reason: way.reason,
-        };
-      })
-    );
-
-    error1 && console.error(error1);
-    error2 && console.error(error2);
 
     router.push("/weight");
   };
