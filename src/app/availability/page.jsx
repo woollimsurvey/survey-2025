@@ -12,26 +12,10 @@ import { Button } from "@/components/button";
 
 import { useForm } from "@/contexts/FormContext";
 
-import { supabase } from "@/libs/supabaseClient";
-
 export default function Availability() {
   const router = useRouter();
 
-  const {
-    name,
-    company,
-    position,
-    classification,
-    etc,
-    career,
-    tel1,
-    tel2,
-    tel3,
-    email,
-    checkedInter,
-    setCheckedInter,
-    largeWay,
-  } = useForm();
+  const { checkedInter, setCheckedInter } = useForm();
 
   const [error, setError] = useState("");
 
@@ -68,67 +52,10 @@ export default function Availability() {
       !checkedInter.every((inter) => "krAvailability" in inter) ||
       !checkedInter.every((inter) => "etcAvailability" in inter)
     ) {
-      setError("모든 중분류에 대해 시장 활용성을 선택해주세요.");
+      setError("모든 중분류에 대해 시장 성숙도을 선택해주세요.");
 
       return;
     }
-
-    const { error1 } = await supabase.from("form").insert(
-      checkedInter.map((inter) => {
-        return {
-          name,
-          company,
-          position,
-          classification,
-          etc,
-          career,
-          tel: tel1 + tel2 + tel3,
-          email,
-          intermediate: inter.intermediate,
-          code: inter.code,
-          country: inter.country,
-          euName: inter.euName,
-          etcName: inter.etcName,
-          institution: inter.institution,
-          krPer: inter.krPer,
-          usPer: inter.usPer,
-          cnPer: inter.cnPer,
-          jpPer: inter.jpPer,
-          euPer: inter.euPer,
-          etcPer: inter.etcPer,
-          krMonth: inter.krMonth,
-          usMonth: inter.usMonth,
-          cnMonth: inter.cnMonth,
-          jpMonth: inter.jpMonth,
-          euMonth: inter.euMonth,
-          etcMonth: inter.etcMonth,
-          independence: inter.independence,
-          importance: inter.importance,
-          urgency: inter.urgency,
-          effect: inter.effect,
-          krReliability: inter.krReliability,
-          etcReliability: inter.etcReliability,
-          krAvailability: inter.krAvailability,
-          etcAvailability: inter.etcAvailability,
-        };
-      })
-    );
-
-    const { error2 } = await supabase.from("form_large").insert(
-      largeWay.map((way) => {
-        return {
-          tel: way.tel,
-          etc: way.etc,
-          large: way.large,
-          code: way.code,
-          way: way.way,
-          reason: way.reason,
-        };
-      })
-    );
-
-    error1 && console.error(error1);
-    error2 && console.error(error2);
 
     router.push("/maturity");
   };
@@ -198,15 +125,13 @@ export default function Availability() {
                   <span className="text-red-400">(!)</span>
                 </div>
                 <RadioGroup
-                  name="urgency"
-                  aria-label="urgency"
+                  name="krAvailability"
+                  aria-label="krAvailability"
                   className="grid grid-cols-[1fr_2fr_2fr_2fr_2fr_2fr] border-b"
                   onChange={(e) => handleChangeKrAvail(e, inter)}
                   defaultValue={inter.krAvailability}
                 >
-                  <div className="flex justify-center items-center m-0 border-r text-lg">
-                    국내
-                  </div>
+                  <div className="m-0 border-r p-1 text-lg">국내</div>
                   <div className="flex justify-center items-center m-0 border-r">
                     <Radio value="1" />
                   </div>
@@ -224,15 +149,13 @@ export default function Availability() {
                   </div>
                 </RadioGroup>
                 <RadioGroup
-                  name="urgency"
-                  aria-label="urgency"
+                  name="etcAvailability"
+                  aria-label="etcAvailability"
                   className="grid grid-cols-[1fr_2fr_2fr_2fr_2fr_2fr] border-b"
                   onChange={(e) => handleChangeEtcAvail(e, inter)}
                   defaultValue={inter.etcAvailability}
                 >
-                  <div className="flex justify-center items-center m-0 border-r text-lg">
-                    국외
-                  </div>
+                  <div className="m-0 border-r p-1 text-lg">국외</div>
                   <div className="flex justify-center items-center m-0 border-r">
                     <Radio value="1" />
                   </div>

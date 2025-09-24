@@ -85,8 +85,8 @@ export default function Effect() {
                   <span className="text-red-400">(!)</span>
                 </div>
                 <RadioGroup
-                  name="urgency"
-                  aria-label="urgency"
+                  name="effect"
+                  aria-label="effect"
                   className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr] border-b"
                   onChange={(e) => handleChangeEff(e, inter)}
                   defaultValue={inter.effect}

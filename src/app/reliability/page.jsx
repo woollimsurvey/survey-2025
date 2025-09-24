@@ -108,15 +108,13 @@ export default function Reliability() {
                   <span className="text-red-400">(!)</span>
                 </div>
                 <RadioGroup
-                  name="urgency"
-                  aria-label="urgency"
+                  name="krReliability"
+                  aria-label="krReliability"
                   className="grid grid-cols-[1fr_2fr_2fr_2fr_2fr_2fr] border-b"
                   onChange={(e) => handleChangeKrRely(e, inter)}
                   defaultValue={inter.krReliability}
                 >
-                  <div className="flex justify-center items-center m-0 border-r text-lg">
-                    국내
-                  </div>
+                  <div className="m-0 border-r p-1 text-lg">국내</div>
                   <div className="flex justify-center items-center m-0 border-r">
                     <Radio value="1" />
                   </div>
@@ -134,15 +132,13 @@ export default function Reliability() {
                   </div>
                 </RadioGroup>
                 <RadioGroup
-                  name="urgency"
-                  aria-label="urgency"
+                  name="etcReliability"
+                  aria-label="etcReliability"
                   className="grid grid-cols-[1fr_2fr_2fr_2fr_2fr_2fr] border-b"
                   onChange={(e) => handleChangeEtcRely(e, inter)}
                   defaultValue={inter.etcReliability}
                 >
-                  <div className="flex justify-center items-center m-0 border-r text-lg">
-                    국외
-                  </div>
+                  <div className="m-0 border-r p-1 text-lg">국외</div>
                   <div className="flex justify-center items-center m-0 border-r">
                     <Radio value="1" />
                   </div>
