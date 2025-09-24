@@ -12,18 +12,34 @@ import { Button } from "@/components/button";
 
 import { useForm } from "@/contexts/FormContext";
 
-export default function Reliability() {
+import { supabase } from "@/libs/supabaseClient";
+
+export default function Availability() {
   const router = useRouter();
 
-  const { checkedInter, setCheckedInter } = useForm();
+  const {
+    name,
+    company,
+    position,
+    classification,
+    etc,
+    career,
+    tel1,
+    tel2,
+    tel3,
+    email,
+    checkedInter,
+    setCheckedInter,
+    largeWay,
+  } = useForm();
 
   const [error, setError] = useState("");
 
-  const handleChangeKrRely = (e, inter) => {
+  const handleChangeKrAvail = (e, inter) => {
     setCheckedInter((prevInter) =>
       prevInter.map((prev) => {
         if (prev.code === inter.code) {
-          return { ...prev, krReliability: e };
+          return { ...prev, krAvailability: e };
         }
 
         return prev;
@@ -31,11 +47,11 @@ export default function Reliability() {
     );
   };
 
-  const handleChangeEtcRely = (e, inter) => {
+  const handleChangeEtcAvail = (e, inter) => {
     setCheckedInter((prevInter) =>
       prevInter.map((prev) => {
         if (prev.code === inter.code) {
-          return { ...prev, etcReliability: e };
+          return { ...prev, etcAvailability: e };
         }
 
         return prev;
@@ -44,20 +60,77 @@ export default function Reliability() {
   };
 
   const handlePrev = () => {
-    router.push("/effect");
+    router.push("/reliability");
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (
-      !checkedInter.every((inter) => "krReliability" in inter) ||
-      !checkedInter.every((inter) => "etcReliability" in inter)
+      !checkedInter.every((inter) => "krAvailability" in inter) ||
+      !checkedInter.every((inter) => "etcAvailability" in inter)
     ) {
-      setError("모든 중분류에 대해 기술 신뢰도를 선택해주세요.");
+      setError("모든 중분류에 대해 시장 활용성을 선택해주세요.");
 
       return;
     }
 
-    router.push("/availability");
+    const { error1 } = await supabase.from("form").insert(
+      checkedInter.map((inter) => {
+        return {
+          name,
+          company,
+          position,
+          classification,
+          etc,
+          career,
+          tel: tel1 + tel2 + tel3,
+          email,
+          intermediate: inter.intermediate,
+          code: inter.code,
+          country: inter.country,
+          euName: inter.euName,
+          etcName: inter.etcName,
+          institution: inter.institution,
+          krPer: inter.krPer,
+          usPer: inter.usPer,
+          cnPer: inter.cnPer,
+          jpPer: inter.jpPer,
+          euPer: inter.euPer,
+          etcPer: inter.etcPer,
+          krMonth: inter.krMonth,
+          usMonth: inter.usMonth,
+          cnMonth: inter.cnMonth,
+          jpMonth: inter.jpMonth,
+          euMonth: inter.euMonth,
+          etcMonth: inter.etcMonth,
+          independence: inter.independence,
+          importance: inter.importance,
+          urgency: inter.urgency,
+          effect: inter.effect,
+          krReliability: inter.krReliability,
+          etcReliability: inter.etcReliability,
+          krAvailability: inter.krAvailability,
+          etcAvailability: inter.etcAvailability,
+        };
+      })
+    );
+
+    const { error2 } = await supabase.from("form_large").insert(
+      largeWay.map((way) => {
+        return {
+          tel: way.tel,
+          etc: way.etc,
+          large: way.large,
+          code: way.code,
+          way: way.way,
+          reason: way.reason,
+        };
+      })
+    );
+
+    error1 && console.error(error1);
+    error2 && console.error(error2);
+
+    router.push("/maturity");
   };
 
   return (
@@ -73,15 +146,16 @@ export default function Reliability() {
           하위 문항에 응답해주시기 바랍니다.
         </h3>
         <Heading level={4}>
-          4Q-4. (기술 신뢰도)&nbsp;
+          4Q-5. (시장 활용성)&nbsp;
           <span className="font-normal">
-            선택하신 중분류별 가장 적합한 기술 신뢰도를 선택해 주시기 바랍니다.
+            선택하신 중분류별 가장 적합한 기술 활용성을 국내와 국외로 구분하여
+            선택해주시기 바랍니다.
           </span>
         </Heading>
         <Text className="indent-4">
-          ※ 해당 기술이 실제 산업·서비스 현장에서 안정적이고 일관되게 활용될 수
-          있는 신뢰 수준(공급 측면에서 기술의 성숙도와 활용 신뢰도를 보유하고
-          있는지 여부)
+          ※ 기술의 수요자 수용성 등을 고려할 때 산업 및 소비자 시장에서
+          제품·서비스로 구현되고 확산될 수 있는 현실적 가능성(국내·외 시장에서
+          활용될 가능성으로, 수요 측면에서의 기술 경쟁력)
         </Text>
         <section className="my-4 border-t border-r border-l text-center">
           <article className="grid grid-cols-[3fr_1fr_2fr_2fr_2fr_2fr_2fr] border-b bg-gray-100 text-xl font-bold">
@@ -91,13 +165,29 @@ export default function Reliability() {
             <div className="flex justify-center items-center border-r">
               구분*
             </div>
-            <div className="border-r p-2">① 전혀 사용이 불가능하다</div>
-            <div className="border-r p-2">② 거의 사용이 불가능하다</div>
             <div className="flex justify-center items-center border-r p-2">
-              ③ 중간 수준이다
+              ① 전혀 없다
             </div>
-            <div className="border-r p-2">④ 대체로 사용이 가능하다</div>
-            <div className="p-2">⑤ 즉시 상용화가 가능하다</div>
+            <div className="border-r p-2">
+              ② 낮은 편이다
+              <br />
+              (시장 제한, 경쟁력 낮음)
+            </div>
+            <div className="border-r p-2">
+              ③ 보통이다
+              <br />
+              (일부 시장 경쟁력을 보유)
+            </div>
+            <div className="border-r p-2">
+              ④ 높은 편이다
+              <br />
+              (국내외에서 활용 예정)
+            </div>
+            <div className="p-2">
+              ⑤ 매우 높다
+              <br />
+              (이미 국내외에서 활용 중)
+            </div>
           </article>
           {checkedInter
             .sort((a, b) => a.id - b.id)
@@ -111,8 +201,8 @@ export default function Reliability() {
                   name="urgency"
                   aria-label="urgency"
                   className="grid grid-cols-[1fr_2fr_2fr_2fr_2fr_2fr] border-b"
-                  onChange={(e) => handleChangeKrRely(e, inter)}
-                  defaultValue={inter.krReliability}
+                  onChange={(e) => handleChangeKrAvail(e, inter)}
+                  defaultValue={inter.krAvailability}
                 >
                   <div className="flex justify-center items-center m-0 border-r text-lg">
                     국내
@@ -137,8 +227,8 @@ export default function Reliability() {
                   name="urgency"
                   aria-label="urgency"
                   className="grid grid-cols-[1fr_2fr_2fr_2fr_2fr_2fr] border-b"
-                  onChange={(e) => handleChangeEtcRely(e, inter)}
-                  defaultValue={inter.etcReliability}
+                  onChange={(e) => handleChangeEtcAvail(e, inter)}
+                  defaultValue={inter.etcAvailability}
                 >
                   <div className="flex justify-center items-center m-0 border-r text-lg">
                     국외
@@ -163,7 +253,7 @@ export default function Reliability() {
             ))}
         </section>
         <Text>
-          * 국내 기술에 대해 국내 시장과 국외 시장에서의 신뢰도를 각각
+          * 국내 기술에 대해 국내시장과 국외시장에서의 활용성을 각각
           평가해주시기 바랍니다.
         </Text>
       </main>
