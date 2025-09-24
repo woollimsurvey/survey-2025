@@ -34,12 +34,19 @@ export default function Weight() {
 
   const [industry, setIndustry] = useState([]);
   const [weighted, setWeighted] = useState([]);
+  const [totalWeight, setTotalWeight] = useState(0);
 
   const handlePrev = () => {
     router.push("/confidence");
   };
 
   const handleSubmit = async () => {
+    if (totalWeight !== 100) {
+      alert("중분류 가중치 합이 100이 되도록 가중치를 부여해주세요.");
+
+      return;
+    }
+
     const { errorForm } = await supabase.from("form").insert(
       checkedInter.map((inter) => {
         return {
@@ -166,6 +173,18 @@ export default function Weight() {
     fetchIndustry();
   }, []);
 
+  useEffect(() => {
+    setTotalWeight(
+      weighted.reduce((acc, cur) => {
+        if (cur.weight) {
+          return acc + Number(cur.weight);
+        }
+
+        return acc;
+      }, 0)
+    );
+  }, [weighted]);
+
   return (
     <Form action={handleSubmit}>
       <header className="my-3 p-3 bg-gray-50">
@@ -249,6 +268,12 @@ export default function Weight() {
               ))}
             </Fragment>
           ))}
+          <div className="col-span-2 border-r border-b bg-gray-200 text-xl font-bold text-center leading-12">
+            전기수소자동차 분야 내 중분류 합계
+          </div>
+          <div className="border-b bg-gray-200 text-2xl font-bold text-center leading-12">
+            {totalWeight}
+          </div>
         </section>
         <Text>* 1~100 사이의 정수로만 입력 가능</Text>
       </main>
