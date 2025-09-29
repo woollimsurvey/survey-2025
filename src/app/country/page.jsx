@@ -75,8 +75,8 @@ export default function Country() {
           </div>
         </section>
         <h3 className="my-4 text-3xl font-semibold text-zinc-950">
-          □ (기술성) 위원님께서 선택하신 중분류 기술들의 기술성을 평가할 수 있는
-          하위 문항에 응답해주시기 바랍니다.
+          □ (기술성) 위원님께서 선택하신 중분류 기술의 기술성(기술수준, 기술격차
+          등)을 객관적으로 평가해주시기 바랍니다.
         </h3>
         <Heading level={4}>
           3Q-1. (최고기술 보유국)&nbsp;
@@ -86,38 +86,37 @@ export default function Country() {
           </span>
         </Heading>
         <Text className="indent-4">
-          ※ 유럽의 경우, 유럽 내 최상위 기술 국가명을 제시해주시기 바랍니다.
+          ※ 유럽의 경우, 유럽 내 최상위 기술 국가명(1개)을 제시해주시기
+          바랍니다.
         </Text>
         <section className="my-2 border-t border-r border-l text-center">
           <article className="grid grid-cols-[4fr_12fr_4fr] border-b">
-            <div className="border-r bg-gray-100 text-xl font-bold leading-30">
+            <div className="border-r bg-gray-100 text-xl font-bold leading-20">
               중분류
             </div>
             <div className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr_4fr_3fr]">
               <div className="col-span-7 border-r border-b bg-gray-100 text-xl font-bold leading-10">
                 최고기술 보유국
               </div>
-              <div className="border-r bg-gray-100 text-xl font-bold leading-20">
+              <div className="border-r bg-gray-100 text-xl font-bold leading-10">
                 한국
               </div>
-              <div className="border-r bg-gray-100 text-xl font-bold leading-20">
+              <div className="border-r bg-gray-100 text-xl font-bold leading-10">
                 미국
               </div>
-              <div className="border-r bg-gray-100 text-xl font-bold leading-20">
+              <div className="border-r bg-gray-100 text-xl font-bold leading-10">
                 중국
               </div>
-              <div className="border-r bg-gray-100 text-xl font-bold leading-20">
+              <div className="border-r bg-gray-100 text-xl font-bold leading-10">
                 일본
               </div>
-              <div className="border-r bg-gray-100 text-xl font-bold leading-20">
+              <div className="border-r bg-gray-100 text-xl font-bold leading-10">
                 유럽
               </div>
-              <div className="flex justify-center items-center border-r bg-gray-100 text-xl font-bold">
+              <div className="border-r bg-gray-100 text-xl font-bold leading-10">
                 유럽국가명*
-                <br />
-                (복수 국가 제시 가능)
               </div>
-              <div className="border-r bg-gray-100 text-xl font-bold leading-20">
+              <div className="border-r bg-gray-100 text-xl font-bold leading-10">
                 기타
               </div>
             </div>
@@ -235,9 +234,8 @@ export default function Country() {
               </article>
             ))}
         </section>
-        <Text>* 유럽 국가 선택 시 작성</Text>
+        <Text>* 유럽 국가 선택 시 작성하며, 단일 국가만 제시</Text>
         <Text>※ 기타 선택 시 해당 국가명 기재</Text>
-        <Text>※ '최고기술 보유기관'을 아시는 바에 따라 작성 부탁드립니다.</Text>
       </main>
       <footer className="my-2 text-right">
         <div className="text-red-700">{error}</div>
