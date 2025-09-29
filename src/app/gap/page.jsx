@@ -108,8 +108,8 @@ export default function Gap() {
       </header>
       <main>
         <h3 className="my-4 text-3xl font-semibold text-zinc-950">
-          □ (기술성) 위원님께서 선택하신 중분류 기술들의 기술성을 평가할 수 있는
-          하위 문항에 응답해주시기 바랍니다.
+          □ (기술성) 위원님께서 선택하신 중분류 기술의 기술성(기술수준, 기술격차
+          등)을 객관적으로 평가해주시기 바랍니다.
         </h3>
         <Heading level={4}>
           3Q-3. (최고기술국 대비 기술격차)&nbsp;
@@ -121,6 +121,10 @@ export default function Gap() {
         <Text className="indent-4">
           ※ 기술격차 : 최고기술국을 0개월로, 나머지 국가는 최고기술국 대비 몇
           개월이 차이가 나는지 입력
+        </Text>
+        <Text className="indent-4">
+          ※ 응답자가 중분류별로 제시한 기술수준(3Q-2) 순위를 참고하시어 국가별
+          기술격차에 응답해 주시기 바랍니다.
         </Text>
         <section className="mt-8 border-t border-r border-l text-center">
           <article className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr]">
@@ -158,7 +162,7 @@ export default function Gap() {
                 key={inter.id}
                 className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr]"
               >
-                <div className="border-b bg-blue-950 p-2 text-lg font-bold text-white">
+                <div className="row-span-2 flex justify-center items-center border-b bg-blue-950 text-lg font-bold text-white">
                   {inter.intermediate}
                   <span className="text-red-400">(!)</span>
                 </div>
@@ -326,11 +330,32 @@ export default function Gap() {
                   />
                   개월
                 </div>
+                <div className="border-r border-b">기술수준 순위</div>
+                <div className="border-b col-span-6">
+                  {[
+                    { per: inter.krPer, country: "한국" },
+                    { per: inter.usPer, country: "미국" },
+                    { per: inter.cnPer, country: "중국" },
+                    { per: inter.jpPer, country: "일본" },
+                    { per: inter.euPer, country: "유럽" },
+                    { per: inter.etcPer, country: "기타" },
+                  ]
+                    .sort((a, b) => b.per - a.per)
+                    .map((item, index, array) => (
+                      <span key={index}>{`${item.country}(${item.per}%) ${
+                        index !== array.length - 1
+                          ? item.per > array[index + 1]?.per
+                            ? ">"
+                            : "="
+                          : ""
+                      } `}</span>
+                    ))}
+                </div>
               </article>
             ))}
         </section>
         <Text>
-          * 기타는 3Q-1.에서 기타 국가가 최고기술 보유국으로 선택되었을 경우만
+          * 기타는 3Q-1에서 기타 국가가 최고기술 보유국으로 선택되었을 경우만
           0개월로 입력, 나머지 경우에는 작성 불필요
         </Text>
         <Text>

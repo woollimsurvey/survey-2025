@@ -108,8 +108,8 @@ export default function Level() {
       </header>
       <main>
         <h3 className="my-4 text-3xl font-semibold text-zinc-950">
-          □ (기술성) 위원님께서 선택하신 중분류 기술들의 기술성을 평가할 수 있는
-          하위 문항에 응답해주시기 바랍니다.
+          □ (기술성) 위원님께서 선택하신 중분류 기술의 기술성(기술수준, 기술격차
+          등)을 객관적으로 평가해주시기 바랍니다.
         </h3>
         <Heading level={4}>
           3Q-2. (최고기술국 대비 기술수준)&nbsp;
