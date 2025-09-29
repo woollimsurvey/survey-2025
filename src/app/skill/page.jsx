@@ -52,7 +52,13 @@ export default function Skill() {
 
   const handleNext = async () => {
     if (
-      checkedInter.some((inter) => inter.countrySkill === "") ||
+      checkedInter.some((inter) => {
+        if (inter.country !== "kr") {
+          return inter.countrySkill === "";
+        }
+
+        return false;
+      }) ||
       checkedInter.some((inter) => inter.krSkill === "")
     ) {
       setError("모든 중분류에 대해 기술성숙도를 선택해주세요.");
