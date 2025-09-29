@@ -44,7 +44,7 @@ export default function Availability() {
   };
 
   const handlePrev = () => {
-    router.push("/reliability");
+    router.push("/effect");
   };
 
   const handleNext = async () => {
@@ -73,16 +73,15 @@ export default function Availability() {
           하위 문항에 응답해주시기 바랍니다.
         </h3>
         <Heading level={4}>
-          4Q-5. (시장 활용성)&nbsp;
+          4Q-4. (시장 활용성)&nbsp;
           <span className="font-normal">
             선택하신 중분류별 가장 적합한 기술 활용성을 국내와 국외로 구분하여
             선택해주시기 바랍니다.
           </span>
         </Heading>
         <Text className="indent-4">
-          ※ 기술의 수요자 수용성 등을 고려할 때 산업 및 소비자 시장에서
-          제품·서비스로 구현되고 확산될 수 있는 현실적 가능성(국내·외 시장에서
-          활용될 가능성으로, 수요 측면에서의 기술 경쟁력)
+          ※ 해당 분야의 산업 규모와 향후 시장 성장 가능성을 고려하여 산업 및
+          소비자 시장에서 제품·서비스로 구현되고 확산될 수 있는 현실적 가능성
         </Text>
         <section className="mt-4 border-t border-r border-l text-center">
           <article className="grid grid-cols-[3fr_1fr_2fr_2fr_2fr_2fr_2fr] border-b bg-gray-100 text-xl font-bold">

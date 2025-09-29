@@ -82,8 +82,6 @@ export default function Weight() {
           importance: inter.importance,
           urgency: inter.urgency,
           effect: inter.effect,
-          krReliability: inter.krReliability,
-          etcReliability: inter.etcReliability,
           krAvailability: inter.krAvailability,
           etcAvailability: inter.etcAvailability,
           maturity: inter.maturity,

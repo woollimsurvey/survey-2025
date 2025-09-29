@@ -64,9 +64,8 @@ export default function Urgency() {
           </span>
         </Heading>
         <Text className="indent-4">
-          ※ 국내외 기술 경쟁, 정책·산업적 수요, 사회적 요구 등을 고려할 때, 해당
-          기술을 조속히 확보하 거나 상용화하지 않을 경우 국가 경쟁력, 산업 성장,
-          또는 국민 안전·복지에 심각한 영향을 미칠 수 있는 정도
+          ※ 특정 기술분야 또는 상위 기술을 개발하고 산업화하기 위해 해당 중분류
+          기술이 시급히 개발되 어야 하는 정도
         </Text>
         <section className="my-4 border-t border-r border-l text-center">
           <article className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr] border-b bg-gray-100 text-xl font-bold leading-10">

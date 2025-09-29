@@ -42,7 +42,7 @@ export default function Effect() {
       return;
     }
 
-    router.push("/reliability");
+    router.push("/availability");
   };
 
   return (
@@ -64,8 +64,8 @@ export default function Effect() {
           </span>
         </Heading>
         <Text className="indent-4">
-          ※ 특정 산업에만 국한하지 않고 연관 산업군의 혁신, 국가 경쟁력 강화,
-          일자리 창출, 생활·안전 개선 등으로 이어지는 효과의 크기
+          ※ 특정 기술분야 또는 상위 기술을 개발하고 산업화하기 위해 해당 중분류
+          기술이 미치는 파급 효과의 정도
         </Text>
         <section className="my-4 border-t border-r border-l text-center">
           <article className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr] border-b bg-gray-100 text-xl font-bold leading-10">
