@@ -5,6 +5,7 @@ import { createContext, useContext, useState } from "react";
 const FormContext = createContext({});
 
 export function FormProvider({ children }) {
+  const [agree, setAgree] = useState("");
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
   const [position, setPosition] = useState("");
@@ -24,6 +25,8 @@ export function FormProvider({ children }) {
   return (
     <FormContext.Provider
       value={{
+        agree,
+        setAgree,
         name,
         setName,
         company,
