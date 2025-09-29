@@ -26,15 +26,22 @@ export default function Prepare() {
     e,
     id,
     large,
-    definition,
     intermediate,
     description,
-    code
+    code,
+    intermediates
   ) => {
     if (e) {
       setCheckedInter((prevList) => [
         ...prevList,
-        { id, large, definition, intermediate, description, code },
+        {
+          id,
+          large,
+          intermediate,
+          description,
+          code,
+          intermediates,
+        },
       ]);
 
       return;
@@ -94,7 +101,6 @@ export default function Prepare() {
           !acc.find((ele) => ele.large === cur.large) &&
             acc.push({
               large: cur.large,
-              definition: cur.definition,
               intermediates,
             });
 
@@ -140,7 +146,7 @@ export default function Prepare() {
               >
                 {lar.large}
               </div>
-              {lar.intermediates.map((intermediate) => (
+              {lar.intermediates.map((intermediate, index, self) => (
                 <CheckboxField key={intermediate.id} className="border-b p-1">
                   <Checkbox
                     aria-label={intermediate.code}
@@ -150,10 +156,10 @@ export default function Prepare() {
                         e,
                         intermediate.id,
                         lar.large,
-                        lar.definition,
                         intermediate.intermediate,
                         intermediate.description,
-                        intermediate.code
+                        intermediate.code,
+                        self
                       )
                     }
                     defaultChecked={

@@ -341,10 +341,10 @@ export default function Gap() {
                     { per: inter.etcPer, coun: "기타" },
                   ]
                     .sort((a, b) => b.per - a.per)
-                    .map((item, index, array) => (
+                    .map((item, index, self) => (
                       <span key={index}>{`${item.coun}(${item.per}%) ${
-                        index !== array.length - 1
-                          ? item.per > array[index + 1]?.per
+                        index !== self.length - 1
+                          ? item.per > self[index + 1]?.per
                             ? ">"
                             : "="
                           : ""

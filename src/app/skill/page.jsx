@@ -224,8 +224,8 @@ export default function Skill() {
                   name="countrySkill"
                   aria-label="countrySkill"
                   className="grid grid-cols-[1fr_2fr_2fr_2fr_2fr_2fr] border-b"
-                  onChange={(e) => handleCounSkill(e, inter)}
                   value={inter.countrySkill || ""}
+                  onChange={(e) => handleCounSkill(e, inter)}
                   disabled={inter.country === "kr"}
                 >
                   <div className="m-0 border-r p-1 text-lg font-bold">
@@ -256,8 +256,8 @@ export default function Skill() {
                   name="krSkill"
                   aria-label="krSkill"
                   className="grid grid-cols-[1fr_2fr_2fr_2fr_2fr_2fr] border-b"
-                  onChange={(e) => handleKrSkill(e, inter)}
                   value={inter.krSkill || ""}
+                  onChange={(e) => handleKrSkill(e, inter)}
                 >
                   <div className="m-0 border-r p-1 text-lg font-bold">한국</div>
                   <div className="flex justify-center items-center m-0 border-r">

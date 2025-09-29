@@ -76,6 +76,8 @@ export default function Weight() {
           jpMonth: inter.jpMonth,
           euMonth: inter.euMonth,
           etcMonth: inter.etcMonth,
+          countrySkill: inter.countrySkill,
+          krSkill: inter.krSkill,
           independence: inter.independence,
           importance: inter.importance,
           urgency: inter.urgency,
