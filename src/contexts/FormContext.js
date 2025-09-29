@@ -20,6 +20,7 @@ export function FormProvider({ children }) {
   const [settingInter, setSettingInter] = useState(false);
   const [settingPer, setSettingPer] = useState(false);
   const [settingMonth, setSettingMonth] = useState(false);
+  const [settingSkill, setSettingSkill] = useState(false);
   const [largeWay, setLargeWay] = useState([]);
 
   return (
@@ -55,6 +56,8 @@ export function FormProvider({ children }) {
         setSettingPer,
         settingMonth,
         setSettingMonth,
+        settingSkill,
+        setSettingSkill,
         largeWay,
         setLargeWay,
       }}

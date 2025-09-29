@@ -27,7 +27,7 @@ export default function Gap() {
   const handleNext = () => {
     setSettingMonth(true);
 
-    router.push("/independence");
+    router.push("/skill");
   };
 
   useEffect(() => {
@@ -162,7 +162,7 @@ export default function Gap() {
                 key={inter.id}
                 className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr]"
               >
-                <div className="row-span-2 flex justify-center items-center border-b bg-blue-950 text-lg font-bold text-white">
+                <div className="row-span-2 flex justify-center items-center border-b bg-blue-950 p-2 text-lg font-bold text-white">
                   {inter.intermediate}
                   <span className="text-red-400">(!)</span>
                 </div>
@@ -333,16 +333,16 @@ export default function Gap() {
                 <div className="border-r border-b">기술수준 순위</div>
                 <div className="border-b col-span-6">
                   {[
-                    { per: inter.krPer, country: "한국" },
-                    { per: inter.usPer, country: "미국" },
-                    { per: inter.cnPer, country: "중국" },
-                    { per: inter.jpPer, country: "일본" },
-                    { per: inter.euPer, country: "유럽" },
-                    { per: inter.etcPer, country: "기타" },
+                    { per: inter.krPer, coun: "한국" },
+                    { per: inter.usPer, coun: "미국" },
+                    { per: inter.cnPer, coun: "중국" },
+                    { per: inter.jpPer, coun: "일본" },
+                    { per: inter.euPer, coun: "유럽" },
+                    { per: inter.etcPer, coun: "기타" },
                   ]
                     .sort((a, b) => b.per - a.per)
                     .map((item, index, array) => (
-                      <span key={index}>{`${item.country}(${item.per}%) ${
+                      <span key={index}>{`${item.coun}(${item.per}%) ${
                         index !== array.length - 1
                           ? item.per > array[index + 1]?.per
                             ? ">"

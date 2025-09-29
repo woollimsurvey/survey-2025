@@ -16,8 +16,13 @@ import { useForm } from "@/contexts/FormContext";
 export default function Country() {
   const router = useRouter();
 
-  const { checkedInter, setCheckedInter, setSettingPer, setSettingMonth } =
-    useForm();
+  const {
+    checkedInter,
+    setCheckedInter,
+    setSettingPer,
+    setSettingMonth,
+    setSettingSkill,
+  } = useForm();
 
   const [error, setError] = useState("");
 
@@ -34,6 +39,7 @@ export default function Country() {
 
     setSettingPer(false);
     setSettingMonth(false);
+    setSettingSkill(false);
   };
 
   const handleNext = () => {
