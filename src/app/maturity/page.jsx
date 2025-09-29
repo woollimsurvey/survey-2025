@@ -12,12 +12,29 @@ import { Button } from "@/components/button";
 
 import { useForm } from "@/contexts/FormContext";
 
+import { supabase } from "@/libs/supabaseClient";
+
 export default function Maturity() {
   const router = useRouter();
 
-  const { checkedInter, setCheckedInter } = useForm();
+  const {
+    name,
+    company,
+    position,
+    classification,
+    etc,
+    career,
+    tel1,
+    tel2,
+    tel3,
+    email,
+    checkedInter,
+    setCheckedInter,
+    largeWay,
+  } = useForm();
 
   const [error, setError] = useState("");
+  const [finish, setFinish] = useState(false);
 
   const handleChangeMature = (e, inter) => {
     setCheckedInter((prevInter) =>
@@ -35,14 +52,72 @@ export default function Maturity() {
     router.push("/availability");
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (!checkedInter.every((inter) => "maturity" in inter)) {
       setError("모든 중분류에 대해 시장 성숙도를 선택해주세요.");
 
       return;
     }
 
-    router.push("/confidence");
+    const { errorForm } = await supabase.from("form").insert(
+      checkedInter.map((inter) => {
+        return {
+          name,
+          company,
+          position,
+          classification,
+          etc,
+          career,
+          tel: tel1 + tel2 + tel3,
+          email,
+          intermediate: inter.intermediate,
+          code: inter.code,
+          country: inter.country,
+          euName: inter.euName,
+          etcName: inter.etcName,
+          institution: inter.institution,
+          krPer: inter.krPer,
+          usPer: inter.usPer,
+          cnPer: inter.cnPer,
+          jpPer: inter.jpPer,
+          euPer: inter.euPer,
+          etcPer: inter.etcPer,
+          krMonth: inter.krMonth,
+          usMonth: inter.usMonth,
+          cnMonth: inter.cnMonth,
+          jpMonth: inter.jpMonth,
+          euMonth: inter.euMonth,
+          etcMonth: inter.etcMonth,
+          countrySkill: inter.countrySkill,
+          krSkill: inter.krSkill,
+          independence: inter.independence,
+          importance: inter.importance,
+          urgency: inter.urgency,
+          effect: inter.effect,
+          krAvailability: inter.krAvailability,
+          etcAvailability: inter.etcAvailability,
+          maturity: inter.maturity,
+        };
+      })
+    );
+
+    const { errorLarge } = await supabase.from("form_large").insert(
+      largeWay.map((way) => {
+        return {
+          tel: way.tel,
+          etc: way.etc,
+          large: way.large,
+          code: way.code,
+          way: way.way,
+          reason: way.reason,
+        };
+      })
+    );
+
+    errorForm && console.error(errorForm);
+    errorLarge && console.error(errorLarge);
+
+    setFinish(true);
   };
 
   return (
@@ -58,7 +133,7 @@ export default function Maturity() {
           하위 문항에 응답해주시기 바랍니다.
         </h3>
         <Heading level={4}>
-          4Q-6. (시장 성숙도)&nbsp;
+          4Q-5. (시장 성숙도)&nbsp;
           <span className="font-normal">
             선택하신 중분류별 가장 적합한 시장 성숙도를 선택해 주시기 바랍니다.
           </span>
@@ -128,8 +203,13 @@ export default function Maturity() {
         <div className="text-red-700 text-right">{error}</div>
         <div className="flex justify-end gap-4">
           <Button onClick={handlePrev}>이전</Button>
-          <Button type="submit">다음</Button>
+          <Button type="submit">설문 제출</Button>
         </div>
+        {finish && (
+          <div className="my-12 text-2xl font-medium text-center">
+            - 설문조사에 응해주셔서 감사합니다. -
+          </div>
+        )}
       </footer>
     </Form>
   );
