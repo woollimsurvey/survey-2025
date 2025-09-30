@@ -22,7 +22,9 @@ export default function Home() {
 
   const handleNext = () => {
     if (agree !== "yes") {
-      alert("문구 필요");
+      alert(
+        "본 설문은 개인정보 수집 및 이용에 대한 동의가 있어야만 참여가 가능합니다\n현재 ‘미동의’를 선택하셨기 때문에 설문이 진행되지 않습니다.\n다시 참여를 원하시면 첫 페이지로 돌아가 동의 후 설문을 진행해 주시기 바랍니다."
+      );
 
       return;
     }
