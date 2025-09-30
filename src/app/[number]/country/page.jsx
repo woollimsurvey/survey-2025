@@ -65,21 +65,28 @@ export default function Country({ params }) {
       <main>
         <section className="flex justify-evenly items-center gap-8 border p-1">
           <div className="text-lg font-bold">
-            기술수준조사 수행 전 과년도(2023년)에 수행된 기술수준조사 결과를
-            다운받아 응답 시 참고해주시기 바랍니다.
+            {number !== "W"
+              ? "기술수준조사 수행 전 과년도(2023년)에 수행된 기술수준조사 결과를 다운받아 응답 시 참고해주시기 바랍니다."
+              : "'양자 분야'는 2025년 새롭게 신설된 분류로, 과년도 기술수준조사 결과가 없습니다. 응답자의 견해를 바탕으로 응답해주시기 바랍니다."}
           </div>
           <div className="border">
             <div className="bg-gray-100 p-4 text-xl font-bold">
               과년도 조사결과 다운로드
             </div>
             <div className="p-2 text-center">
-              <Button
-                href={`https://sisfrqtridudubgcsuoe.supabase.co/storage/v1/object/public/keit/${number}.pdf`}
-                target="_blank"
-                color="red"
-              >
-                PDF 파일
-              </Button>
+              {number !== "W" ? (
+                <Button
+                  href={`https://sisfrqtridudubgcsuoe.supabase.co/storage/v1/object/public/keit/${number}.pdf`}
+                  target="_blank"
+                  color="red"
+                >
+                  PDF 파일
+                </Button>
+              ) : (
+                <Button color="red" disabled>
+                  PDF 파일
+                </Button>
+              )}
             </div>
           </div>
         </section>

@@ -84,7 +84,7 @@ export default function Prepare({ params }) {
       const { data, error } = await supabase
         .from("industry")
         .select("*")
-        .like("code", "A%")
+        .like("code", `${number}%`)
         .order("id");
 
       setIndustry(
@@ -104,6 +104,7 @@ export default function Prepare({ params }) {
 
           !acc.find((ele) => ele.large === cur.large) &&
             acc.push({
+              field: cur.field,
               large: cur.large,
               intermediates,
             });
@@ -134,7 +135,7 @@ export default function Prepare({ params }) {
           ※ <span className="text-red-400">(!)</span>에 마우스를 올리시면 해당
           기술의 정의가 표시됩니다.
         </Text>
-        <Text className="indent-4">※ 기술분류 : 전기수소자동차</Text>
+        <Text className="indent-4">※ 기술분류 : {industry[0]?.field}</Text>
         <section className="grid grid-cols-[2fr_3fr] my-4 border-t border-r border-l">
           <div className="border-r border-b bg-gray-100 text-xl font-bold text-center leading-10">
             대분류
