@@ -68,11 +68,11 @@ export default function Country() {
           </div>
           <div className="border">
             <div className="bg-gray-100 p-4 text-xl font-bold">
-              과년도 조사결고 다운로드
+              과년도 조사결과 다운로드
             </div>
             <div className="p-2 text-center">
               <Button
-                href="https://sisfrqtridudubgcsuoe.supabase.co/storage/v1/object/public/keit/keit.pdf"
+                href="https://sisfrqtridudubgcsuoe.supabase.co/storage/v1/object/public/keit/electric.pdf"
                 target="_blank"
                 color="red"
               >
