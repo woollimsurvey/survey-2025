@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, use } from "react";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
 import Tooltip from "@mui/material/Tooltip";
@@ -13,8 +13,10 @@ import { Button } from "@/components/button";
 
 import { useForm } from "@/contexts/FormContext";
 
-export default function Availability() {
+export default function Availability({ params }) {
   const router = useRouter();
+
+  const { number } = use(params);
 
   const { checkedInter, setCheckedInter } = useForm();
 
@@ -45,7 +47,7 @@ export default function Availability() {
   };
 
   const handlePrev = () => {
-    router.push("/effect");
+    router.push(`/${number}/effect`);
   };
 
   const handleNext = async () => {
@@ -58,7 +60,7 @@ export default function Availability() {
       return;
     }
 
-    router.push("/maturity");
+    router.push(`/${number}/maturity`);
   };
 
   return (

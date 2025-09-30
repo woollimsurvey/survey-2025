@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, use } from "react";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
 import Tooltip from "@mui/material/Tooltip";
@@ -14,8 +14,10 @@ import { Input } from "@/components/input";
 
 import { useForm } from "@/contexts/FormContext";
 
-export default function Country() {
+export default function Country({ params }) {
   const router = useRouter();
+
+  const { number } = use(params);
 
   const {
     checkedInter,
@@ -50,7 +52,7 @@ export default function Country() {
       return;
     }
 
-    router.push("/level");
+    router.push(`/${number}/level`);
   };
 
   return (
@@ -72,7 +74,7 @@ export default function Country() {
             </div>
             <div className="p-2 text-center">
               <Button
-                href="https://sisfrqtridudubgcsuoe.supabase.co/storage/v1/object/public/keit/electric.pdf"
+                href={`https://sisfrqtridudubgcsuoe.supabase.co/storage/v1/object/public/keit/${number}.pdf`}
                 target="_blank"
                 color="red"
               >

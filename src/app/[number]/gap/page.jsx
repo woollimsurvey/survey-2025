@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, use } from "react";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
 import Tooltip from "@mui/material/Tooltip";
@@ -13,87 +13,89 @@ import { Button } from "@/components/button";
 
 import { useForm } from "@/contexts/FormContext";
 
-export default function Level() {
+export default function Gap({ params }) {
   const router = useRouter();
 
-  const { checkedInter, setCheckedInter, settingPer, setSettingPer } =
+  const { number } = use(params);
+
+  const { checkedInter, setCheckedInter, settingMonth, setSettingMonth } =
     useForm();
 
   const handlePrev = () => {
-    setSettingPer(true);
+    setSettingMonth(true);
 
-    router.push("/country");
+    router.push(`/${number}/level`);
   };
 
   const handleNext = () => {
-    setSettingPer(true);
+    setSettingMonth(true);
 
-    router.push("/gap");
+    router.push(`/${number}/skill`);
   };
 
   useEffect(() => {
-    if (!settingPer) {
+    if (!settingMonth) {
       setCheckedInter((prevInter) =>
         prevInter.map((inter) => {
           if (inter.country === "kr")
             return {
               ...inter,
-              krPer: 100,
-              usPer: 0,
-              cnPer: 0,
-              jpPer: 0,
-              euPer: 0,
-              etcPer: 0,
+              krMonth: "0",
+              usMonth: "",
+              cnMonth: "",
+              jpMonth: "",
+              euMonth: "",
+              etcMonth: 0,
             };
           if (inter.country === "us")
             return {
               ...inter,
-              krPer: 0,
-              usPer: 100,
-              cnPer: 0,
-              jpPer: 0,
-              euPer: 0,
-              etcPer: 0,
+              krMonth: "",
+              usMonth: "0",
+              cnMonth: "",
+              jpMonth: "",
+              euMonth: "",
+              etcMonth: 0,
             };
           if (inter.country === "cn")
             return {
               ...inter,
-              krPer: 0,
-              usPer: 0,
-              cnPer: 100,
-              jpPer: 0,
-              euPer: 0,
-              etcPer: 0,
+              krMonth: "",
+              usMonth: "",
+              cnMonth: "0",
+              jpMonth: "",
+              euMonth: "",
+              etcMonth: 0,
             };
           if (inter.country === "jp")
             return {
               ...inter,
-              krPer: 0,
-              usPer: 0,
-              cnPer: 0,
-              jpPer: 100,
-              euPer: 0,
-              etcPer: 0,
+              krMonth: "",
+              usMonth: "",
+              cnMonth: "",
+              jpMonth: "0",
+              euMonth: "",
+              etcMonth: 0,
             };
           if (inter.country === "eu")
             return {
               ...inter,
-              krPer: 0,
-              usPer: 0,
-              cnPer: 0,
-              jpPer: 0,
-              euPer: 100,
-              etcPer: 0,
+              krMonth: "",
+              usMonth: "",
+              cnMonth: "",
+              jpMonth: "",
+              euMonth: "0",
+              etcMonth: 0,
             };
           if (inter.country === "etc")
             return {
               ...inter,
-              krPer: 0,
-              usPer: 0,
-              cnPer: 0,
-              jpPer: 0,
-              euPer: 0,
-              etcPer: 100,
+              krMonth: "",
+              usMonth: "",
+              cnMonth: "",
+              jpMonth: "",
+              euMonth: "",
+              etcMonth: "0",
             };
         })
       );
@@ -113,43 +115,21 @@ export default function Level() {
           등)을 객관적으로 평가해주시기 바랍니다.
         </h3>
         <Heading level={4}>
-          3Q-2. (최고기술국 대비 기술수준)&nbsp;
+          3Q-3. (최고기술국 대비 기술격차)&nbsp;
           <span className="font-normal">
-            선택하신 중분류 기술별 최고기술국(100%) 대비 상대적 기술수준을 아래
-            설명을 참고하시어 국가별로 입력해주시기 바랍니다.
+            선택하신 중분류 기술별 최고기술국 대비 상대적 기술격차를 국가별로
+            “개월” 단위로 입력해주시기 바랍니다.
           </span>
         </Heading>
         <Text className="indent-4">
-          ※ 기술수준 : 최고기술국을 100%로, 나머지 국가는 최고기술국 대비 몇
-          %인지 입력
+          ※ 기술격차 : 최고기술국을 0개월로, 나머지 국가는 최고기술국 대비 몇
+          개월이 차이가 나는지 입력
         </Text>
         <Text className="indent-4">
-          ※ 기술수준 입력 시 아래의 범위를 고려하여 응답해주십시오.
+          ※ 응답자가 중분류별로 제시한 기술수준(3Q-2) 순위를 참고하시어 국가별
+          기술격차에 응답해 주시기 바랍니다.
         </Text>
-        <section className="my-4">
-          <Heading level={5} className="my-2 text-center">
-            &lt; 기술수준 설명 &gt;
-          </Heading>
-          <div className="grid grid-cols-[2fr_3fr] border text-center">
-            <div className="border-r border-b bg-gray-100 text-lg font-bold leading-8">
-              기술수준
-            </div>
-            <div className="border-b bg-gray-100 text-lg font-bold leading-8">
-              설명
-            </div>
-            <div className="border-r border-b">세계최고(100%)</div>
-            <div className="border-b">세계 최고의 기술 보유 국가</div>
-            <div className="border-r border-b">선도수준(90~99%)</div>
-            <div className="border-b">기술분야를 선도하는 수준</div>
-            <div className="border-r border-b">추격수준(80~89%)</div>
-            <div className="border-b">선진기술의 모방/개량이 가능한 수준</div>
-            <div className="border-r border-b">후발수준(70~79%)</div>
-            <div className="border-b">선진기술의 도입/적용이 가능한 수준</div>
-            <div className="border-r">낙후수준(70% 미만)</div>
-            <div>연구개발 능력이 취약한 수준</div>
-          </div>
-        </section>
-        <section className="border-t border-r border-l text-center">
+        <section className="mt-8 border-t border-r border-l text-center">
           <article className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr]">
             <div className="border-r border-b bg-gray-100 text-xl font-bold leading-20">
               중분류
@@ -185,7 +165,7 @@ export default function Level() {
                 key={inter.id}
                 className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr]"
               >
-                <div className="border-b bg-blue-950 p-2 text-lg font-bold text-white">
+                <div className="row-span-2 flex justify-center items-center border-b bg-blue-950 p-2 text-lg font-bold text-white">
                   {inter.intermediate}
                   <Tooltip title={inter.description}>
                     <button type="button" className="text-red-400">
@@ -205,19 +185,19 @@ export default function Level() {
                   <Input
                     type="number"
                     step="1"
-                    min="0"
-                    max={inter.country === "kr" ? 100 : 99}
-                    aria-label="krPer"
-                    name="krPer"
+                    min={inter.country === "kr" ? 0 : 1}
+                    aria-label="krMonth"
+                    name="krMonth"
+                    className="flex-1"
                     value={
                       checkedInter.find((ele) => ele.code === inter.code)
-                        ?.krPer || ""
+                        ?.krMonth || ""
                     }
                     onChange={({ target }) =>
                       setCheckedInter((prevList) =>
                         prevList.map((prev) => {
                           if (prev.code === inter.code) {
-                            return { ...prev, krPer: target.value };
+                            return { ...prev, krMonth: target.value };
                           }
 
                           return prev;
@@ -227,25 +207,25 @@ export default function Level() {
                     disabled={inter.country === "kr"}
                     required
                   />
-                  %
+                  개월
                 </div>
                 <div className="flex items-center border-r border-b px-2">
                   <Input
                     type="number"
                     step="1"
-                    min="0"
-                    max={inter.country === "us" ? 100 : 99}
-                    aria-label="usPer"
-                    name="usPer"
+                    min={inter.country === "us" ? 0 : 1}
+                    aria-label="usMonth"
+                    name="usMonth"
+                    className="flex-1"
                     value={
                       checkedInter.find((ele) => ele.code === inter.code)
-                        ?.usPer || ""
+                        ?.usMonth || ""
                     }
                     onChange={({ target }) =>
                       setCheckedInter((prevList) =>
                         prevList.map((prev) => {
                           if (prev.code === inter.code) {
-                            return { ...prev, usPer: target.value };
+                            return { ...prev, usMonth: target.value };
                           }
 
                           return prev;
@@ -255,25 +235,25 @@ export default function Level() {
                     disabled={inter.country === "us"}
                     required
                   />
-                  %
+                  개월
                 </div>
                 <div className="flex items-center border-r border-b px-2">
                   <Input
                     type="number"
                     step="1"
-                    min="0"
-                    max={inter.country === "cn" ? 100 : 99}
-                    aria-label="cnPer"
-                    name="cnPer"
+                    min={inter.country === "cn" ? 0 : 1}
+                    aria-label="cnMonth"
+                    name="cnMonth"
+                    className="flex-1"
                     value={
                       checkedInter.find((ele) => ele.code === inter.code)
-                        ?.cnPer || ""
+                        ?.cnMonth || ""
                     }
                     onChange={({ target }) =>
                       setCheckedInter((prevList) =>
                         prevList.map((prev) => {
                           if (prev.code === inter.code) {
-                            return { ...prev, cnPer: target.value };
+                            return { ...prev, cnMonth: target.value };
                           }
 
                           return prev;
@@ -283,25 +263,25 @@ export default function Level() {
                     disabled={inter.country === "cn"}
                     required
                   />
-                  %
+                  개월
                 </div>
                 <div className="flex items-center border-r border-b px-2">
                   <Input
                     type="number"
                     step="1"
-                    min="0"
-                    max={inter.country === "jp" ? 100 : 99}
-                    aria-label="jpPer"
-                    name="jpPer"
+                    min={inter.country === "jp" ? 0 : 1}
+                    aria-label="jpMonth"
+                    name="jpMonth"
+                    className="flex-1"
                     value={
                       checkedInter.find((ele) => ele.code === inter.code)
-                        ?.jpPer || ""
+                        ?.jpMonth || ""
                     }
                     onChange={({ target }) =>
                       setCheckedInter((prevList) =>
                         prevList.map((prev) => {
                           if (prev.code === inter.code) {
-                            return { ...prev, jpPer: target.value };
+                            return { ...prev, jpMonth: target.value };
                           }
 
                           return prev;
@@ -311,25 +291,25 @@ export default function Level() {
                     disabled={inter.country === "jp"}
                     required
                   />
-                  %
+                  개월
                 </div>
                 <div className="flex items-center border-r border-b px-2">
                   <Input
                     type="number"
                     step="1"
-                    min="0"
-                    max={inter.country === "eu" ? 100 : 99}
-                    aria-label="euPer"
-                    name="euPer"
+                    min={inter.country === "eu" ? 0 : 1}
+                    aria-label="euMonth"
+                    name="euMonth"
+                    className="flex-1"
                     value={
                       checkedInter.find((ele) => ele.code === inter.code)
-                        ?.euPer || ""
+                        ?.euMonth || ""
                     }
                     onChange={({ target }) =>
                       setCheckedInter((prevList) =>
                         prevList.map((prev) => {
                           if (prev.code === inter.code) {
-                            return { ...prev, euPer: target.value };
+                            return { ...prev, euMonth: target.value };
                           }
 
                           return prev;
@@ -339,34 +319,55 @@ export default function Level() {
                     disabled={inter.country === "eu"}
                     required
                   />
-                  %
+                  개월
                 </div>
                 <div className="flex items-center border-b px-2">
                   <Input
                     type="number"
                     step="1"
-                    min="0"
-                    max={inter.country === "etc" ? 100 : 99}
-                    aria-label="etcPer"
-                    name="etcPer"
+                    min={inter.country === "kr" ? 0 : 1}
+                    aria-label="etcMonth"
+                    name="etcMonth"
+                    className="flex-1"
                     value={
                       checkedInter.find((ele) => ele.code === inter.code)
-                        ?.etcPer || ""
+                        ?.etcMonth || ""
                     }
                     disabled
                   />
-                  %
+                  개월
+                </div>
+                <div className="border-r border-b">기술수준 순위</div>
+                <div className="border-b col-span-6">
+                  {[
+                    { per: inter.krPer, coun: "한국" },
+                    { per: inter.usPer, coun: "미국" },
+                    { per: inter.cnPer, coun: "중국" },
+                    { per: inter.jpPer, coun: "일본" },
+                    { per: inter.euPer, coun: "유럽" },
+                    { per: inter.etcPer, coun: "기타" },
+                  ]
+                    .sort((a, b) => b.per - a.per)
+                    .map((item, index, self) => (
+                      <span key={index}>{`${item.coun}(${item.per}%) ${
+                        index !== self.length - 1
+                          ? item.per > self[index + 1]?.per
+                            ? ">"
+                            : "="
+                          : ""
+                      } `}</span>
+                    ))}
                 </div>
               </article>
             ))}
         </section>
         <Text>
-          * 기타는 3Q-1.에서 기타 국가를 최고기술 보유국으로 선택한 경우만
-          100%로 입력, 나머지 경우에는 작성 불필요
+          * 기타는 3Q-1에서 기타 국가가 최고기술 보유국으로 선택되었을 경우만
+          0개월로 입력, 나머지 경우에는 작성 불필요
         </Text>
         <Text>
-          ※ 최고기술 보유국에 제시된 국가는 무조건 100%로 기재해야 하며, 나머지
-          국가는 해당 국가와 비교하여 상대적 기술수준을 %로 제시
+          ※ 최고기술 보유국에 제시된 국가는 무조건 0개월로 기재해야 하며, 나머지
+          국가는 해당 국가와 비교하여 상대적 기술격차를 “개월” 단위로 제시
         </Text>
       </main>
       <footer className="flex justify-end gap-4 my-4">

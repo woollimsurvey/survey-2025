@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
 import Tooltip from "@mui/material/Tooltip";
@@ -13,8 +13,10 @@ import { Button } from "@/components/button";
 
 import { useForm } from "@/contexts/FormContext";
 
-export default function Skill() {
+export default function Skill({ params }) {
   const router = useRouter();
+
+  const { number } = use(params);
 
   const { checkedInter, setCheckedInter, settingSkill, setSettingSkill } =
     useForm();
@@ -48,7 +50,7 @@ export default function Skill() {
   const handlePrev = () => {
     setSettingSkill(true);
 
-    router.push("/gap");
+    router.push(`/${number}/gap`);
   };
 
   const handleNext = async () => {
@@ -69,7 +71,7 @@ export default function Skill() {
 
     setSettingSkill(true);
 
-    router.push("/independence");
+    router.push(`/${number}/independence`);
   };
 
   useEffect(() => {

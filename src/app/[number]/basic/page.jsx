@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, use } from "react";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
 
@@ -14,8 +14,10 @@ import { Button } from "@/components/button";
 
 import { useForm } from "@/contexts/FormContext";
 
-export default function Basic() {
+export default function Basic({ params }) {
   const router = useRouter();
+
+  const { number } = use(params);
 
   const {
     name,
@@ -43,7 +45,7 @@ export default function Basic() {
   const [error, setError] = useState("");
 
   const handlePrev = () => {
-    router.push("/");
+    router.push(`/${number}`);
   };
 
   const handleNext = () => {
@@ -59,7 +61,7 @@ export default function Basic() {
       return;
     }
 
-    router.push("/prepare");
+    router.push(`/${number}/prepare`);
   };
 
   return (

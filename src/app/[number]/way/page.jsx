@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, Fragment } from "react";
+import { useEffect, use, Fragment } from "react";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
 import Tooltip from "@mui/material/Tooltip";
@@ -14,8 +14,10 @@ import { Button } from "@/components/button";
 
 import { useForm } from "@/contexts/FormContext";
 
-export default function Way() {
+export default function Way({ params }) {
   const router = useRouter();
+
+  const { number } = use(params);
 
   const { tel1, tel2, tel3, checkedInter, largeWay, setLargeWay } = useForm();
 
@@ -32,11 +34,11 @@ export default function Way() {
   };
 
   const handlePrev = () => {
-    router.push("/independence");
+    router.push(`/${number}/independence`);
   };
 
   const handleNext = () => {
-    router.push("/importance");
+    router.push(`/${number}/importance`);
   };
 
   useEffect(() => {

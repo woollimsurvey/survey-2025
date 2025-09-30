@@ -1,5 +1,6 @@
 "use client";
 
+import { use } from "react";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
 
@@ -11,8 +12,10 @@ import { Button } from "@/components/button";
 
 import { useForm } from "@/contexts/FormContext";
 
-export default function Home() {
+export default function Home({ params }) {
   const router = useRouter();
+
+  const { number } = use(params);
 
   const { agree, setAgree } = useForm();
 
@@ -29,7 +32,7 @@ export default function Home() {
       return;
     }
 
-    router.push("/basic");
+    router.push(`/${number}/basic`);
   };
 
   return (

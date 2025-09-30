@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, use } from "react";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
 import Tooltip from "@mui/material/Tooltip";
@@ -13,18 +13,20 @@ import { Button } from "@/components/button";
 
 import { useForm } from "@/contexts/FormContext";
 
-export default function Urgency() {
+export default function Effect({ params }) {
   const router = useRouter();
+
+  const { number } = use(params);
 
   const { checkedInter, setCheckedInter } = useForm();
 
   const [error, setError] = useState("");
 
-  const handleChangeUrgen = (e, inter) => {
+  const handleChangeEff = (e, inter) => {
     setCheckedInter((prevInter) =>
       prevInter.map((prev) => {
         if (prev.code === inter.code) {
-          return { ...prev, urgency: e };
+          return { ...prev, effect: e };
         }
 
         return prev;
@@ -33,17 +35,17 @@ export default function Urgency() {
   };
 
   const handlePrev = () => {
-    router.push("/importance");
+    router.push(`/${number}/urgency`);
   };
 
   const handleNext = () => {
-    if (!checkedInter.every((inter) => "urgency" in inter)) {
-      setError("모든 중분류에 대해 시급성을 선택해주세요.");
+    if (!checkedInter.every((inter) => "effect" in inter)) {
+      setError("모든 중분류에 대해 파급효과를 선택해주세요.");
 
       return;
     }
 
-    router.push("/effect");
+    router.push(`/${number}/availability`);
   };
 
   return (
@@ -59,23 +61,23 @@ export default function Urgency() {
           하위 문항에 응답해주시기 바랍니다.
         </h3>
         <Heading level={4}>
-          4Q-2. (시급성)&nbsp;
+          4Q-3. (파급효과)&nbsp;
           <span className="font-normal">
-            선택하신 중분류별 가장 적합한 시급성 정도를 선택해주시기 바랍니다.
+            선택하신 중분류별 가장 적합한 파급효과를 선택해주시기 바랍니다.
           </span>
         </Heading>
         <Text className="indent-4">
           ※ 특정 기술분야 또는 상위 기술을 개발하고 산업화하기 위해 해당 중분류
-          기술이 시급히 개발되 어야 하는 정도
+          기술이 미치는 파급 효과의 정도
         </Text>
         <section className="my-4 border-t border-r border-l text-center">
           <article className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr] border-b bg-gray-100 text-xl font-bold leading-10">
             <div className="border-r">중분류</div>
-            <div className="border-r">① 전혀 시급하지 않다</div>
-            <div className="border-r">② 시급하지 않다</div>
+            <div className="border-r">① 전혀 크지 않다</div>
+            <div className="border-r">② 크지 않다</div>
             <div className="border-r">③ 보통이다</div>
-            <div className="border-r">④ 시급하다</div>
-            <div>⑤ 매우 시급하다</div>
+            <div className="border-r">④ 크다</div>
+            <div>⑤ 매우 크다</div>
           </article>
           {checkedInter
             .sort((a, b) => a.id - b.id)
@@ -90,11 +92,11 @@ export default function Urgency() {
                   </Tooltip>
                 </div>
                 <RadioGroup
-                  name="urgency"
-                  aria-label="urgency"
+                  name="effect"
+                  aria-label="effect"
                   className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr] border-b"
-                  onChange={(e) => handleChangeUrgen(e, inter)}
-                  defaultValue={inter.urgency}
+                  onChange={(e) => handleChangeEff(e, inter)}
+                  defaultValue={inter.effect}
                 >
                   <div className="flex justify-center items-center m-0 border-r">
                     <Radio value="1" />

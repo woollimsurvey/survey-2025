@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect, use, Fragment } from "react";
 import { useRouter } from "next/navigation";
 import Tooltip from "@mui/material/Tooltip";
 
@@ -15,8 +15,10 @@ import { useForm } from "@/contexts/FormContext";
 
 import { supabase } from "@/libs/supabaseClient";
 
-export default function Prepare() {
+export default function Prepare({ params }) {
   const router = useRouter();
+
+  const { number } = use(params);
 
   const { checkedInter, setCheckedInter, settingInter, setSettingInter } =
     useForm();
@@ -56,7 +58,7 @@ export default function Prepare() {
   };
 
   const handlePrev = () => {
-    router.push("/basic");
+    router.push(`/${number}/basic`);
   };
 
   const handleNext = () => {
@@ -73,7 +75,7 @@ export default function Prepare() {
     ) {
       setSettingInter(true);
 
-      router.push("/country");
+      router.push(`/${number}/country`);
     }
   };
 

@@ -1,5 +1,6 @@
 "use client";
 
+import { use } from "react";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
 import Tooltip from "@mui/material/Tooltip";
@@ -11,17 +12,19 @@ import { Button } from "@/components/button";
 
 import { useForm } from "@/contexts/FormContext";
 
-export default function Importance() {
+export default function Importance({ params }) {
   const router = useRouter();
+
+  const { number } = use(params);
 
   const { checkedInter, setCheckedInter } = useForm();
 
   const handlePrev = () => {
-    router.push("/way");
+    router.push(`/${number}/way`);
   };
 
   const handleNext = () => {
-    router.push("/urgency");
+    router.push(`/${number}/urgency`);
   };
 
   return (

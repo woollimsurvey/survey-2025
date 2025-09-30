@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, use } from "react";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
 import Tooltip from "@mui/material/Tooltip";
@@ -13,8 +13,10 @@ import { Button } from "@/components/button";
 
 import { useForm } from "@/contexts/FormContext";
 
-export default function Independence() {
+export default function Independence({ params }) {
   const router = useRouter();
+
+  const { number } = use(params);
 
   const { checkedInter, setCheckedInter } = useForm();
 
@@ -33,7 +35,7 @@ export default function Independence() {
   };
 
   const handlePrev = () => {
-    router.push("/skill");
+    router.push(`/${number}/skill`);
   };
 
   const handleNext = () => {
@@ -43,7 +45,7 @@ export default function Independence() {
       return;
     }
 
-    router.push("/way");
+    router.push(`/${number}/way`);
   };
 
   return (

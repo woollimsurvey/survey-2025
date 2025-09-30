@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, use } from "react";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
 import Tooltip from "@mui/material/Tooltip";
@@ -15,8 +15,10 @@ import { useForm } from "@/contexts/FormContext";
 
 import { supabase } from "@/libs/supabaseClient";
 
-export default function Maturity() {
+export default function Maturity({ params }) {
   const router = useRouter();
+
+  const { number } = use(params);
 
   const {
     name,
@@ -50,7 +52,7 @@ export default function Maturity() {
   };
 
   const handlePrev = () => {
-    router.push("/availability");
+    router.push(`/${number}/availability`);
   };
 
   const handleNext = async () => {
