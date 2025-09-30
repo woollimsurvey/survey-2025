@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
+import Tooltip from "@mui/material/Tooltip";
 
 import { Heading } from "@/components/heading";
 import { Badge } from "@/components/badge";
@@ -173,7 +174,11 @@ export default function Maturity() {
               <article key={inter.id} className="grid grid-cols-[2fr_4fr]">
                 <div className="border-b bg-blue-950 p-2 text-lg font-bold text-white">
                   {inter.intermediate}
-                  <span className="text-red-400">(!)</span>
+                  <Tooltip title={inter.description}>
+                    <button type="button" className="text-red-400">
+                      (!)
+                    </button>
+                  </Tooltip>
                 </div>
                 <RadioGroup
                   name="maturity"

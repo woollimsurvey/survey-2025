@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
+import Tooltip from "@mui/material/Tooltip";
 
 import { Heading } from "@/components/heading";
 import { Badge } from "@/components/badge";
@@ -164,7 +165,11 @@ export default function Gap() {
               >
                 <div className="row-span-2 flex justify-center items-center border-b bg-blue-950 p-2 text-lg font-bold text-white">
                   {inter.intermediate}
-                  <span className="text-red-400">(!)</span>
+                  <Tooltip title={inter.description}>
+                    <button type="button" className="text-red-400">
+                      (!)
+                    </button>
+                  </Tooltip>
                 </div>
                 <div className="flex justify-center items-center border-r border-b text-lg font-bold">
                   {inter.country === "kr" && "한국"}

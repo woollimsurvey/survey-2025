@@ -2,6 +2,7 @@
 
 import { useState, useEffect, Fragment } from "react";
 import { useRouter } from "next/navigation";
+import Tooltip from "@mui/material/Tooltip";
 
 import { Heading } from "@/components/heading";
 import { Badge } from "@/components/badge";
@@ -80,7 +81,8 @@ export default function Prepare() {
     const fetchIndustry = async () => {
       const { data, error } = await supabase
         .from("industry")
-        .select()
+        .select("*")
+        .like("code", "A%")
         .order("id");
 
       setIndustry(
@@ -173,7 +175,11 @@ export default function Prepare() {
                   />
                   <Label>
                     {intermediate.intermediate}
-                    <span className="text-red-400">(!)</span>
+                    <Tooltip title={intermediate.description}>
+                      <button type="button" className="text-red-400">
+                        (!)
+                      </button>
+                    </Tooltip>
                   </Label>
                 </CheckboxField>
               ))}
