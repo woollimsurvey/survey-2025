@@ -14,6 +14,7 @@ import { Button } from "@/components/button";
 import { useForm } from "@/contexts/FormContext";
 
 import { supabase } from "@/libs/supabaseClient";
+import { GSP_NO_RETURNED_VALUE } from "next/dist/lib/constants";
 
 export default function Prepare({ params }) {
   const router = useRouter();
@@ -62,6 +63,12 @@ export default function Prepare({ params }) {
   };
 
   const handleNext = () => {
+    if (settingInter) {
+      router.push(`/${number}/country`);
+
+      return;
+    }
+
     if (checkedInter.length === 0) {
       alert("※ 한 개 이상의 중분류를 선택해 주세요!.");
 
@@ -75,7 +82,15 @@ export default function Prepare({ params }) {
     ) {
       setSettingInter(true);
 
-      router.push(`/${number}/country`);
+      return;
+    }
+
+    if (
+      !confirm(
+        "※ (주의!!) 선택하신 중분류를 다시 한번 검토해주세요. 현재 선택하신 중분류를 기준으로 다음 설문이 이어집니다.\n현재 페이지 이후, 중분류를 제외하거나 추가로 선택하려는 경우 설문을 처음부터 다시 진행해야 합니다."
+      )
+    ) {
+      return;
     }
   };
 
