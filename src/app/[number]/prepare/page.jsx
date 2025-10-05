@@ -2,7 +2,6 @@
 
 import { useState, useEffect, use, Fragment } from "react";
 import { useRouter } from "next/navigation";
-import Tooltip from "@mui/material/Tooltip";
 
 import { Heading } from "@/components/heading";
 import { Badge } from "@/components/badge";
@@ -14,7 +13,6 @@ import { Button } from "@/components/button";
 import { useForm } from "@/contexts/FormContext";
 
 import { supabase } from "@/libs/supabaseClient";
-import { GSP_NO_RETURNED_VALUE } from "next/dist/lib/constants";
 
 export default function Prepare({ params }) {
   const router = useRouter();
@@ -25,6 +23,7 @@ export default function Prepare({ params }) {
     useForm();
 
   const [industry, setIndustry] = useState([]);
+  const [industryLength, setIndustrylength] = useState(0);
 
   const handleCheckInter = (
     e,
@@ -128,6 +127,8 @@ export default function Prepare({ params }) {
         }, [])
       );
 
+      setIndustrylength(data.length);
+
       error && console.error(error);
     };
 
@@ -146,60 +147,77 @@ export default function Prepare({ params }) {
           2Q. 주요 산업 분야 중분류 기술분야 중 귀하께서 응답이 가능한 중분류
           기술을 모두 선택해주시기 바랍니다.
         </Heading>
-        <Text className="indent-4">
-          ※ <span className="text-red-400">(!)</span>에 마우스를 올리시면 해당
-          기술의 정의가 표시됩니다.
-        </Text>
         <Text className="indent-4">※ 기술분류 : {industry[0]?.field}</Text>
-        <section className="grid grid-cols-[2fr_3fr] my-4 border-t border-r border-l">
+        <section className="grid grid-cols-[2fr_2fr_3fr_3fr] my-4 border-t border-r border-l">
+          <div className="border-r border-b bg-gray-100 text-xl font-bold text-center leading-10">
+            기술분야
+          </div>
           <div className="border-r border-b bg-gray-100 text-xl font-bold text-center leading-10">
             대분류
           </div>
-          <div className="border-b bg-gray-100 text-xl font-bold text-center leading-10">
+          <div className="border-r border-b bg-gray-100 text-xl font-bold text-center leading-10">
             중분류
+          </div>
+          <div className="border-b bg-gray-100 text-xl font-bold text-center leading-10">
+            정의
+          </div>
+          <div
+            style={{ gridRow: `span ${industryLength}` }}
+            className="flex justify-center items-center bg-blue-950 text-2xl font-bold text-white text-center whitespace-pre-line"
+          >
+            {industry[0]?.field.split(" ").reduce((acc, word, index) => {
+              acc += (index + 1) % 2 === 0 ? `${word}\n` : `${word}\t`;
+
+              return acc;
+            }, "")}
           </div>
           {industry.map((lar, index) => (
             <Fragment key={index}>
               <div
                 style={{ gridRow: `span ${lar.intermediates.length}` }}
-                className="flex justify-center items-center border-b bg-blue-950 text-2xl font-bold text-white"
+                className="flex justify-center items-center border-b bg-blue-900 text-xl font-bold text-white text-center whitespace-pre-line"
               >
-                {lar.large}
+                {lar.large.split(" ").reduce((acc, word, index) => {
+                  acc += (index + 1) % 3 === 0 ? `${word}\n` : `${word}\t`;
+
+                  return acc;
+                }, "")}
               </div>
               {lar.intermediates.map((intermediate, index, self) => (
-                <CheckboxField key={intermediate.id} className="border-b p-1">
-                  <Checkbox
-                    aria-label={intermediate.code}
-                    name={intermediate.code}
-                    onChange={(e) =>
-                      handleCheckInter(
-                        e,
-                        intermediate.id,
-                        lar.large,
-                        intermediate.intermediate,
-                        intermediate.description,
-                        intermediate.code,
-                        self
-                      )
-                    }
-                    defaultChecked={
-                      checkedInter.find(
-                        (inter) => inter.code === intermediate.code
-                      )
-                        ? true
-                        : false
-                    }
-                    disabled={settingInter}
-                  />
-                  <Label>
-                    {intermediate.intermediate}
-                    <Tooltip title={intermediate.description}>
-                      <button type="button" className="text-red-400">
-                        (!)
-                      </button>
-                    </Tooltip>
-                  </Label>
-                </CheckboxField>
+                <Fragment key={index}>
+                  <CheckboxField
+                    key={intermediate.id}
+                    className="flex items-center border-r border-b p-1"
+                  >
+                    <Checkbox
+                      aria-label={intermediate.code}
+                      name={intermediate.code}
+                      onChange={(e) =>
+                        handleCheckInter(
+                          e,
+                          intermediate.id,
+                          lar.large,
+                          intermediate.intermediate,
+                          intermediate.description,
+                          intermediate.code,
+                          self
+                        )
+                      }
+                      defaultChecked={
+                        checkedInter.find(
+                          (inter) => inter.code === intermediate.code
+                        )
+                          ? true
+                          : false
+                      }
+                      disabled={settingInter}
+                    />
+                    <Label>{intermediate.intermediate}</Label>
+                  </CheckboxField>
+                  <p className="border-b p-1 text-sm">
+                    {intermediate.description}
+                  </p>
+                </Fragment>
               ))}
             </Fragment>
           ))}
