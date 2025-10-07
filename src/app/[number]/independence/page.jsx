@@ -8,6 +8,7 @@ import { Box, LinearProgress, Typography, Tooltip } from "@mui/material";
 import { Heading } from "@/components/heading";
 import { Badge } from "@/components/badge";
 import { Text, Strong } from "@/components/text";
+import { Label } from "@/components/fieldset";
 import { Radio, RadioGroup } from "@/components/radio";
 import { Button } from "@/components/button";
 
@@ -172,25 +173,40 @@ export default function Independence({ params }) {
                 <RadioGroup
                   name="independence"
                   aria-label="independence"
-                  className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr]"
+                  className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr] border-b"
                   onChange={(e) => handleChangeInde(e, inter)}
                   defaultValue={inter.independence}
                 >
-                  <div className="flex justify-center items-center m-0 border-r border-b">
-                    <Radio value="1" />
-                  </div>
-                  <div className="flex justify-center items-center m-0 border-r border-b">
-                    <Radio value="2" />
-                  </div>
-                  <div className="flex justify-center items-center m-0 border-r border-b">
-                    <Radio value="3" />
-                  </div>
-                  <div className="flex justify-center items-center m-0 border-r border-b">
-                    <Radio value="4" />
-                  </div>
-                  <div className="flex justify-center items-center m-0 border-b">
-                    <Radio value="5" />
-                  </div>
+                  <Label
+                    htmlFor="1"
+                    className="flex justify-center items-center m-0 border-r"
+                  >
+                    <Radio id="1" value="1" />
+                  </Label>
+                  <Label
+                    htmlFor="2"
+                    className="flex justify-center items-center m-0 border-r"
+                  >
+                    <Radio id="2" value="2" />
+                  </Label>
+                  <Label
+                    htmlFor="3"
+                    className="flex justify-center items-center m-0 border-r"
+                  >
+                    <Radio id="3" value="3" />
+                  </Label>
+                  <Label
+                    htmlFor="4"
+                    className="flex justify-center items-center m-0 border-r"
+                  >
+                    <Radio id="4" value="4" />
+                  </Label>
+                  <Label
+                    htmlFor="5"
+                    className="flex justify-center items-center m-0"
+                  >
+                    <Radio id="5" value="5" />
+                  </Label>
                 </RadioGroup>
               </article>
             ))}

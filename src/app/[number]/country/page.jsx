@@ -9,6 +9,7 @@ import { Heading } from "@/components/heading";
 import { Badge } from "@/components/badge";
 import { Button } from "@/components/button";
 import { Text } from "@/components/text";
+import { Label } from "@/components/fieldset";
 import { Radio, RadioGroup } from "@/components/radio";
 import { Input } from "@/components/input";
 
@@ -173,21 +174,36 @@ export default function Country({ params }) {
                   onChange={(e) => handleChangeCountry(e, inter)}
                   defaultValue={inter.country}
                 >
-                  <div className="flex justify-center items-center m-0 border-r border-b">
-                    <Radio value="kr" />
-                  </div>
-                  <div className="flex justify-center items-center m-0 border-r border-b">
-                    <Radio value="us" />
-                  </div>
-                  <div className="flex justify-center items-center m-0 border-r border-b">
-                    <Radio value="cn" />
-                  </div>
-                  <div className="flex justify-center items-center m-0 border-r border-b">
-                    <Radio value="jp" />
-                  </div>
-                  <div className="flex justify-center items-center m-0 border-r border-b">
-                    <Radio value="eu" />
-                  </div>
+                  <Label
+                    htmlFor="kr"
+                    className="flex justify-center items-center m-0 border-r border-b"
+                  >
+                    <Radio id="kr" value="kr" />
+                  </Label>
+                  <Label
+                    htmlFor="us"
+                    className="flex justify-center items-center m-0 border-r border-b"
+                  >
+                    <Radio id="us" value="us" />
+                  </Label>
+                  <Label
+                    htmlFor="cn"
+                    className="flex justify-center items-center m-0 border-r border-b"
+                  >
+                    <Radio id="cn" value="cn" />
+                  </Label>
+                  <Label
+                    htmlFor="jp"
+                    className="flex justify-center items-center m-0 border-r border-b"
+                  >
+                    <Radio id="jp" value="jp" />
+                  </Label>
+                  <Label
+                    htmlFor="eu"
+                    className="flex justify-center items-center m-0 border-r border-b"
+                  >
+                    <Radio id="eu" value="eu" />
+                  </Label>
                   <div className="flex items-center m-0 border-r border-b px-2">
                     <Input
                       aria-label="euName"

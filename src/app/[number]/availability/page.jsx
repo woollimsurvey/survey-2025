@@ -8,6 +8,7 @@ import { Box, LinearProgress, Typography, Tooltip } from "@mui/material";
 import { Heading } from "@/components/heading";
 import { Badge } from "@/components/badge";
 import { Text } from "@/components/text";
+import { Label } from "@/components/fieldset";
 import { Radio, RadioGroup } from "@/components/radio";
 import { Button } from "@/components/button";
 
@@ -152,21 +153,36 @@ export default function Availability({ params }) {
                   defaultValue={inter.krAvailability}
                 >
                   <div className="m-0 border-r p-1 text-lg">국내</div>
-                  <div className="flex justify-center items-center m-0 border-r">
-                    <Radio value="1" />
-                  </div>
-                  <div className="flex justify-center items-center m-0 border-r">
-                    <Radio value="2" />
-                  </div>
-                  <div className="flex justify-center items-center m-0 border-r">
-                    <Radio value="3" />
-                  </div>
-                  <div className="flex justify-center items-center m-0 border-r">
-                    <Radio value="4" />
-                  </div>
-                  <div className="flex justify-center items-center m-0">
-                    <Radio value="5" />
-                  </div>
+                  <Label
+                    htmlFor="kr1"
+                    className="flex justify-center items-center m-0 border-r"
+                  >
+                    <Radio id="kr1" value="1" />
+                  </Label>
+                  <Label
+                    htmlFor="kr2"
+                    className="flex justify-center items-center m-0 border-r"
+                  >
+                    <Radio id="kr2" value="2" />
+                  </Label>
+                  <Label
+                    htmlFor="kr3"
+                    className="flex justify-center items-center m-0 border-r"
+                  >
+                    <Radio id="kr3" value="3" />
+                  </Label>
+                  <Label
+                    htmlFor="kr4"
+                    className="flex justify-center items-center m-0 border-r"
+                  >
+                    <Radio id="kr4" value="4" />
+                  </Label>
+                  <Label
+                    htmlFor="kr5"
+                    className="flex justify-center items-center m-0"
+                  >
+                    <Radio id="kr5" value="5" />
+                  </Label>
                 </RadioGroup>
                 <RadioGroup
                   name="etcAvailability"
@@ -176,21 +192,36 @@ export default function Availability({ params }) {
                   defaultValue={inter.etcAvailability}
                 >
                   <div className="m-0 border-r p-1 text-lg">국외</div>
-                  <div className="flex justify-center items-center m-0 border-r">
-                    <Radio value="1" />
-                  </div>
-                  <div className="flex justify-center items-center m-0 border-r">
-                    <Radio value="2" />
-                  </div>
-                  <div className="flex justify-center items-center m-0 border-r">
-                    <Radio value="3" />
-                  </div>
-                  <div className="flex justify-center items-center m-0 border-r">
-                    <Radio value="4" />
-                  </div>
-                  <div className="flex justify-center items-center m-0">
-                    <Radio value="5" />
-                  </div>
+                  <Label
+                    htmlFor="etc1"
+                    className="flex justify-center items-center m-0 border-r"
+                  >
+                    <Radio id="etc1" value="1" />
+                  </Label>
+                  <Label
+                    htmlFor="etc2"
+                    className="flex justify-center items-center m-0 border-r"
+                  >
+                    <Radio id="etc2" value="2" />
+                  </Label>
+                  <Label
+                    htmlFor="etc3"
+                    className="flex justify-center items-center m-0 border-r"
+                  >
+                    <Radio id="etc3" value="3" />
+                  </Label>
+                  <Label
+                    htmlFor="etc4"
+                    className="flex justify-center items-center m-0 border-r"
+                  >
+                    <Radio id="etc4" value="4" />
+                  </Label>
+                  <Label
+                    htmlFor="etc5"
+                    className="flex justify-center items-center m-0"
+                  >
+                    <Radio id="etc5" value="5" />
+                  </Label>
                 </RadioGroup>
               </article>
             ))}

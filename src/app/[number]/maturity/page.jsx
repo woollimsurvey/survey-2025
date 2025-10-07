@@ -8,6 +8,7 @@ import { Box, LinearProgress, Typography, Tooltip } from "@mui/material";
 import { Heading } from "@/components/heading";
 import { Badge } from "@/components/badge";
 import { Text } from "@/components/text";
+import { Label } from "@/components/fieldset";
 import { Radio, RadioGroup } from "@/components/radio";
 import { Button } from "@/components/button";
 
@@ -197,18 +198,30 @@ export default function Maturity({ params }) {
                   onChange={(e) => handleChangeMature(e, inter)}
                   defaultValue={inter.maturity}
                 >
-                  <div className="flex justify-center items-center m-0 border-r">
-                    <Radio value="1" />
-                  </div>
-                  <div className="flex justify-center items-center m-0 border-r">
-                    <Radio value="2" />
-                  </div>
-                  <div className="flex justify-center items-center m-0 border-r">
-                    <Radio value="3" />
-                  </div>
-                  <div className="flex justify-center items-center m-0">
-                    <Radio value="4" />
-                  </div>
+                  <Label
+                    htmlFor="1"
+                    className="flex justify-center items-center m-0 border-r"
+                  >
+                    <Radio id="1" value="1" />
+                  </Label>
+                  <Label
+                    htmlFor="2"
+                    className="flex justify-center items-center m-0 border-r"
+                  >
+                    <Radio id="2" value="2" />
+                  </Label>
+                  <Label
+                    htmlFor="3"
+                    className="flex justify-center items-center m-0 border-r"
+                  >
+                    <Radio id="3" value="3" />
+                  </Label>
+                  <Label
+                    htmlFor="4"
+                    className="flex justify-center items-center m-0"
+                  >
+                    <Radio id="4" value="4" />
+                  </Label>
                 </RadioGroup>
               </article>
             ))}

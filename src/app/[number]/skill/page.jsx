@@ -8,6 +8,7 @@ import { Box, LinearProgress, Typography, Tooltip } from "@mui/material";
 import { Heading } from "@/components/heading";
 import { Badge } from "@/components/badge";
 import { Text } from "@/components/text";
+import { Label } from "@/components/fieldset";
 import { Radio, RadioGroup } from "@/components/radio";
 import { Button } from "@/components/button";
 
@@ -253,21 +254,36 @@ export default function Skill({ params }) {
                     {inter.country === "eu" && `유럽(${inter.euName})`}
                     {inter.country === "etc" && `기타(${inter.etcName})`}
                   </div>
-                  <div className="flex justify-center items-center m-0 border-r">
-                    <Radio value="1" />
-                  </div>
-                  <div className="flex justify-center items-center m-0 border-r">
-                    <Radio value="2" />
-                  </div>
-                  <div className="flex justify-center items-center m-0 border-r">
-                    <Radio value="3" />
-                  </div>
-                  <div className="flex justify-center items-center m-0 border-r">
-                    <Radio value="4" />
-                  </div>
-                  <div className="flex justify-center items-center m-0">
-                    <Radio value="5" />
-                  </div>
+                  <Label
+                    htmlFor="coun1"
+                    className="flex justify-center items-center m-0 border-r"
+                  >
+                    <Radio id="coun1" value="1" />
+                  </Label>
+                  <Label
+                    htmlFor="coun2"
+                    className="flex justify-center items-center m-0 border-r"
+                  >
+                    <Radio id="coun2" value="2" />
+                  </Label>
+                  <Label
+                    htmlFor="coun3"
+                    className="flex justify-center items-center m-0 border-r"
+                  >
+                    <Radio id="coun3" value="3" />
+                  </Label>
+                  <Label
+                    htmlFor="coun4"
+                    className="flex justify-center items-center m-0 border-r"
+                  >
+                    <Radio id="coun4" value="4" />
+                  </Label>
+                  <Label
+                    htmlFor="coun5"
+                    className="flex justify-center items-center m-0"
+                  >
+                    <Radio id="coun5" value="5" />
+                  </Label>
                 </RadioGroup>
                 <RadioGroup
                   name="krSkill"
@@ -277,21 +293,36 @@ export default function Skill({ params }) {
                   onChange={(e) => handleKrSkill(e, inter)}
                 >
                   <div className="m-0 border-r p-1 text-lg font-bold">한국</div>
-                  <div className="flex justify-center items-center m-0 border-r">
-                    <Radio value="1" />
-                  </div>
-                  <div className="flex justify-center items-center m-0 border-r">
-                    <Radio value="2" />
-                  </div>
-                  <div className="flex justify-center items-center m-0 border-r">
-                    <Radio value="3" />
-                  </div>
-                  <div className="flex justify-center items-center m-0 border-r">
-                    <Radio value="4" />
-                  </div>
-                  <div className="flex justify-center items-center m-0">
-                    <Radio value="5" />
-                  </div>
+                  <Label
+                    htmlFor="kr1"
+                    className="flex justify-center items-center m-0 border-r"
+                  >
+                    <Radio id="kr1" value="1" />
+                  </Label>
+                  <Label
+                    htmlFor="kr2"
+                    className="flex justify-center items-center m-0 border-r"
+                  >
+                    <Radio id="kr2" value="2" />
+                  </Label>
+                  <Label
+                    htmlFor="kr3"
+                    className="flex justify-center items-center m-0 border-r"
+                  >
+                    <Radio id="kr3" value="3" />
+                  </Label>
+                  <Label
+                    htmlFor="kr4"
+                    className="flex justify-center items-center m-0 border-r"
+                  >
+                    <Radio id="kr4" value="4" />
+                  </Label>
+                  <Label
+                    htmlFor="kr5"
+                    className="flex justify-center items-center m-0"
+                  >
+                    <Radio id="kr5" value="5" />
+                  </Label>
                 </RadioGroup>
               </article>
             ))}
