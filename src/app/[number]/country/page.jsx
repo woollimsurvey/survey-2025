@@ -230,8 +230,11 @@ export default function Country({ params }) {
                       required={inter.country === "eu"}
                     />
                   </div>
-                  <div className="flex items-center gap-1 border-r border-b px-2">
-                    <Radio value="etc" />
+                  <Label
+                    htmlFor="etc"
+                    className="flex items-center gap-1 border-r border-b px-2"
+                  >
+                    <Radio id="etc" value="etc" />
                     <Input
                       aria-label="etcName"
                       name="etcName"
@@ -256,7 +259,7 @@ export default function Country({ params }) {
                       }
                       required={inter.country === "etc"}
                     />
-                  </div>
+                  </Label>
                 </RadioGroup>
                 <div className="flex items-center border-b px-2">
                   <Input

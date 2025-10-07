@@ -256,33 +256,88 @@ export default function Skill({ params }) {
                   </div>
                   <Label
                     htmlFor="coun1"
-                    className="flex justify-center items-center m-0 border-r"
+                    className={`flex justify-center items-center m-0 border-r ${
+                      inter.country === "kr" && "bg-gray-400"
+                    }`}
                   >
-                    <Radio id="coun1" value="1" />
+                    <Tooltip
+                      title={
+                        <Typography variant="body1">
+                          귀하는 ‘3Q-2’ 설문 문항에서 해당 중분류의
+                          최고기술국으로 ‘한국’으로 선택하셨습니다.
+                        </Typography>
+                      }
+                    >
+                      <Radio id="coun1" value="1" />
+                    </Tooltip>
                   </Label>
                   <Label
                     htmlFor="coun2"
-                    className="flex justify-center items-center m-0 border-r"
+                    className={`flex justify-center items-center m-0 border-r ${
+                      inter.country === "kr" && "bg-gray-400"
+                    }`}
                   >
-                    <Radio id="coun2" value="2" />
+                    <Tooltip
+                      title={
+                        <Typography variant="body1">
+                          귀하는 ‘3Q-2’ 설문 문항에서 해당 중분류의
+                          최고기술국으로 ‘한국’으로 선택하셨습니다.
+                        </Typography>
+                      }
+                    >
+                      <Radio id="coun2" value="2" />
+                    </Tooltip>
                   </Label>
                   <Label
                     htmlFor="coun3"
-                    className="flex justify-center items-center m-0 border-r"
+                    className={`flex justify-center items-center m-0 border-r ${
+                      inter.country === "kr" && "bg-gray-400"
+                    }`}
                   >
-                    <Radio id="coun3" value="3" />
+                    <Tooltip
+                      title={
+                        <Typography variant="body1">
+                          귀하는 ‘3Q-2’ 설문 문항에서 해당 중분류의
+                          최고기술국으로 ‘한국’으로 선택하셨습니다.
+                        </Typography>
+                      }
+                    >
+                      <Radio id="coun3" value="3" />
+                    </Tooltip>
                   </Label>
                   <Label
                     htmlFor="coun4"
-                    className="flex justify-center items-center m-0 border-r"
+                    className={`flex justify-center items-center m-0 border-r ${
+                      inter.country === "kr" && "bg-gray-400"
+                    }`}
                   >
-                    <Radio id="coun4" value="4" />
+                    <Tooltip
+                      title={
+                        <Typography variant="body1">
+                          귀하는 ‘3Q-2’ 설문 문항에서 해당 중분류의
+                          최고기술국으로 ‘한국’으로 선택하셨습니다.
+                        </Typography>
+                      }
+                    >
+                      <Radio id="coun4" value="4" />
+                    </Tooltip>
                   </Label>
                   <Label
                     htmlFor="coun5"
-                    className="flex justify-center items-center m-0"
+                    className={`flex justify-center items-center m-0 ${
+                      inter.country === "kr" && "bg-gray-400"
+                    }`}
                   >
-                    <Radio id="coun5" value="5" />
+                    <Tooltip
+                      title={
+                        <Typography variant="body1">
+                          귀하는 ‘3Q-2’ 설문 문항에서 해당 중분류의
+                          최고기술국으로 ‘한국’으로 선택하셨습니다.
+                        </Typography>
+                      }
+                    >
+                      <Radio id="coun5" value="5" />
+                    </Tooltip>
                   </Label>
                 </RadioGroup>
                 <RadioGroup
