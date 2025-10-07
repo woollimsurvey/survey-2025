@@ -96,10 +96,6 @@ export default function Skill({ params }) {
         </Heading>
       </header>
       <main>
-        <h3 className="my-4 text-3xl font-semibold text-zinc-950">
-          □ (기술성) 위원님께서 선택하신 중분류 기술의 기술성(기술수준, 기술격차
-          등)을 객관적으로 평가해주시기 바랍니다.
-        </h3>
         <Heading level={4}>
           3Q-4. (기술성숙도)&nbsp;
           <span className="font-normal">

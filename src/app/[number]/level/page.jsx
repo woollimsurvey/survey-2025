@@ -110,15 +110,13 @@ export default function Level({ params }) {
         </Heading>
       </header>
       <main>
-        <h3 className="my-4 text-3xl font-semibold text-zinc-950">
-          □ (기술성) 위원님께서 선택하신 중분류 기술의 기술성(기술수준, 기술격차
-          등)을 객관적으로 평가해주시기 바랍니다.
-        </h3>
         <Heading level={4}>
           3Q-2. (최고기술국 대비 기술수준)&nbsp;
           <span className="font-normal">
             선택하신 중분류 기술별 최고기술국(100%) 대비 상대적 기술수준을 아래
-            설명을 참고하시어 국가별로 입력해주시기 바랍니다.
+            설명을 참고하시어
+            <br />
+            국가별로 입력해주시기 바랍니다.
           </span>
         </Heading>
         <Text className="indent-4">

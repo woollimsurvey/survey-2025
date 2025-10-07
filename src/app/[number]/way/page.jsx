@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, use, Fragment } from "react";
+import { useState, useEffect, use, Fragment } from "react";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
 import Tooltip from "@mui/material/Tooltip";
@@ -21,6 +21,8 @@ export default function Way({ params }) {
 
   const { tel1, tel2, tel3, checkedInter, largeWay, setLargeWay } = useForm();
 
+  const [error, setError] = useState("");
+
   const handleSelectWay = (e, way) => {
     setLargeWay((prevWay) =>
       prevWay.map((prev) => {
@@ -38,6 +40,12 @@ export default function Way({ params }) {
   };
 
   const handleNext = () => {
+    if (!largeWay.every((inter) => "way" in inter)) {
+      setError("모든 대분류에 대해 기술격차 해소방안을 선택해주세요.");
+
+      return;
+    }
+
     router.push(`/${number}/importance`);
   };
 
@@ -58,7 +66,6 @@ export default function Way({ params }) {
               tel: tel1 + tel2 + tel3,
               large: inter.large,
               code: inter.code.substring(0, 2),
-              way: "1",
               intermediates: inter.intermediates,
             };
           })
@@ -74,16 +81,13 @@ export default function Way({ params }) {
         </Heading>
       </header>
       <main>
-        <h3 className="my-4 text-3xl font-semibold text-zinc-950">
-          □ (기술성) 위원님께서 선택하신 중분류 기술의 기술성(기술수준, 기술격차
-          등)을 객관적으로 평가해주시기 바랍니다.
-        </h3>
         <Heading level={4}>
           3Q-6. (기술격차 해소방안)&nbsp;
           <span className="font-normal">
             선택하신 기술군의 상위 분류인 대분류의 기술격차를 해소하기 위해 가장
-            적합한 방안을 선택해주시기 바라며, 해당 방안을 선택하신 이유를 같이
-            기재해주시기 바랍니다.
+            적합한 방안을 선택해주시기
+            <br />
+            바라며, 해당 방안을 선택하신 이유를 같이 기재해주시기바랍니다.
           </span>
         </Heading>
         <Text className="indent-4">
@@ -137,8 +141,9 @@ export default function Way({ params }) {
                 <Listbox
                   name="way"
                   aria-label="way"
-                  value={way.way || ""}
+                  defaultValue={way.way}
                   onChange={(e) => handleSelectWay(e, way)}
+                  placeholder="선택"
                 >
                   <ListboxOption value="1">
                     <ListboxLabel>정부 R&D 투자 확대</ListboxLabel>
@@ -210,9 +215,12 @@ export default function Way({ params }) {
           ))}
         </section>
       </main>
-      <footer className="flex justify-end gap-4 my-4">
-        <Button onClick={handlePrev}>이전</Button>
-        <Button type="submit">다음</Button>
+      <footer className="my-4">
+        <div className="text-red-700 text-right">{error}</div>
+        <div className="flex justify-end gap-4">
+          <Button onClick={handlePrev}>이전</Button>
+          <Button type="submit">다음</Button>
+        </div>
       </footer>
     </Form>
   );

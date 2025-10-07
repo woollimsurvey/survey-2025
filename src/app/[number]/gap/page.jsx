@@ -110,24 +110,22 @@ export default function Gap({ params }) {
         </Heading>
       </header>
       <main>
-        <h3 className="my-4 text-3xl font-semibold text-zinc-950">
-          □ (기술성) 위원님께서 선택하신 중분류 기술의 기술성(기술수준, 기술격차
-          등)을 객관적으로 평가해주시기 바랍니다.
-        </h3>
         <Heading level={4}>
           3Q-3. (최고기술국 대비 기술격차)&nbsp;
           <span className="font-normal">
             선택하신 중분류 기술별 최고기술국 대비 상대적 기술격차를 국가별로
-            “개월” 단위로 입력해주시기 바랍니다.
+            “개월” 단위로 입력해주시기
+            <br />
+            바랍니다.
           </span>
         </Heading>
         <Text className="indent-4">
-          ※ 기술격차 : 최고기술국을 0개월로, 나머지 국가는 최고기술국 대비 몇
-          개월이 차이가 나는지 입력
+          ※ 기술격차 : 최고기술국(0개월)을 기준으로, 최고 기술국의 기술력을
+          따라잡기 위해 소요되는 기간
         </Text>
         <Text className="indent-4">
-          ※ 응답자가 중분류별로 제시한 기술수준(3Q-2) 순위를 참고하시어 국가별
-          기술격차에 응답해 주시기 바랍니다.
+          ※ 앞서 귀하께서 중분류 기술별로 제시하신 기술수준(3Q-2) 순위를
+          참고하시어 국가별 기술격차에 응답해 주시기 바랍니다.
         </Text>
         <section className="mt-8 border-t border-r border-l text-center">
           <article className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr]">
@@ -361,10 +359,6 @@ export default function Gap({ params }) {
               </article>
             ))}
         </section>
-        <Text>
-          * 기타는 3Q-1에서 기타 국가가 최고기술 보유국으로 선택되었을 경우만
-          0개월로 입력, 나머지 경우에는 작성 불필요
-        </Text>
         <Text>
           ※ 최고기술 보유국에 제시된 국가는 무조건 0개월로 기재해야 하며, 나머지
           국가는 해당 국가와 비교하여 상대적 기술격차를 “개월” 단위로 제시

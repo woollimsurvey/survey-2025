@@ -163,7 +163,7 @@ export default function Prepare({ params }) {
           </div>
           <div
             style={{ gridRow: `span ${industryLength}` }}
-            className="flex justify-center items-center bg-blue-950 text-2xl font-bold text-white text-center whitespace-pre-line"
+            className="flex justify-center items-center border-b bg-blue-950 text-2xl font-bold text-white text-center whitespace-pre-line"
           >
             {industry[0]?.field.split(" ").reduce((acc, word, index) => {
               acc += (index + 1) % 2 === 0 ? `${word}\n` : `${word}\t`;

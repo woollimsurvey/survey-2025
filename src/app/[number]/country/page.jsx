@@ -92,13 +92,17 @@ export default function Country({ params }) {
         </section>
         <h3 className="my-4 text-3xl font-semibold text-zinc-950">
           □ (기술성) 위원님께서 선택하신 중분류 기술의 기술성(기술수준, 기술격차
-          등)을 객관적으로 평가해주시기 바랍니다.
+          등)을 객관적으로 평가해주시기
+          <br />
+          바랍니다.
         </h3>
         <Heading level={4}>
           3Q-1. (최고기술 보유국)&nbsp;
           <span className="font-normal">
             한국, 미국, 중국, 일본, 유럽 중 2025년 현재 분야 내 기술의 최상위
-            국가와 최고기술 보유기관을 제시해주시기 바랍니다.
+            국가와 최고기술 보유기관을 제시해주시기
+            <br />
+            바랍니다.
           </span>
         </Heading>
         <Text className="indent-4">
