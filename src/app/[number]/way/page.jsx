@@ -3,7 +3,7 @@
 import { useState, useEffect, use, Fragment } from "react";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
-import Tooltip from "@mui/material/Tooltip";
+import { Box, LinearProgress, Typography, Tooltip } from "@mui/material";
 
 import { Heading } from "@/components/heading";
 import { Badge } from "@/components/badge";
@@ -75,6 +75,18 @@ export default function Way({ params }) {
 
   return (
     <Form action={handleNext}>
+      <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Box sx={{ width: "100%", mr: 1 }}>
+          <LinearProgress
+            variant="determinate"
+            value={72}
+            sx={{ height: 35 }}
+          />
+        </Box>
+        <Box sx={{ minWidth: 35 }}>
+          <Typography variant="body1">72%</Typography>
+        </Box>
+      </Box>
       <header className="my-3 p-3 bg-gray-50">
         <Heading level={2}>
           <Badge className="align-middle">3</Badge> 기술수준조사
@@ -113,7 +125,7 @@ export default function Way({ params }) {
           <article className="grid grid-cols-[1fr_1fr_1fr] bg-gray-100 text-xl font-bold leading-10">
             <div className="border-r border-b">대분류</div>
             <div className="border-r border-b">기술격차 해소방안</div>
-            <div className="border-b">선택 이유(선택)</div>
+            <div className="border-b">선택 이유</div>
           </article>
           {largeWay.map((way, index) => (
             <article key={index} className="grid grid-cols-[1fr_1fr_1fr]">
