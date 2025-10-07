@@ -47,7 +47,7 @@ export default function Availability({ params }) {
   };
 
   const handlePrev = () => {
-    router.push(`/${number}/effect`);
+    router.push(`/${number}/way`);
   };
 
   const handleNext = async () => {
@@ -72,11 +72,13 @@ export default function Availability({ params }) {
       </header>
       <main>
         <h3 className="my-4 text-3xl font-semibold text-zinc-950">
-          □ (시장성) 위원님께서 선택하신 중분류 기술들의 시장성을 평가할 수 있는
-          하위 문항에 응답해주시기 바랍니다.
+          □ (시장성) 위원님께서 선택하신 중분류 기술의 시장성(시장 활용성, 시장
+          성숙도)을 객관적으로 평가해주시기
+          <br />
+          바랍니다.
         </h3>
         <Heading level={4}>
-          4Q-4. (시장 활용성)&nbsp;
+          4Q-1. (시장 활용성)&nbsp;
           <span className="font-normal">
             선택하신 중분류별 가장 적합한 기술 활용성을 국내와 국외로 구분하여
             선택해주시기 바랍니다.

@@ -46,7 +46,7 @@ export default function Way({ params }) {
       return;
     }
 
-    router.push(`/${number}/importance`);
+    router.push(`/${number}/availability`);
   };
 
   useEffect(() => {
@@ -82,7 +82,7 @@ export default function Way({ params }) {
       </header>
       <main>
         <Heading level={4}>
-          3Q-6. (기술격차 해소방안)&nbsp;
+          3Q-9. (기술격차 해소방안)&nbsp;
           <span className="font-normal">
             선택하신 기술군의 상위 분류인 대분류의 기술격차를 해소하기 위해 가장
             적합한 방안을 선택해주시기

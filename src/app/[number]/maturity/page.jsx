@@ -131,12 +131,8 @@ export default function Maturity({ params }) {
         </Heading>
       </header>
       <main>
-        <h3 className="my-4 text-3xl font-semibold text-zinc-950">
-          □ (시장성) 위원님께서 선택하신 중분류 기술들의 시장성을 평가할 수 있는
-          하위 문항에 응답해주시기 바랍니다.
-        </h3>
         <Heading level={4}>
-          4Q-5. (시장 성숙도)&nbsp;
+          4Q-2. (시장 성숙도)&nbsp;
           <span className="font-normal">
             선택하신 중분류별 가장 적합한 시장 성숙도를 선택해 주시기 바랍니다.
           </span>

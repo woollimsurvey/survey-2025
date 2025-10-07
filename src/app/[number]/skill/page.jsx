@@ -50,7 +50,7 @@ export default function Skill({ params }) {
   const handlePrev = () => {
     setSettingSkill(true);
 
-    router.push(`/${number}/gap`);
+    router.push(`/${number}/effect`);
   };
 
   const handleNext = async () => {
@@ -97,10 +97,12 @@ export default function Skill({ params }) {
       </header>
       <main>
         <Heading level={4}>
-          3Q-4. (기술성숙도)&nbsp;
+          3Q-7. (기술성숙도)&nbsp;
           <span className="font-normal">
             선택하신 중분류 기술별 최고기술국과 우리나라의 기술 성숙도를 아래
-            설명을 참고하시어 적정 단계를 선택해주시기 바랍니다.
+            설명을 참고하시어 적정 단계를 선택해주시기
+            <br />
+            바랍니다.
           </span>
         </Heading>
         <Text className="indent-4">

@@ -20,7 +20,7 @@ export default function Importance({ params }) {
   const { checkedInter, setCheckedInter } = useForm();
 
   const handlePrev = () => {
-    router.push(`/${number}/way`);
+    router.push(`/${number}/gap`);
   };
 
   const handleNext = () => {
@@ -35,12 +35,8 @@ export default function Importance({ params }) {
         </Heading>
       </header>
       <main>
-        <h3 className="my-4 text-3xl font-semibold text-zinc-950">
-          □ (시장성) 위원님께서 선택하신 중분류 기술들의 시장성을 평가할 수 있는
-          하위 문항에 응답해주시기 바랍니다.
-        </h3>
         <Heading level={4}>
-          4Q-1. (중요도)&nbsp;
+          3Q-4. (중요도)&nbsp;
           <span className="font-normal">
             선택하신 중분류별 하위 설명을 참고하시어 해당 기술분야의 중요도를
             제시해주시기 바랍니다.

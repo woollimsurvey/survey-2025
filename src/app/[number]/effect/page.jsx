@@ -45,7 +45,7 @@ export default function Effect({ params }) {
       return;
     }
 
-    router.push(`/${number}/availability`);
+    router.push(`/${number}/skill`);
   };
 
   return (
@@ -56,12 +56,8 @@ export default function Effect({ params }) {
         </Heading>
       </header>
       <main>
-        <h3 className="my-4 text-3xl font-semibold text-zinc-950">
-          □ (시장성) 위원님께서 선택하신 중분류 기술들의 시장성을 평가할 수 있는
-          하위 문항에 응답해주시기 바랍니다.
-        </h3>
         <Heading level={4}>
-          4Q-3. (파급효과)&nbsp;
+          3Q-6. (파급효과)&nbsp;
           <span className="font-normal">
             선택하신 중분류별 가장 적합한 파급효과를 선택해주시기 바랍니다.
           </span>

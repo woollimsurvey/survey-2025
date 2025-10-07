@@ -57,7 +57,7 @@ export default function Independence({ params }) {
       </header>
       <main>
         <Heading level={4}>
-          3Q-5. (기술 자립도)&nbsp;
+          3Q-8. (기술 자립도)&nbsp;
           <span className="font-normal">
             아래 설명을 참고하시어 선택하신 기술분류별로 5개의 항목 중 기술
             자립도에 가장 적합한 구분자를 선택해주시기

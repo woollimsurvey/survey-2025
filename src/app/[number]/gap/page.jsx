@@ -30,7 +30,7 @@ export default function Gap({ params }) {
   const handleNext = () => {
     setSettingMonth(true);
 
-    router.push(`/${number}/skill`);
+    router.push(`/${number}/importance`);
   };
 
   useEffect(() => {
