@@ -73,9 +73,7 @@ export default function Independence({ params }) {
           3Q-8. (기술 자립도)&nbsp;
           <span className="font-normal">
             아래 설명을 참고하시어 선택하신 기술분류별로 5개의 항목 중 기술
-            자립도에 가장 적합한 구분자를 선택해주시기
-            <br />
-            바랍니다.
+            자립도에 가장 적합한 구분자를 선택해주시기 바랍니다.
           </span>
         </Heading>
         <Text className="indent-4">
@@ -142,16 +140,24 @@ export default function Independence({ params }) {
             <div className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr]">
               <div className="col-span-5 border-b leading-10">기술 자립도</div>
               <div className="border-r border-b p-2">
-                ① 해외 기술 의존도가 매우 높음
+                ① 해외 기술
+                <br />
+                의존도가 매우 높음
               </div>
               <div className="border-r border-b p-2">
-                ② 해외 기술 의존도가 높음
+                ② 해외 기술
+                <br />
+                의존도가 높음
               </div>
               <div className="border-r border-b p-2">
-                ③ 해외·국내 기술 의존도가 비슷함
+                ③ 해외·국내 기술
+                <br />
+                의존도가 비슷함
               </div>
               <div className="border-r border-b p-2">
-                ④ 국내 기술 자립도가 높음
+                ④ 국내 기술
+                <br />
+                자립도가 높음
               </div>
               <div className="border-b p-2">
                 ⑤ 국내 독자적 기술 자립도가 매우 높음
@@ -162,9 +168,16 @@ export default function Independence({ params }) {
             .sort((a, b) => a.id - b.id)
             .map((inter) => (
               <article key={inter.id} className="grid grid-cols-[2fr_5fr]">
-                <div className="border-b bg-blue-950 p-2 text-lg font-bold text-white">
+                <div className="border-b bg-blue-950 p-2 text-lg font-bold text-white whitespace-pre-line">
                   {inter.intermediate.split(" ").reduce((acc, word, index) => {
-                    acc += (index + 1) % 3 === 0 ? `${word}\n` : `${word}\t`;
+                    acc +=
+                      (index + 1) % 3 === 0
+                        ? `${word}${
+                            index !== inter.intermediate.split(" ").length - 1
+                              ? "\n"
+                              : "\t"
+                          }`
+                        : `${word}\t`;
 
                     return acc;
                   }, "")}

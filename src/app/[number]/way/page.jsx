@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, use, Fragment } from "react";
+import { useState, useEffect, use } from "react";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
 import { Box, LinearProgress, Typography, Tooltip } from "@mui/material";
@@ -131,24 +131,36 @@ export default function Way({ params }) {
             <article key={index} className="grid grid-cols-[1fr_1fr_1fr]">
               <div className="border-b bg-blue-950 p-2 text-lg font-bold text-white">
                 {way.large.split(" ").reduce((acc, word, index) => {
-                  acc += (index + 1) % 3 === 0 ? `${word}\n` : `${word}\t`;
+                  acc +=
+                    (index + 1) % 3 === 0
+                      ? `${word}${
+                          index !== way.large.split(" ").length - 1
+                            ? "\n"
+                            : "\t"
+                        }`
+                      : `${word}\t`;
 
                   return acc;
                 }, "")}
                 <Tooltip
                   title={
-                    <Fragment>
-                      <ul>
-                        {way.intermediates.map((intermedite) => (
-                          <li key={intermedite.id}>
-                            <Typography variant="body1">
-                              {intermedite.intermediate}
-                            </Typography>
-                          </li>
-                        ))}
-                      </ul>
-                    </Fragment>
+                    <ul>
+                      {way.intermediates.map((intermedite) => (
+                        <li key={intermedite.id}>
+                          <Typography variant="body1">
+                            {intermedite.intermediate}
+                          </Typography>
+                        </li>
+                      ))}
+                    </ul>
                   }
+                  slotProps={{
+                    tooltip: {
+                      sx: {
+                        maxWidth: "none",
+                      },
+                    },
+                  }}
                 >
                   <button type="button" className="text-red-400">
                     (!)

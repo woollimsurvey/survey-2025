@@ -195,7 +195,14 @@ export default function Level({ params }) {
               >
                 <div className="border-b bg-blue-950 p-2 text-lg font-bold text-white whitespace-pre-line">
                   {inter.intermediate.split(" ").reduce((acc, word, index) => {
-                    acc += (index + 1) % 3 === 0 ? `${word}\n` : `${word}\t`;
+                    acc +=
+                      (index + 1) % 3 === 0
+                        ? `${word}${
+                            index !== inter.intermediate.split(" ").length - 1
+                              ? "\n"
+                              : "\t"
+                          }`
+                        : `${word}\t`;
 
                     return acc;
                   }, "")}

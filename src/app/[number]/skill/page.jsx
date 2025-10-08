@@ -113,9 +113,7 @@ export default function Skill({ params }) {
           3Q-7. (기술성숙도)&nbsp;
           <span className="font-normal">
             선택하신 중분류 기술별 최고기술국과 우리나라의 기술 성숙도를 아래
-            설명을 참고하시어 적정 단계를 선택해주시기
-            <br />
-            바랍니다.
+            설명을 참고하시어 적정 단계를 선택해주시기 바랍니다.
           </span>
         </Heading>
         <Text className="indent-4">
@@ -230,9 +228,16 @@ export default function Skill({ params }) {
             .sort((a, b) => a.id - b.id)
             .map((inter) => (
               <article key={inter.id} className="grid grid-cols-[3fr_12fr]">
-                <div className="row-span-2 flex justify-center items-center border-b bg-blue-950 p-2 text-lg font-bold text-white">
+                <div className="row-span-2 border-b bg-blue-950 p-2 text-lg font-bold text-white whitespace-pre-line">
                   {inter.intermediate.split(" ").reduce((acc, word, index) => {
-                    acc += (index + 1) % 3 === 0 ? `${word}\n` : `${word}\t`;
+                    acc +=
+                      (index + 1) % 3 === 0
+                        ? `${word}${
+                            index !== inter.intermediate.split(" ").length - 1
+                              ? "\n"
+                              : "\t"
+                          }`
+                        : `${word}\t`;
 
                     return acc;
                   }, "")}
@@ -256,7 +261,7 @@ export default function Skill({ params }) {
                   onChange={(e) => handleCounSkill(e, inter)}
                   disabled={inter.country === "kr"}
                 >
-                  <div className="m-0 border-r p-1 text-lg font-bold whitespace-pre-line">
+                  <div className="flex justify-center items-center m-0 border-r p-1 text-lg font-bold">
                     {inter.country === "kr" && "최고 기술국(한국)"}
                     {inter.country === "us" && "최고 기술국(미국)"}
                     {inter.country === "cn" && "최고 기술국(중국)"}
@@ -377,7 +382,9 @@ export default function Skill({ params }) {
                   value={inter.krSkill || ""}
                   onChange={(e) => handleKrSkill(e, inter)}
                 >
-                  <div className="m-0 border-r p-1 text-lg font-bold">한국</div>
+                  <div className="flex justify-center items-center m-0 border-r p-1 text-lg font-bold">
+                    한국
+                  </div>
                   <Label
                     htmlFor={`kr1${inter.id}`}
                     className="flex justify-center items-center m-0 border-r"

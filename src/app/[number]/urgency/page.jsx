@@ -77,7 +77,7 @@ export default function Urgency({ params }) {
         </Heading>
         <Text className="indent-4">
           ※ 특정 기술분야 또는 상위 기술을 개발하고 산업화하기 위해 해당 중분류
-          기술이 시급히 개발되 어야 하는 정도
+          기술이 시급히 개발되어야 하는 정도
         </Text>
         <section className="my-4 border-t border-r border-l text-center">
           <article className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr] border-b bg-gray-100 text-xl font-bold leading-10">
@@ -92,9 +92,16 @@ export default function Urgency({ params }) {
             .sort((a, b) => a.id - b.id)
             .map((inter) => (
               <article key={inter.id} className="grid grid-cols-[2fr_5fr]">
-                <div className="border-b bg-blue-950 p-2 text-lg font-bold text-white">
+                <div className="border-b bg-blue-950 p-2 text-lg font-bold text-white whitespace-pre-line">
                   {inter.intermediate.split(" ").reduce((acc, word, index) => {
-                    acc += (index + 1) % 3 === 0 ? `${word}\n` : `${word}\t`;
+                    acc +=
+                      (index + 1) % 3 === 0
+                        ? `${word}${
+                            index !== inter.intermediate.split(" ").length - 1
+                              ? "\n"
+                              : "\t"
+                          }`
+                        : `${word}\t`;
 
                     return acc;
                   }, "")}

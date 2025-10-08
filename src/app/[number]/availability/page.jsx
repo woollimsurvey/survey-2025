@@ -56,7 +56,7 @@ export default function Availability({ params }) {
       !checkedInter.every((inter) => "krAvailability" in inter) ||
       !checkedInter.every((inter) => "etcAvailability" in inter)
     ) {
-      setError("모든 중분류에 대해 시장 성숙도을 선택해주세요.");
+      setError("모든 중분류에 대해 시장 활용성을 선택해주세요.");
 
       return;
     }
@@ -86,9 +86,7 @@ export default function Availability({ params }) {
       <main>
         <h3 className="my-4 text-3xl font-semibold text-zinc-950">
           □ (시장성) 위원님께서 선택하신 중분류 기술의 시장성(시장 활용성, 시장
-          성숙도)을 객관적으로 평가해주시기
-          <br />
-          바랍니다.
+          성숙도)을 객관적으로 평가해주시기 바랍니다.
         </h3>
         <Heading level={4}>
           4Q-1. (시장 활용성)&nbsp;
@@ -137,9 +135,16 @@ export default function Availability({ params }) {
             .sort((a, b) => a.id - b.id)
             .map((inter) => (
               <article key={inter.id} className="grid grid-cols-[3fr_11fr]">
-                <div className="row-span-2 flex justify-center items-center border-b bg-blue-950 p-2 text-lg font-bold text-white">
+                <div className="row-span-2 border-b bg-blue-950 p-2 text-lg font-bold text-white whitespace-pre-line">
                   {inter.intermediate.split(" ").reduce((acc, word, index) => {
-                    acc += (index + 1) % 3 === 0 ? `${word}\n` : `${word}\t`;
+                    acc +=
+                      (index + 1) % 3 === 0
+                        ? `${word}${
+                            index !== inter.intermediate.split(" ").length - 1
+                              ? "\n"
+                              : "\t"
+                          }`
+                        : `${word}\t`;
 
                     return acc;
                   }, "")}
@@ -162,7 +167,9 @@ export default function Availability({ params }) {
                   onChange={(e) => handleChangeKrAvail(e, inter)}
                   defaultValue={inter.krAvailability}
                 >
-                  <div className="m-0 border-r p-1 text-lg">국내</div>
+                  <div className="flex justify-center items-center m-0 border-r p-1 text-lg">
+                    국내
+                  </div>
                   <Label
                     htmlFor={`kr1${inter.id}`}
                     className="flex justify-center items-center m-0 border-r"
@@ -201,7 +208,9 @@ export default function Availability({ params }) {
                   onChange={(e) => handleChangeEtcAvail(e, inter)}
                   defaultValue={inter.etcAvailability}
                 >
-                  <div className="m-0 border-r p-1 text-lg">국외</div>
+                  <div className="flex justify-center items-center m-0 border-r p-1 text-lg">
+                    국외
+                  </div>
                   <Label
                     htmlFor={`etc1${inter.id}`}
                     className="flex justify-center items-center m-0 border-r"

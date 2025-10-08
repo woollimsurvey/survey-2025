@@ -109,9 +109,7 @@ export default function Country({ params }) {
           3Q-1. (최고기술 보유국)&nbsp;
           <span className="font-normal">
             한국, 미국, 중국, 일본, 유럽 중 2025년 현재 분야 내 기술의 최상위
-            국가와 최고기술 보유기관을 제시해주시기
-            <br />
-            바랍니다.
+            국가와 최고기술 보유기관을 제시해주시기 바랍니다.
           </span>
         </Heading>
         <Text className="indent-4">
@@ -161,7 +159,14 @@ export default function Country({ params }) {
               <article key={inter.id} className="grid grid-cols-[4fr_12fr_4fr]">
                 <div className="border-b bg-blue-950 p-2 text-lg font-bold text-white whitespace-pre-line">
                   {inter.intermediate.split(" ").reduce((acc, word, index) => {
-                    acc += (index + 1) % 3 === 0 ? `${word}\n` : `${word}\t`;
+                    acc +=
+                      (index + 1) % 3 === 0
+                        ? `${word}${
+                            index !== inter.intermediate.split(" ").length - 1
+                              ? "\n"
+                              : "\t"
+                          }`
+                        : `${word}\t`;
 
                     return acc;
                   }, "")}
