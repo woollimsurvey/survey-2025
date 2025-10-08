@@ -96,7 +96,13 @@ export default function Importance({ params }) {
               <article key={inter.id} className="grid grid-cols-[4fr_1fr]">
                 <div className="border-b bg-blue-950 p-2 text-lg font-bold text-white">
                   {inter.intermediate}
-                  <Tooltip title={inter.description}>
+                  <Tooltip
+                    title={
+                      <Typography variant="body1">
+                        {inter.description}
+                      </Typography>
+                    }
+                  >
                     <button type="button" className="text-red-400">
                       (!)
                     </button>

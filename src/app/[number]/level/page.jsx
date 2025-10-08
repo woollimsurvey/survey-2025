@@ -195,7 +195,13 @@ export default function Level({ params }) {
               >
                 <div className="border-b bg-blue-950 p-2 text-lg font-bold text-white">
                   {inter.intermediate}
-                  <Tooltip title={inter.description}>
+                  <Tooltip
+                    title={
+                      <Typography variant="body1">
+                        {inter.description}
+                      </Typography>
+                    }
+                  >
                     <button type="button" className="text-red-400">
                       (!)
                     </button>

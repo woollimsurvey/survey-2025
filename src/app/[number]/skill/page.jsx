@@ -190,7 +190,7 @@ export default function Skill({ params }) {
           </div>
         </section>
         <section className="mt-4 border-t border-r border-l text-center">
-          <article className="grid grid-cols-[3fr_1fr_10fr] border-b bg-gray-100 text-xl font-bold">
+          <article className="grid grid-cols-[3fr_2fr_10fr] border-b bg-gray-100 text-xl font-bold">
             <div className="flex justify-center items-center border-r">
               중분류
             </div>
@@ -229,10 +229,16 @@ export default function Skill({ params }) {
           {checkedInter
             .sort((a, b) => a.id - b.id)
             .map((inter) => (
-              <article key={inter.id} className="grid grid-cols-[3fr_11fr]">
+              <article key={inter.id} className="grid grid-cols-[3fr_12fr]">
                 <div className="row-span-2 flex justify-center items-center border-b bg-blue-950 p-2 text-lg font-bold text-white">
                   {inter.intermediate}
-                  <Tooltip title={inter.description}>
+                  <Tooltip
+                    title={
+                      <Typography variant="body1">
+                        {inter.description}
+                      </Typography>
+                    }
+                  >
                     <button type="button" className="text-red-400">
                       (!)
                     </button>
@@ -241,142 +247,162 @@ export default function Skill({ params }) {
                 <RadioGroup
                   name="countrySkill"
                   aria-label="countrySkill"
-                  className="grid grid-cols-[1fr_2fr_2fr_2fr_2fr_2fr] border-b"
+                  className="grid grid-cols-[2fr_2fr_2fr_2fr_2fr_2fr] border-b"
                   value={inter.countrySkill || ""}
                   onChange={(e) => handleCounSkill(e, inter)}
                   disabled={inter.country === "kr"}
                 >
-                  <div className="m-0 border-r p-1 text-lg font-bold">
-                    {inter.country === "kr" && "한국"}
-                    {inter.country === "us" && "미국"}
-                    {inter.country === "cn" && "중국"}
-                    {inter.country === "jp" && "일본"}
-                    {inter.country === "eu" && `유럽(${inter.euName})`}
-                    {inter.country === "etc" && `기타(${inter.etcName})`}
+                  <div className="m-0 border-r p-1 text-lg font-bold whitespace-pre-line">
+                    {inter.country === "kr" && "최고 기술국(한국)"}
+                    {inter.country === "us" && "최고 기술국(미국)"}
+                    {inter.country === "cn" && "최고 기술국(중국)"}
+                    {inter.country === "jp" && "최고 기술국(일본)"}
+                    {inter.country === "eu" && `최고 기술국(${inter.euName})`}
+                    {inter.country === "etc" && `최고 기술국(${inter.etcName})`}
                   </div>
                   <Label
-                    htmlFor="coun1"
+                    htmlFor={`coun1${inter.id}`}
                     className={`flex justify-center items-center m-0 border-r ${
                       inter.country === "kr" && "bg-gray-400"
                     }`}
                   >
-                    <Tooltip
-                      title={
-                        <Typography variant="body1">
-                          귀하는 ‘3Q-2’ 설문 문항에서 해당 중분류의
-                          최고기술국으로 ‘한국’으로 선택하셨습니다.
-                        </Typography>
-                      }
-                    >
-                      <Radio id="coun1" value="1" />
-                    </Tooltip>
+                    {inter.country === "kr" ? (
+                      <Tooltip
+                        title={
+                          <Typography variant="body1">
+                            귀하는 ‘3Q-2’ 설문 문항에서 해당 중분류의
+                            최고기술국으로 ‘한국’으로 선택하셨습니다.
+                          </Typography>
+                        }
+                      >
+                        <Radio id={`coun1${inter.id}`} value="1" />
+                      </Tooltip>
+                    ) : (
+                      <Radio id={`coun1${inter.id}`} value="1" />
+                    )}
                   </Label>
                   <Label
-                    htmlFor="coun2"
+                    htmlFor={`coun2${inter.id}`}
                     className={`flex justify-center items-center m-0 border-r ${
                       inter.country === "kr" && "bg-gray-400"
                     }`}
                   >
-                    <Tooltip
-                      title={
-                        <Typography variant="body1">
-                          귀하는 ‘3Q-2’ 설문 문항에서 해당 중분류의
-                          최고기술국으로 ‘한국’으로 선택하셨습니다.
-                        </Typography>
-                      }
-                    >
-                      <Radio id="coun2" value="2" />
-                    </Tooltip>
+                    {inter.country === "kr" ? (
+                      <Tooltip
+                        title={
+                          <Typography variant="body1">
+                            귀하는 ‘3Q-2’ 설문 문항에서 해당 중분류의
+                            최고기술국으로 ‘한국’으로 선택하셨습니다.
+                          </Typography>
+                        }
+                      >
+                        <Radio id={`coun2${inter.id}`} value="2" />
+                      </Tooltip>
+                    ) : (
+                      <Radio id={`coun2${inter.id}`} value="2" />
+                    )}
                   </Label>
                   <Label
-                    htmlFor="coun3"
+                    htmlFor={`coun3${inter.id}`}
                     className={`flex justify-center items-center m-0 border-r ${
                       inter.country === "kr" && "bg-gray-400"
                     }`}
                   >
-                    <Tooltip
-                      title={
-                        <Typography variant="body1">
-                          귀하는 ‘3Q-2’ 설문 문항에서 해당 중분류의
-                          최고기술국으로 ‘한국’으로 선택하셨습니다.
-                        </Typography>
-                      }
-                    >
-                      <Radio id="coun3" value="3" />
-                    </Tooltip>
+                    {inter.country === "kr" ? (
+                      <Tooltip
+                        title={
+                          <Typography variant="body1">
+                            귀하는 ‘3Q-2’ 설문 문항에서 해당 중분류의
+                            최고기술국으로 ‘한국’으로 선택하셨습니다.
+                          </Typography>
+                        }
+                      >
+                        <Radio id={`coun3${inter.id}`} value="3" />
+                      </Tooltip>
+                    ) : (
+                      <Radio id={`coun3${inter.id}`} value="3" />
+                    )}
                   </Label>
                   <Label
-                    htmlFor="coun4"
+                    htmlFor={`coun4${inter.id}`}
                     className={`flex justify-center items-center m-0 border-r ${
                       inter.country === "kr" && "bg-gray-400"
                     }`}
                   >
-                    <Tooltip
-                      title={
-                        <Typography variant="body1">
-                          귀하는 ‘3Q-2’ 설문 문항에서 해당 중분류의
-                          최고기술국으로 ‘한국’으로 선택하셨습니다.
-                        </Typography>
-                      }
-                    >
-                      <Radio id="coun4" value="4" />
-                    </Tooltip>
+                    {inter.country === "kr" ? (
+                      <Tooltip
+                        title={
+                          <Typography variant="body1">
+                            귀하는 ‘3Q-2’ 설문 문항에서 해당 중분류의
+                            최고기술국으로 ‘한국’으로 선택하셨습니다.
+                          </Typography>
+                        }
+                      >
+                        <Radio id={`coun4${inter.id}`} value="4" />
+                      </Tooltip>
+                    ) : (
+                      <Radio id={`coun4${inter.id}`} value="4" />
+                    )}
                   </Label>
                   <Label
-                    htmlFor="coun5"
+                    htmlFor={`coun5${inter.id}`}
                     className={`flex justify-center items-center m-0 ${
                       inter.country === "kr" && "bg-gray-400"
                     }`}
                   >
-                    <Tooltip
-                      title={
-                        <Typography variant="body1">
-                          귀하는 ‘3Q-2’ 설문 문항에서 해당 중분류의
-                          최고기술국으로 ‘한국’으로 선택하셨습니다.
-                        </Typography>
-                      }
-                    >
-                      <Radio id="coun5" value="5" />
-                    </Tooltip>
+                    {inter.country === "kr" ? (
+                      <Tooltip
+                        title={
+                          <Typography variant="body1">
+                            귀하는 ‘3Q-2’ 설문 문항에서 해당 중분류의
+                            최고기술국으로 ‘한국’으로 선택하셨습니다.
+                          </Typography>
+                        }
+                      >
+                        <Radio id={`coun5${inter.id}`} value="5" />
+                      </Tooltip>
+                    ) : (
+                      <Radio id={`coun5${inter.id}`} value="5" />
+                    )}
                   </Label>
                 </RadioGroup>
                 <RadioGroup
                   name="krSkill"
                   aria-label="krSkill"
-                  className="grid grid-cols-[1fr_2fr_2fr_2fr_2fr_2fr] border-b"
+                  className="grid grid-cols-[2fr_2fr_2fr_2fr_2fr_2fr] border-b"
                   value={inter.krSkill || ""}
                   onChange={(e) => handleKrSkill(e, inter)}
                 >
                   <div className="m-0 border-r p-1 text-lg font-bold">한국</div>
                   <Label
-                    htmlFor="kr1"
+                    htmlFor={`kr1${inter.id}`}
                     className="flex justify-center items-center m-0 border-r"
                   >
-                    <Radio id="kr1" value="1" />
+                    <Radio id={`kr1${inter.id}`} value="1" />
                   </Label>
                   <Label
-                    htmlFor="kr2"
+                    htmlFor={`kr2${inter.id}`}
                     className="flex justify-center items-center m-0 border-r"
                   >
-                    <Radio id="kr2" value="2" />
+                    <Radio id={`kr2${inter.id}`} value="2" />
                   </Label>
                   <Label
-                    htmlFor="kr3"
+                    htmlFor={`kr3${inter.id}`}
                     className="flex justify-center items-center m-0 border-r"
                   >
-                    <Radio id="kr3" value="3" />
+                    <Radio id={`kr3${inter.id}`} value="3" />
                   </Label>
                   <Label
-                    htmlFor="kr4"
+                    htmlFor={`kr4${inter.id}`}
                     className="flex justify-center items-center m-0 border-r"
                   >
-                    <Radio id="kr4" value="4" />
+                    <Radio id={`kr4${inter.id}`} value="4" />
                   </Label>
                   <Label
-                    htmlFor="kr5"
+                    htmlFor={`kr5${inter.id}`}
                     className="flex justify-center items-center m-0"
                   >
-                    <Radio id="kr5" value="5" />
+                    <Radio id={`kr5${inter.id}`} value="5" />
                   </Label>
                 </RadioGroup>
               </article>

@@ -161,7 +161,13 @@ export default function Country({ params }) {
               <article key={inter.id} className="grid grid-cols-[4fr_12fr_4fr]">
                 <div className="border-b bg-blue-950 p-2 text-lg font-bold text-white">
                   {inter.intermediate}
-                  <Tooltip title={inter.description}>
+                  <Tooltip
+                    title={
+                      <Typography variant="body1">
+                        {inter.description}
+                      </Typography>
+                    }
+                  >
                     <button type="button" className="text-red-400">
                       (!)
                     </button>
@@ -175,34 +181,34 @@ export default function Country({ params }) {
                   defaultValue={inter.country}
                 >
                   <Label
-                    htmlFor="kr"
+                    htmlFor={`kr${inter.id}`}
                     className="flex justify-center items-center m-0 border-r border-b"
                   >
-                    <Radio id="kr" value="kr" />
+                    <Radio id={`kr${inter.id}`} value="kr" />
                   </Label>
                   <Label
-                    htmlFor="us"
+                    htmlFor={`us${inter.id}`}
                     className="flex justify-center items-center m-0 border-r border-b"
                   >
-                    <Radio id="us" value="us" />
+                    <Radio id={`us${inter.id}`} value="us" />
                   </Label>
                   <Label
-                    htmlFor="cn"
+                    htmlFor={`cn${inter.id}`}
                     className="flex justify-center items-center m-0 border-r border-b"
                   >
-                    <Radio id="cn" value="cn" />
+                    <Radio id={`cn${inter.id}`} value="cn" />
                   </Label>
                   <Label
-                    htmlFor="jp"
+                    htmlFor={`jp${inter.id}`}
                     className="flex justify-center items-center m-0 border-r border-b"
                   >
-                    <Radio id="jp" value="jp" />
+                    <Radio id={`jp${inter.id}`} value="jp" />
                   </Label>
                   <Label
-                    htmlFor="eu"
+                    htmlFor={`eu${inter.id}`}
                     className="flex justify-center items-center m-0 border-r border-b"
                   >
-                    <Radio id="eu" value="eu" />
+                    <Radio id={`eu${inter.id}`} value="eu" />
                   </Label>
                   <div className="flex items-center m-0 border-r border-b px-2">
                     <Input
@@ -231,10 +237,10 @@ export default function Country({ params }) {
                     />
                   </div>
                   <Label
-                    htmlFor="etc"
+                    htmlFor={`etc${inter.id}`}
                     className="flex items-center gap-1 border-r border-b px-2"
                   >
-                    <Radio id="etc" value="etc" />
+                    <Radio id={`etc${inter.id}`} value="etc" />
                     <Input
                       aria-label="etcName"
                       name="etcName"
