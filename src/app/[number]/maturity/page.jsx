@@ -184,8 +184,18 @@ export default function Maturity({ params }) {
             .map((inter) => (
               <article key={inter.id} className="grid grid-cols-[2fr_4fr]">
                 <div className="border-b bg-blue-950 p-2 text-lg font-bold text-white">
-                  {inter.intermediate}
-                  <Tooltip title={inter.description}>
+                  {inter.intermediate.split(" ").reduce((acc, word, index) => {
+                    acc += (index + 1) % 3 === 0 ? `${word}\n` : `${word}\t`;
+
+                    return acc;
+                  }, "")}
+                  <Tooltip
+                    title={
+                      <Typography variant="body1">
+                        {inter.description}
+                      </Typography>
+                    }
+                  >
                     <button type="button" className="text-red-400">
                       (!)
                     </button>
@@ -199,28 +209,28 @@ export default function Maturity({ params }) {
                   defaultValue={inter.maturity}
                 >
                   <Label
-                    htmlFor="1"
+                    htmlFor={`1${inter.id}`}
                     className="flex justify-center items-center m-0 border-r"
                   >
-                    <Radio id="1" value="1" />
+                    <Radio id={`1${inter.id}`} value="1" />
                   </Label>
                   <Label
-                    htmlFor="2"
+                    htmlFor={`2${inter.id}`}
                     className="flex justify-center items-center m-0 border-r"
                   >
-                    <Radio id="2" value="2" />
+                    <Radio id={`2${inter.id}`} value="2" />
                   </Label>
                   <Label
-                    htmlFor="3"
+                    htmlFor={`3${inter.id}`}
                     className="flex justify-center items-center m-0 border-r"
                   >
-                    <Radio id="3" value="3" />
+                    <Radio id={`3${inter.id}`} value="3" />
                   </Label>
                   <Label
-                    htmlFor="4"
+                    htmlFor={`4${inter.id}`}
                     className="flex justify-center items-center m-0"
                   >
-                    <Radio id="4" value="4" />
+                    <Radio id={`4${inter.id}`} value="4" />
                   </Label>
                 </RadioGroup>
               </article>

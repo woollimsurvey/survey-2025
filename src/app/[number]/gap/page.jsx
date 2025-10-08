@@ -175,8 +175,12 @@ export default function Gap({ params }) {
                 key={inter.id}
                 className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr]"
               >
-                <div className="row-span-2 flex justify-center items-center border-b bg-blue-950 p-2 text-lg font-bold text-white">
-                  {inter.intermediate}
+                <div className="row-span-2 border-b bg-blue-950 p-2 text-lg font-bold text-white whitespace-pre-line">
+                  {inter.intermediate.split(" ").reduce((acc, word, index) => {
+                    acc += (index + 1) % 3 === 0 ? `${word}\n` : `${word}\t`;
+
+                    return acc;
+                  }, "")}
                   <Tooltip
                     title={
                       <Typography variant="body1">
@@ -353,8 +357,10 @@ export default function Gap({ params }) {
                   />
                   개월
                 </div>
-                <div className="border-r border-b">기술수준 순위</div>
-                <div className="border-b col-span-6">
+                <div className="flex justify-center items-center border-r border-b">
+                  기술수준 순위
+                </div>
+                <div className="flex justify-center items-center gap-1 border-b col-span-6">
                   {[
                     { per: inter.krPer, coun: "한국" },
                     { per: inter.usPer, coun: "미국" },
@@ -367,7 +373,7 @@ export default function Gap({ params }) {
                     .map((item, index, self) => (
                       <span key={index}>{`${item.coun}(${item.per}%) ${
                         index !== self.length - 1
-                          ? item.per > self[index + 1]?.per
+                          ? Number(item.per) > Number(self[index + 1]?.per)
                             ? ">"
                             : "="
                           : ""

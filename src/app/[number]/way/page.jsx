@@ -130,14 +130,20 @@ export default function Way({ params }) {
           {largeWay.map((way, index) => (
             <article key={index} className="grid grid-cols-[1fr_1fr_1fr]">
               <div className="border-b bg-blue-950 p-2 text-lg font-bold text-white">
-                {way.large}
+                {way.large.split(" ").reduce((acc, word, index) => {
+                  acc += (index + 1) % 3 === 0 ? `${word}\n` : `${word}\t`;
+
+                  return acc;
+                }, "")}
                 <Tooltip
                   title={
                     <Fragment>
                       <ul>
                         {way.intermediates.map((intermedite) => (
                           <li key={intermedite.id}>
-                            {intermedite.intermediate}
+                            <Typography variant="body1">
+                              {intermedite.intermediate}
+                            </Typography>
                           </li>
                         ))}
                       </ul>
@@ -155,7 +161,7 @@ export default function Way({ params }) {
                   aria-label="way"
                   defaultValue={way.way}
                   onChange={(e) => handleSelectWay(e, way)}
-                  placeholder="선택"
+                  placeholder="클릭하여 선택"
                 >
                   <ListboxOption value="1">
                     <ListboxLabel>정부 R&D 투자 확대</ListboxLabel>

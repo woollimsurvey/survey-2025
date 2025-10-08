@@ -231,7 +231,11 @@ export default function Skill({ params }) {
             .map((inter) => (
               <article key={inter.id} className="grid grid-cols-[3fr_12fr]">
                 <div className="row-span-2 flex justify-center items-center border-b bg-blue-950 p-2 text-lg font-bold text-white">
-                  {inter.intermediate}
+                  {inter.intermediate.split(" ").reduce((acc, word, index) => {
+                    acc += (index + 1) % 3 === 0 ? `${word}\n` : `${word}\t`;
+
+                    return acc;
+                  }, "")}
                   <Tooltip
                     title={
                       <Typography variant="body1">

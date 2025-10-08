@@ -159,8 +159,12 @@ export default function Country({ params }) {
             .sort((a, b) => a.id - b.id)
             .map((inter) => (
               <article key={inter.id} className="grid grid-cols-[4fr_12fr_4fr]">
-                <div className="border-b bg-blue-950 p-2 text-lg font-bold text-white">
-                  {inter.intermediate}
+                <div className="border-b bg-blue-950 p-2 text-lg font-bold text-white whitespace-pre-line">
+                  {inter.intermediate.split(" ").reduce((acc, word, index) => {
+                    acc += (index + 1) % 3 === 0 ? `${word}\n` : `${word}\t`;
+
+                    return acc;
+                  }, "")}
                   <Tooltip
                     title={
                       <Typography variant="body1">

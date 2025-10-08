@@ -138,8 +138,18 @@ export default function Availability({ params }) {
             .map((inter) => (
               <article key={inter.id} className="grid grid-cols-[3fr_11fr]">
                 <div className="row-span-2 flex justify-center items-center border-b bg-blue-950 p-2 text-lg font-bold text-white">
-                  {inter.intermediate}
-                  <Tooltip title={inter.description}>
+                  {inter.intermediate.split(" ").reduce((acc, word, index) => {
+                    acc += (index + 1) % 3 === 0 ? `${word}\n` : `${word}\t`;
+
+                    return acc;
+                  }, "")}
+                  <Tooltip
+                    title={
+                      <Typography variant="body1">
+                        {inter.description}
+                      </Typography>
+                    }
+                  >
                     <button type="button" className="text-red-400">
                       (!)
                     </button>
@@ -154,34 +164,34 @@ export default function Availability({ params }) {
                 >
                   <div className="m-0 border-r p-1 text-lg">국내</div>
                   <Label
-                    htmlFor="kr1"
+                    htmlFor={`kr1${inter.id}`}
                     className="flex justify-center items-center m-0 border-r"
                   >
-                    <Radio id="kr1" value="1" />
+                    <Radio id={`kr1${inter.id}`} value="1" />
                   </Label>
                   <Label
-                    htmlFor="kr2"
+                    htmlFor={`kr2${inter.id}`}
                     className="flex justify-center items-center m-0 border-r"
                   >
-                    <Radio id="kr2" value="2" />
+                    <Radio id={`kr2${inter.id}`} value="2" />
                   </Label>
                   <Label
-                    htmlFor="kr3"
+                    htmlFor={`kr3${inter.id}`}
                     className="flex justify-center items-center m-0 border-r"
                   >
-                    <Radio id="kr3" value="3" />
+                    <Radio id={`kr3${inter.id}`} value="3" />
                   </Label>
                   <Label
-                    htmlFor="kr4"
+                    htmlFor={`kr4${inter.id}`}
                     className="flex justify-center items-center m-0 border-r"
                   >
-                    <Radio id="kr4" value="4" />
+                    <Radio id={`kr4${inter.id}`} value="4" />
                   </Label>
                   <Label
-                    htmlFor="kr5"
+                    htmlFor={`kr5${inter.id}`}
                     className="flex justify-center items-center m-0"
                   >
-                    <Radio id="kr5" value="5" />
+                    <Radio id={`kr5${inter.id}`} value="5" />
                   </Label>
                 </RadioGroup>
                 <RadioGroup
@@ -193,34 +203,34 @@ export default function Availability({ params }) {
                 >
                   <div className="m-0 border-r p-1 text-lg">국외</div>
                   <Label
-                    htmlFor="etc1"
+                    htmlFor={`etc1${inter.id}`}
                     className="flex justify-center items-center m-0 border-r"
                   >
-                    <Radio id="etc1" value="1" />
+                    <Radio id={`etc1${inter.id}`} value="1" />
                   </Label>
                   <Label
-                    htmlFor="etc2"
+                    htmlFor={`etc2${inter.id}`}
                     className="flex justify-center items-center m-0 border-r"
                   >
-                    <Radio id="etc2" value="2" />
+                    <Radio id={`etc2${inter.id}`} value="2" />
                   </Label>
                   <Label
-                    htmlFor="etc3"
+                    htmlFor={`etc3${inter.id}`}
                     className="flex justify-center items-center m-0 border-r"
                   >
-                    <Radio id="etc3" value="3" />
+                    <Radio id={`etc3${inter.id}`} value="3" />
                   </Label>
                   <Label
-                    htmlFor="etc4"
+                    htmlFor={`etc4${inter.id}`}
                     className="flex justify-center items-center m-0 border-r"
                   >
-                    <Radio id="etc4" value="4" />
+                    <Radio id={`etc4${inter.id}`} value="4" />
                   </Label>
                   <Label
-                    htmlFor="etc5"
+                    htmlFor={`etc5${inter.id}`}
                     className="flex justify-center items-center m-0"
                   >
-                    <Radio id="etc5" value="5" />
+                    <Radio id={`etc5${inter.id}`} value="5" />
                   </Label>
                 </RadioGroup>
               </article>
