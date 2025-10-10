@@ -56,76 +56,82 @@ export default function Maturity({ params }) {
     router.push(`/${number}/availability`);
   };
 
-  const handleNext = async () => {
+  const handleSubmit = async () => {
     if (!checkedInter.every((inter) => "maturity" in inter)) {
       setError("모든 중분류에 대해 시장 성숙도를 선택해주세요.");
 
       return;
     }
 
-    const { errorForm } = await supabase.from("form").insert(
-      checkedInter.map((inter) => {
-        return {
-          name,
-          company,
-          position,
-          classification,
-          etc,
-          career,
-          tel: tel1 + tel2 + tel3,
-          email,
-          intermediate: inter.intermediate,
-          code: inter.code,
-          country: inter.country,
-          euName: inter.euName,
-          etcName: inter.etcName,
-          institution: inter.institution,
-          krPer: inter.krPer,
-          usPer: inter.usPer,
-          cnPer: inter.cnPer,
-          jpPer: inter.jpPer,
-          euPer: inter.euPer,
-          etcPer: inter.etcPer,
-          krMonth: inter.krMonth,
-          usMonth: inter.usMonth,
-          cnMonth: inter.cnMonth,
-          jpMonth: inter.jpMonth,
-          euMonth: inter.euMonth,
-          etcMonth: inter.etcMonth,
-          countrySkill: inter.countrySkill,
-          krSkill: inter.krSkill,
-          independence: inter.independence,
-          importance: inter.importance,
-          urgency: inter.urgency,
-          effect: inter.effect,
-          krAvailability: inter.krAvailability,
-          etcAvailability: inter.etcAvailability,
-          maturity: inter.maturity,
-        };
-      })
-    );
+    if (
+      confirm(
+        "확인 버튼을 누르시는 경우, 현재 작성한 설문 내용이 최종 제출되며, 설문 작성 페이지로 돌아갈 수 없습니다. 제출을 원하시는 경우 ‘확인’ 버튼을 눌러주세요."
+      )
+    ) {
+      const { errorForm } = await supabase.from("form").insert(
+        checkedInter.map((inter) => {
+          return {
+            name,
+            company,
+            position,
+            classification,
+            etc,
+            career,
+            tel: tel1 + tel2 + tel3,
+            email,
+            intermediate: inter.intermediate,
+            code: inter.code,
+            country: inter.country,
+            euName: inter.euName,
+            etcName: inter.etcName,
+            institution: inter.institution,
+            krPer: inter.krPer,
+            usPer: inter.usPer,
+            cnPer: inter.cnPer,
+            jpPer: inter.jpPer,
+            euPer: inter.euPer,
+            etcPer: inter.etcPer,
+            krMonth: inter.krMonth,
+            usMonth: inter.usMonth,
+            cnMonth: inter.cnMonth,
+            jpMonth: inter.jpMonth,
+            euMonth: inter.euMonth,
+            etcMonth: inter.etcMonth,
+            countrySkill: inter.countrySkill,
+            krSkill: inter.krSkill,
+            independence: inter.independence,
+            importance: inter.importance,
+            urgency: inter.urgency,
+            effect: inter.effect,
+            krAvailability: inter.krAvailability,
+            etcAvailability: inter.etcAvailability,
+            maturity: inter.maturity,
+          };
+        })
+      );
 
-    const { errorLarge } = await supabase.from("form_large").insert(
-      largeWay.map((way) => {
-        return {
-          tel: way.tel,
-          etc: way.etc,
-          large: way.large,
-          code: way.code,
-          way: way.way,
-          reason: way.reason,
-        };
-      })
-    );
+      const { errorLarge } = await supabase.from("form_large").insert(
+        largeWay.map((way) => {
+          return {
+            tel: way.tel,
+            etc: way.etc,
+            large: way.large,
+            code: way.code,
+            way: way.way,
+            reason: way.reason,
+          };
+        })
+      );
 
-    errorForm && console.error(errorForm);
-    errorLarge && console.error(errorLarge);
+      errorForm && console.error(errorForm);
+      errorLarge && console.error(errorLarge);
 
-    setFinish(true);
+      router.push("/finish");
+    }
   };
 
   return (
-    <Form action={handleNext}>
+    <Form action={handleSubmit}>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <Box sx={{ width: "100%", mr: 1 }}>
           <LinearProgress
@@ -254,11 +260,6 @@ export default function Maturity({ params }) {
           <Button onClick={handlePrev}>이전</Button>
           <Button type="submit">설문 제출</Button>
         </div>
-        {finish && (
-          <div className="my-12 text-2xl font-medium text-center">
-            - 설문조사에 응해주셔서 감사합니다. -
-          </div>
-        )}
       </footer>
     </Form>
   );
