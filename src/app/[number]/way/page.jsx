@@ -129,7 +129,7 @@ export default function Way({ params }) {
           </article>
           {largeWay.map((way, index) => (
             <article key={index} className="grid grid-cols-[1fr_1fr_1fr]">
-              <div className="border-b bg-blue-950 p-2 text-lg font-bold text-white">
+              <div className="border-b bg-blue-950 p-2 text-base font-bold text-white">
                 {way.large.split(" ").reduce((acc, word, index) => {
                   acc +=
                     (index + 1) % 3 === 0

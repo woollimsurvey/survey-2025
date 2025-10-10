@@ -95,7 +95,7 @@ export default function Importance({ params }) {
             .sort((a, b) => a.id - b.id)
             .map((inter) => (
               <article key={inter.id} className="grid grid-cols-[4fr_1fr]">
-                <div className="border-b bg-blue-950 p-2 text-lg font-bold text-white">
+                <div className="border-b bg-blue-950 p-2 text-base font-bold text-white">
                   {`${inter.intermediate} `}
                   <Tooltip
                     title={

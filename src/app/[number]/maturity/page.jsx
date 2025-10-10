@@ -190,7 +190,7 @@ export default function Maturity({ params }) {
             .sort((a, b) => a.id - b.id)
             .map((inter) => (
               <article key={inter.id} className="grid grid-cols-[2fr_4fr]">
-                <div className="border-b bg-blue-950 p-2 text-lg font-bold text-white whitespace-pre-line">
+                <div className="border-b bg-blue-950 p-2 text-base font-bold text-white whitespace-pre-line">
                   {inter.intermediate.split(" ").reduce((acc, word, index) => {
                     acc +=
                       (index + 1) % 3 === 0

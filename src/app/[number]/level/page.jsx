@@ -193,7 +193,7 @@ export default function Level({ params }) {
                 key={inter.id}
                 className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr]"
               >
-                <div className="border-b bg-blue-950 p-2 text-lg font-bold text-white whitespace-pre-line">
+                <div className="border-b bg-blue-950 p-2 text-base font-bold text-white whitespace-pre-line">
                   {inter.intermediate.split(" ").reduce((acc, word, index) => {
                     acc +=
                       (index + 1) % 3 === 0
