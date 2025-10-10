@@ -158,6 +158,10 @@ export default function Effect({ params }) {
               </article>
             ))}
         </section>
+        <Text>
+          *<u>파급효과</u>를 선택하신 <u>각각의 개별 중분류 (기술)별로 평가</u>
+          해주시기 바랍니다.
+        </Text>
       </main>
       <footer className="my-4">
         <div className="text-red-700 text-right">{error}</div>

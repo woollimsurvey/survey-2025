@@ -8,6 +8,7 @@ import { Box, LinearProgress, Typography, Tooltip } from "@mui/material";
 import { Heading } from "@/components/heading";
 import { Badge } from "@/components/badge";
 import { Input } from "@/components/input";
+import { Text } from "@/components/text";
 import { Button } from "@/components/button";
 
 import { useForm } from "@/contexts/FormContext";
@@ -138,6 +139,10 @@ export default function Importance({ params }) {
               </article>
             ))}
         </section>
+        <Text>
+          *<u>중요도</u>를 선택하신 <u>각각의 개별 중분류 (기술)별로 평가</u>
+          해주시기 바랍니다.
+        </Text>
       </main>
       <footer className="flex justify-end gap-4 my-4">
         <Button onClick={handlePrev}>이전</Button>
