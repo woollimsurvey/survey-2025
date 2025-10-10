@@ -28,6 +28,7 @@ export default function Prepare({ params }) {
   const handleCheckInter = (
     e,
     id,
+    field,
     large,
     intermediate,
     description,
@@ -39,6 +40,7 @@ export default function Prepare({ params }) {
         ...prevList,
         {
           id,
+          field,
           large,
           intermediate,
           description,
@@ -196,6 +198,7 @@ export default function Prepare({ params }) {
                         handleCheckInter(
                           e,
                           intermediate.id,
+                          lar.field,
                           lar.large,
                           intermediate.intermediate,
                           intermediate.description,

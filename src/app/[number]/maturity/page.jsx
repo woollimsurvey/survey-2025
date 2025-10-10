@@ -38,7 +38,6 @@ export default function Maturity({ params }) {
   } = useForm();
 
   const [error, setError] = useState("");
-  const [finish, setFinish] = useState(false);
 
   const handleChangeMature = (e, inter) => {
     setCheckedInter((prevInter) =>
@@ -79,6 +78,8 @@ export default function Maturity({ params }) {
             career,
             tel: tel1 + tel2 + tel3,
             email,
+            field: inter.field,
+            large: inter.large,
             intermediate: inter.intermediate,
             code: inter.code,
             country: inter.country,

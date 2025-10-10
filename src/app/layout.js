@@ -1,6 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { FormProvider } from "@/contexts/FormContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,9 +20,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased m-auto max-w-7xl`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <FormProvider>{children}</FormProvider>
+        {children}
       </body>
     </html>
   );
