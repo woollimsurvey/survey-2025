@@ -25,6 +25,14 @@ export default function Main() {
       headerName: "중분류 고유 번호",
       width: 150,
     },
+    {
+      field: "totalCount",
+      headerName: "총 건수",
+      width: 100,
+      rowSpanValueGetter: () => {
+        return;
+      },
+    },
   ];
 
   const [rows, setRows] = useState([]);
@@ -36,7 +44,23 @@ export default function Main() {
         .select("*")
         .order("code");
 
-      setRows(data);
+      setRows(
+        Object.values(
+          data.reduce((acc, cur) => {
+            const key = cur.code;
+
+            if (acc[key]) {
+              acc[key].totalCount += 1;
+            }
+
+            if (!acc[key]) {
+              acc[key] = { ...cur, totalCount: 1 };
+            }
+
+            return acc;
+          }, {})
+        )
+      );
 
       error && console.error(error);
     };
@@ -55,8 +79,8 @@ export default function Main() {
         <DataGrid
           rows={rows}
           columns={columns}
-          showCellVerticalBorder
           rowSpanning
+          showCellVerticalBorder
         />
       </main>
     </div>
