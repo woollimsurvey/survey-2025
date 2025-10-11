@@ -33,6 +33,38 @@ export default function Main() {
         return;
       },
     },
+    {
+      field: "ind",
+      headerName: "산",
+      width: 50,
+      rowSpanValueGetter: () => {
+        return;
+      },
+    },
+    {
+      field: "aca",
+      headerName: "학",
+      width: 50,
+      rowSpanValueGetter: () => {
+        return;
+      },
+    },
+    {
+      field: "lab",
+      headerName: "연",
+      width: 50,
+      rowSpanValueGetter: () => {
+        return;
+      },
+    },
+    {
+      field: "etc",
+      headerName: "기타",
+      width: 50,
+      rowSpanValueGetter: () => {
+        return;
+      },
+    },
   ];
 
   const [rows, setRows] = useState([]);
@@ -54,7 +86,34 @@ export default function Main() {
             }
 
             if (!acc[key]) {
-              acc[key] = { ...cur, totalCount: 1 };
+              acc[key] = {
+                ...cur,
+                totalCount: 1,
+                ind: 0,
+                aca: 0,
+                lab: 0,
+                etc: 0,
+              };
+            }
+
+            switch (cur.classification) {
+              case "ind":
+                acc[key].ind += 1;
+
+                break;
+
+              case "aca":
+                acc[key].aca += 1;
+
+                break;
+
+              case "lab":
+                acc[key].lab += 1;
+
+                break;
+
+              case "etc":
+                acc[key].etc += +1;
             }
 
             return acc;

@@ -135,7 +135,7 @@ export default function Availability({ params }) {
             .sort((a, b) => a.id - b.id)
             .map((inter) => (
               <article key={inter.id} className="grid grid-cols-[3fr_11fr]">
-                <div className="row-span-2 border-b bg-blue-950 p-2 text-base font-bold text-white whitespace-pre-line">
+                <div className="row-span-2 flex justify-center items-center border-b bg-blue-950 p-2 text-base font-bold text-white whitespace-pre-line">
                   {inter.intermediate.split(" ").reduce((acc, word, index) => {
                     acc +=
                       (index + 1) % 3 === 0

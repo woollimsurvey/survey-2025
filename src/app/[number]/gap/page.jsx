@@ -175,7 +175,7 @@ export default function Gap({ params }) {
                 key={inter.id}
                 className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr]"
               >
-                <div className="row-span-2 border-b bg-blue-950 p-2 text-base font-bold text-white whitespace-pre-line">
+                <div className="row-span-2 flex justify-center items-center border-b bg-blue-950 p-2 text-base font-bold text-white whitespace-pre-line">
                   {inter.intermediate.split(" ").reduce((acc, word, index) => {
                     acc +=
                       (index + 1) % 3 === 0
